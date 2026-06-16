@@ -1,0 +1,66 @@
+{
+  "title": "MP C3004ex/C3504ex:  Open Redirect Vulnerability in Web Image Monitor",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-prod000035-2026-000004",
+  "importance": "",
+  "publishedAt": "2026-05-11T12:00:00+09:00",
+  "updatedAt": "2026-05-11T12:00:00+09:00",
+  "version": "1.00E",
+  "explanation": "<p>Ricoh has identified an open redirect vulnerability affecting Web Image Monitor.</p>",
+  "cve": [
+    {
+      "id": "CVE-2026-41226",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41226",
+      "cwe": [
+        {
+          "id": "CWE-601",
+          "url": "https://cwe.mitre.org/data/definitions/601.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "4.7",
+  "severity": "MEDIUM",
+  "affect": "<p>This vulnerability could allow an attacker to redirect users to a malicious website.</p>",
+  "models": [
+    {
+      "name": "MP C3004ex/C3504ex",
+      "component": "Firmware",
+      "version": "Web Support : 1.20 or earlier"
+    },
+    {
+      "name": "MP C3004ex/C3504ex",
+      "component": "Firmware",
+      "version": "Web Uapl : 1.07 or earlier"
+    },
+    {
+      "name": "MP C3004ex/C3504ex",
+      "component": "Firmware",
+      "version": "NetworkDocBox : 1.17 or earlier"
+    },
+    {
+      "name": "MP C3004ex/C3504ex",
+      "component": "Firmware",
+      "version": "Printer : 1.15 or earlier"
+    },
+    {
+      "name": "MP C3004ex/C3504ex",
+      "component": "Firmware",
+      "version": "System/Copy : 1.34 or earlier"
+    }
+  ],
+  "checkVersion": "<p>How to view the firmware version:</p>\n<p>&nbsp;</p>\n<p>1. Access Web Image Monitor using a web browser by entering the following URL:<br>&nbsp; &nbsp;https://&lt;IP address or hostname of the device&gt;<br>2. Log in with Administrator privileges.<br>3. Navigate to Device Management &gt; Configuration &gt; Device Settings &gt; Firmware Update.</p>",
+  "measures": "<p>To address this vulnerability, please update the device to the latest firmware using the RICOH Firmware Update Tool. The RICOH Firmware Update Tool is available at the following link:</p>\n<p><a href=\"https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/r_firm/r_firm.htm\">https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/r_firm/r_firm.htm</a></p>",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "history": [
+    {
+      "updatedAt": "2026-05-11T12:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000035-2026-000004",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors."
+}

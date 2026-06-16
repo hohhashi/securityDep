@@ -429,7 +429,8 @@ var app = new Vue({
     let dateParam = year+mon+date+random;
     let fileName;
     if (document.location.hostname == "127.0.0.1"
-        || document.location.hostname == "stg-prv-wrc.scms.jp.ricoh.com") {
+        || document.location.hostname == "stg-prv-wrc.scms.jp.ricoh.com"
+        || document.location.hostname == "stg-prv-jrc.scms.jp.ricoh.com") {
         fileName = "http://127.0.0.1:5500/vuls.ricoh.com/ja/vulinfolist.json?" + dateParam;
     } else {
         fileName = "https://vuls.ricoh.com/ja/vulinfolist.json?" + dateParam;

@@ -1,0 +1,193 @@
+{
+  "name": "RICOH Streamline NX V3",
+  "id": "prod000077",
+  "advisories": [
+    {
+      "id": "ricoh-prod000077-2025-000011",
+      "model": "RICOH Streamline NX V3",
+      "component": "DS Auth",
+      "title": "Notice on potential impact of \"Vulnerability leading to leakage of Credential IDs and Personally Identifiable Information of Users\" towards RICOH Streamline NX V3",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-21409",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-01-09+09:00",
+      "updatedAt": "2026-02-18+09:00"
+    },
+    {
+      "id": "ricoh-prod000077-2025-000010",
+      "model": "RICOH Streamline NX V3",
+      "component": "Administration Tool",
+      "title": "Notice on potential impact of \"Vulnerability in the RICOH Streamline NX Administration Tool Allowing Tampering of Operation History\" towards RICOH Streamline NX V3",
+      "importance": "",
+      "severity": "LOW",
+      "cve": [
+        {
+          "id": "CVE-2025-58422",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2025-09-05+09:00",
+      "updatedAt": "2025-09-16+09:00"
+    },
+    {
+      "id": "ricoh-prod000077-2025-000008",
+      "model": "RICOH Streamline NX V3",
+      "component": "SLNX administrative tool",
+      "title": "Notice on potential impact of \"Cross-Site Scripting (XSS) Vulnerability in SLNX Help Documentation via specific Parameter\" (CVE-2025-41439) towards RICOH Streamline NX V3",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2025-41439",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2025-06-30+09:00",
+      "updatedAt": "2025-06-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000077-2025-000006",
+      "model": "RICOH Streamline NX V3",
+      "component": "PC Client",
+      "title": "Notice on potential impact of \"Vulnerability Leading to Possible Code Execution via Remotely Upgrading\" towards  SLNX PC Client Application",
+      "importance": "",
+      "severity": "LOW",
+      "cve": [
+        {
+          "id": "CVE-2025-48825",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2025-06-13+09:00",
+      "updatedAt": "2025-06-13+09:00"
+    },
+    {
+      "id": "ricoh-prod000077-2025-000005",
+      "model": "RICOH Streamline NX V3",
+      "component": "PC Client",
+      "title": "Notice on potential impact of ”Arbitrary File Delete (Path Traversal) Vulnerability Leading to Code Execution\" towards RICOH Streamline NX V3 PC Client",
+      "importance": "",
+      "severity": "CRITICAL",
+      "cve": [
+        {
+          "id": "CVE-2025-46783",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2025-06-13+09:00",
+      "updatedAt": "2025-06-13+09:00"
+    },
+    {
+      "id": "ricoh-prod000077-2025-000004",
+      "model": "RICOH Streamline NX V3",
+      "component": "PC Client",
+      "title": "Notice on potential impact of \"Vulnerability Leading to Arbitrary File Overwrite via Save Log File\" toward SLNX PC Client",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2025-36506",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2025-06-13+09:00",
+      "updatedAt": "2025-06-13+09:00"
+    },
+    {
+      "id": "ricoh-prod000077-2024-000007",
+      "model": "RICOH Streamline NX V3",
+      "component": "RICOH Streamline NX PC Client",
+      "title": "Notice of security investigation: Vulnerability that an attacker can read and delete any file on the operating system.",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2024-37387",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2024-06-18+09:00",
+      "updatedAt": "2024-06-18+09:00"
+    },
+    {
+      "id": "ricoh-prod000077-2024-000006",
+      "model": "RICOH Streamline NX V3",
+      "component": "RICOH Streamline NX PC Client",
+      "title": "Notice of security investigation: Vulnerability that an attacker can write arbitrary property files at any place of the filesystem.",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2024-37124",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2024-06-18+09:00",
+      "updatedAt": "2024-06-18+09:00"
+    },
+    {
+      "id": "ricoh-prod000077-2024-000005",
+      "model": "Ricoh Streamline NX v3",
+      "component": "RICOH Streamline NX PC Client",
+      "title": "Notice of security investigation: Vulnerability that an attacker can escalate privileges to NT Authority\\System on the OS where RICOH Streamline NX PC Client is installed.",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2024-36480",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2024-06-18+09:00",
+      "updatedAt": "2024-06-18+09:00"
+    },
+    {
+      "id": "ricoh-prod000077-2024-000004",
+      "model": "RICOH Streamline NX V3",
+      "component": "RICOH Streamline NX PC Client",
+      "title": "Notice of security investigation: Arbitrary code execution vulnerability caused by ECF library implementation.",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2024-36252",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2024-06-18+09:00",
+      "updatedAt": "2024-06-18+09:00"
+    },
+    {
+      "id": "ricoh-prod000077-2023-000004",
+      "model": "RICOH Streamline NX V3",
+      "component": "PC Client",
+      "title": "Notice of security investigation: \"Vulnerability of SLP (Service Location Protocol) implementation that allows reflected DoS attacks via UDP\"  (CVE-2023-29552)",
+      "importance": "",
+      "severity": "HIGH",
+      "cve": [
+        {
+          "id": "CVE-2023-29552",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-29552"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2023-10-02+09:00",
+      "updatedAt": "2023-10-02+09:00"
+    }
+  ]
+}

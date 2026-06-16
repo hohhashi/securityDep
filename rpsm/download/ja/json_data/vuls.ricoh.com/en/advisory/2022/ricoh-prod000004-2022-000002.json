@@ -1,0 +1,52 @@
+{
+  "title": "Notice on potential impact of \"a threat of leakage of the folder user password\" vulnerability (CVE-2022-43969) towards RICOH MP C2004/C2504",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-prod000004-2022-000002",
+  "importance": "Important",
+  "publishedAt": "2022-12-26T17:00:00+09:00",
+  "updatedAt": "2023-01-24T17:00:00+09:00",
+  "version": "1.01E",
+  "explanation": "<p>Ricoh understands this threat. For customers using these products, please take the following actions to ensure stronger security.</p>",
+  "cve": [
+    {
+      "id": "CVE-2022-43969",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-255",
+          "url": ""
+        }
+      ]
+    }
+  ],
+  "cvss": 9.1,
+  "severity": "CRITICAL",
+  "affect": "<p>The user password for the folder may be leaked on scanner or FAX-installed models.</p>",
+  "models": [
+    {
+      "name": "RICOH MP C2004/C2504",
+      "component": "Firmware",
+      "version": "Web Support 1.21 or earlier"
+    }
+  ],
+  "checkVersion": "<p>How to view the firmware version:<br />1. Access Web Image Monitor from your browser.<br />https://\"IP address or hostname of the device\"<br />2. Log in with Administrator privileges.<br />3. Navigate to Device Management &gt; Configuration &gt; Device Settings &gt; Firmware Update</p>",
+  "measures": "<p>Update firmware.<br />To obtain the updated firmware, please contact your local Ricoh representative.</p>",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "history": [
+    {
+      "updatedAt": "2023-01-24T17:00:00+09:00",
+      "version": "1.01E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated Resolution/workaround section"
+    },
+    {
+      "updatedAt": "2022-12-26T17:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000004-2022-000002",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors."
+}

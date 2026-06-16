@@ -1,0 +1,80 @@
+{
+  "name": "RICOH IM 460F/370F",
+  "id": "prod000152",
+  "advisories": [
+    {
+      "id": "ricoh-prod000152-2025-000001",
+      "model": "RICOH IM 460F/370F",
+      "component": "本体F/W",
+      "title": "RICOH IM 370F/IM 460Fへの「反射型クロスサイトスクリプティングの脆弱性」の影響について",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2025-41393",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-41393"
+        }
+      ],
+      "jvn": [
+        {
+          "id": "JVN#20474768",
+          "url": "https://jvn.jp/jp/JVN20474768/index.html"
+        }
+      ],
+      "publishedAt": "2025-10-15+09:00",
+      "updatedAt": "2025-10-15+09:00"
+    },
+    {
+      "id": "ricoh-prod000152-2024-000008",
+      "model": "RICOH IM 460F/370F",
+      "component": "本体F/W",
+      "title": "RICOH IM 460F/370F　へのバッファオーバーフローの脆弱性（CVE-2024-39927）の影響について",
+      "importance": "",
+      "severity": "HIGH",
+      "cve": [
+        {
+          "id": "CVE-2024-39927",
+          "url": ""
+        }
+      ],
+      "jvn": [
+        {
+          "id": "JVN#14294633",
+          "url": "https://jvn.jp/jp/JVN14294633/index.html"
+        }
+      ],
+      "publishedAt": "2024-07-09+09:00",
+      "updatedAt": "2024-07-22+09:00"
+    },
+    {
+      "id": "ricoh-prod000152-2023-000003",
+      "model": "RICOH IM 370F/460F",
+      "component": "操作部F/W",
+      "title": "RICOH IM 370F/460Fへの「libwebp/libvpxにおけるヒープバッファオーバーフローの脆弱性」(CVE-2023-4863/5217)の影響について",
+      "importance": "Important",
+      "severity": "HIGH",
+      "cve": [
+        {
+          "id": "CVE-2023-4863",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-4863"
+        },
+        {
+          "id": "CVE-2023-5217",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-5217"
+        }
+      ],
+      "jvn": [
+        {
+          "id": "JVNDB-2023-003763",
+          "url": "https://jvndb.jvn.jp/ja/contents/2023/JVNDB-2023-003763.html"
+        },
+        {
+          "id": "JVNDB-2023-003786",
+          "url": "https://jvndb.jvn.jp/ja/contents/2023/JVNDB-2023-003786.html"
+        }
+      ],
+      "publishedAt": "2024-01-15+09:00",
+      "updatedAt": "2024-01-15+09:00"
+    }
+  ]
+}

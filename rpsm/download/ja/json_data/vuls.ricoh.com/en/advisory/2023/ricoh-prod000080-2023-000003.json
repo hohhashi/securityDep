@@ -1,0 +1,56 @@
+{
+  "title": "Notice on potential impact of a heap buffer overflow vulnerability in libwebp / libvpx towards RICOH Interactive Whiteboard Controller Type 2 / Controller Type 3",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-prod000080-2023-000003",
+  "importance": "Important",
+  "publishedAt": "2024-01-09T13:00:00+09:00",
+  "updatedAt": "2024-01-09T13:00:00+09:00",
+  "version": "1.00E",
+  "explanation": "<p>Ricoh understands the importance of security and we are committed to managing its products and services with the most advanced security technologies possible for its customers worldwide.<br />Ricoh is aware of the reported \"Heap buffer overflow vulnerability in libwebp / libvpx\" (CVE-2023-4863 / 5217) affects RICOH Interactive Whiteboard Controller Type 2 / Controller Type 3.<br />Ricoh offers measures detailed below.</p>",
+  "cve": [
+    {
+      "id": "CVE-2023-4863",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-4863",
+      "cwe": [
+        {
+          "id": "CWE-787",
+          "url": "https://cwe.mitre.org/data/definitions/787.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-5217",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-5217",
+      "cwe": [
+        {
+          "id": "CWE-787",
+          "url": "https://cwe.mitre.org/data/definitions/787.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "8.8",
+  "severity": "HIGH",
+  "affect": "<p>Heap buffer overflow allowed a remote attacker to perform an out of bounds memory write via a crafted HTML page.</p>",
+  "models": [
+    {
+      "name": "RICOH Interactive Whiteboard Controller Type 2 / Controller Type 3",
+      "component": "Microsoft Edge",
+      "version": "Microsoft Edge Version less than 117.0.2045.47"
+    }
+  ],
+  "checkVersion": "<p>How to check Microsoft Edge browser version:<br />1. Run Edge browser on RICOH Interactive Whiteboard.<br />2. Touch the [Settings] icon.<br />3. Touch [About Microsoft Edge] on the bottom of the window.</p>",
+  "measures": "<p>Update Microsoft Edge to Ver.117.0.2045.47 or higher (*).<br />*No action required as it will be updated automatically.&nbsp;<br />&nbsp;You can check the version of Edge browser by accessing&nbsp;<br />&nbsp;[Settings] &gt; [About Microsoft Edge] on Edge browser.</p>",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "history": [
+    {
+      "updatedAt": "2024-01-09T13:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000080-2023-000003",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors."
+}

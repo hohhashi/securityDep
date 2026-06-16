@@ -1,0 +1,84 @@
+{
+  "title": "Ridoc Ez Installer NXに権限昇格の脆弱性",
+  "company": "株式会社リコー",
+  "id": "ricoh-2023-000001",
+  "importance": "",
+  "publishedAt": "2023-02-21T14:00:00+09:00",
+  "updatedAt": "2023-06-14T13:00:00+09:00",
+  "version": "1.05J",
+  "explanation": "<p>日頃は弊社製品をご愛用いただきまして、誠にありがとうございます。<br />当社が開発、公開しているドライバーパッケージ作成ツールであるRidoc Ez Installer NXに対し、「権限昇格の脆弱性」による影響が確認されました。より強固なセキュリティーを確保するため、以下(表1)に記載の製品・サービスをご利用のお客様におかれましては、表中のリンク先ページに記載の対処を頂けますようお願いいたします。</p>\n<p><br />[脆弱性概要]<br />Ridoc Ez Installer NXにおいて、作成したドライバーインストールパッケージに管理者パスワードを設定した場合、悪意のある攻撃を行うことにより、権限昇格の脆弱性があります。</p>\n<p><br />CVSS v3.1値：7.8<br />対象Version： DI01.00.02 ～ DI01.01.25<br />対策Version： DI01.01.26</p>",
+  "cve": [
+    {
+      "id": "CVE-2023-30759",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-345",
+          "url": "https://cwe.mitre.org/data/definitions/345.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "7.8",
+  "severity": "HIGH",
+  "status": "",
+  "jvn": [
+    {
+      "id": "JVNVU#92207133",
+      "url": "https://jvn.jp/vu/JVNVU92207133/"
+    }
+  ],
+  "contact": "<p>リコーテクニカルコールセンター<br />Tel: 0120-892-111<br />※ 対応時間：祝日を除く月～金 9:00～17:00</p>",
+  "thanks": "",
+  "history": [
+    {
+      "updatedAt": "2023-06-14T13:00:00+09:00",
+      "version": "1.05J",
+      "company": "株式会社リコー",
+      "changes": "CVE ID、CWE ID、JVN登録番号の追加、CVSSv3スコアの更新"
+    },
+    {
+      "updatedAt": "2023-06-02T11:00:00+09:00",
+      "version": "1.04J",
+      "company": "株式会社リコー",
+      "changes": "CVSSv3スコアの更新"
+    },
+    {
+      "updatedAt": "2023-05-31T10:00:00+09:00",
+      "version": "1.03J",
+      "company": "株式会社リコー",
+      "changes": "CVSSv3スコアの更新"
+    },
+    {
+      "updatedAt": "2023-05-11T14:00:00+09:00",
+      "version": "1.02J",
+      "company": "株式会社リコー",
+      "changes": "対象Versionの訂正"
+    },
+    {
+      "updatedAt": "2023-04-21T14:00:00+09:00",
+      "version": "1.01J",
+      "company": "株式会社リコー",
+      "changes": "CVSSv3スコアの更新"
+    },
+    {
+      "updatedAt": "2023-02-21T14:00:00+09:00",
+      "version": "1.00J",
+      "company": "株式会社リコー",
+      "changes": "新規公開"
+    }
+  ],
+  "url": "https://jp.ricoh.com/security/products/vulnerabilities/vul?id=ricoh-2023-000001",
+  "authenticityGuarantee": "このURLリンク先と内容の異なる、あるいはURLを省略した、このドキュメントのテキストのコピーは、重要な情報の欠落や誤りの可能性がありますのでご注意ください。",
+  "list1Title": "",
+  "list2Title": "表1.脆弱性への対処が必要なリコー製品・サービス",
+  "productStatus": {
+    "businessFields": [],
+    "products": [
+      {
+        "name": "Ridoc Ez Installer NX",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000047-2023-000001'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000047-2023-000001</a>"
+      }
+    ]
+  }
+}

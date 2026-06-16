@@ -1,0 +1,55 @@
+{
+  "title": "Notice on potential impact of \"Vulnerability Leading to Possible Code Execution via Remotely Upgrading\" towards  SLNX PC Client Application",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-2025-000006",
+  "importance": "",
+  "publishedAt": "2025-06-13T13:00:00+09:00",
+  "updatedAt": "2025-06-20T15:00:00+09:00",
+  "version": "1.01E",
+  "explanation": "<p>There is a vulnerability that allows privilege escalation to \"NT AUTHORITY\\SYSTEM\" by performing a man-in-the-middle attack during a remote version upgrade. By using proxy settings to intercept the upgrade request and modify the ZIP file, it is possible to execute a DLL with custom code.</p>",
+  "cve": [
+    {
+      "id": "CVE-2025-48825",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-48825",
+      "cwe": [
+        {
+          "id": "CWE-348",
+          "url": "https://cwe.mitre.org/data/definitions/348.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "2.5",
+  "severity": "LOW",
+  "status": "",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "thanks": "Ricoh would like to thank and acknowledge CYS DET PEN from Siemens for reporting this finding.",
+  "history": [
+    {
+      "updatedAt": "2025-06-20T15:00:00+09:00",
+      "version": "1.01E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Corrected Acknowledgement"
+    },
+    {
+      "updatedAt": "2025-06-13T13:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/vul?id=ricoh-2025-000006",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors.",
+  "list1Title": "",
+  "list2Title": "List1:Ricoh products and services affected by this vulnerability",
+  "productStatus": {
+    "businessFields": [],
+    "products": [
+      {
+        "name": "RICOH Streamline NX V3",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000077-2025-000006'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000077-2025-000006</a>"
+      }
+    ]
+  }
+}

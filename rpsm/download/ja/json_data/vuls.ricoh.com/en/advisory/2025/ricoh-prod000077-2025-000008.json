@@ -1,0 +1,46 @@
+{
+  "title": "Notice on potential impact of \"Cross-Site Scripting (XSS) Vulnerability in SLNX Help Documentation via specific Parameter\" (CVE-2025-41439) towards RICOH Streamline NX V3",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-prod000077-2025-000008",
+  "importance": "",
+  "publishedAt": "2025-06-30T13:00:00+09:00",
+  "updatedAt": "2025-06-30T13:00:00+09:00",
+  "version": "1.00E",
+  "explanation": "<p>Ricoh understands the importance of security and is committed to managing its products and services with the most advanced security technologies possible for its customers worldwide.<br />Ricoh is aware of the reported \"Cross-Site Scripting (XSS) Vulnerability in SLNX Help Documentation via specific Parameter\" (CVE-2025-41439) affects RICOH Streamline NX V3.</p>\n<p>Ricoh offers measures detailed below.</p>\n<p><a href=\"https://jvn.jp/en/jp/JVN24333956/index.html\">https://jvn.jp/en/jp/JVN24333956/index.html</a></p>",
+  "cve": [
+    {
+      "id": "CVE-2025-41439",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-79",
+          "url": "https://cwe.mitre.org/data/definitions/79.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "6.1",
+  "severity": "MEDIUM",
+  "affect": "<p>For more information on the impact of this vulnerability being exploited, please refer to the following URL.</p>\n<p><a href=\"https://jvn.jp/en/jp/JVN24333956/index.html\">https://jvn.jp/en/jp/JVN24333956/index.html</a></p>\n<p>&nbsp;</p>",
+  "models": [
+    {
+      "name": "RICOH Streamline NX V3",
+      "component": "SLNX administrative tool",
+      "version": "3.5.0-3.7.2"
+    }
+  ],
+  "checkVersion": "<p>Streamline NX version can be confirmed with the following procedure:<br />1. Login in to Administrators console.<br />2. Navigate to [System] &rarr; [Server Settings] &rarr; [System Information and Settings].<br />3. In the \"System Information\" section, check the value of \"System Version\".</p>",
+  "measures": "<p>Applying a security patch V3.7.2.1 will resolve this issue. Also, the functionality that caused the issue has been removed as of version 3.231.0 (=23R1), and upgrading to this version or later will prevent the problem from occurring.</p>",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "history": [
+    {
+      "updatedAt": "2025-06-30T13:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000077-2025-000008",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors."
+}

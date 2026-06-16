@@ -1,0 +1,50 @@
+{
+  "name": "RICOH MP C3004RC",
+  "id": "prod000261",
+  "advisories": [
+    {
+      "id": "ricoh-prod000261-2025-000001",
+      "model": "RICOH MP C3004RC",
+      "component": "本体F/W",
+      "title": "RICOH MP C3004RCへの「反射型クロスサイトスクリプティングの脆弱性」の影響について",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2025-41393",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-41393"
+        }
+      ],
+      "jvn": [
+        {
+          "id": "JVN#20474768",
+          "url": "https://jvn.jp/jp/JVN20474768/index.html"
+        }
+      ],
+      "publishedAt": "2025-06-09+09:00",
+      "updatedAt": "2025-06-09+09:00"
+    },
+    {
+      "id": "ricoh-prod000261-2024-000011",
+      "model": "RICOH MP C3004RC",
+      "component": "本体F/W",
+      "title": "RICOH MP C3004RC への「リコー製プリンタおよび複合機におけるバッファオーバーフローの脆弱性」(CVE-2024-47939)の影響について",
+      "importance": "Important",
+      "severity": "HIGH",
+      "cve": [
+        {
+          "id": "CVE-2024-47939",
+          "url": ""
+        }
+      ],
+      "jvn": [
+        {
+          "id": "JVN#87770340",
+          "url": "https://jvn.jp/jp/JVN87770340/index.html"
+        }
+      ],
+      "publishedAt": "2024-11-06+09:00",
+      "updatedAt": "2025-03-25+09:00"
+    }
+  ]
+}

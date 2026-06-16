@@ -1,0 +1,46 @@
+{
+  "title": "Specific Ricoh MFP and Printer Products - Session Management Vulnerability in SP230DNw.",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-prod000166-2024-000002",
+  "importance": "",
+  "publishedAt": "2024-03-06T16:00:00+09:00",
+  "updatedAt": "2024-03-06T16:00:00+09:00",
+  "version": "1.00E",
+  "explanation": "<p>A vulnerability in Web Based Management affecting SP230DNw could allow an unauthenticated, remote attacker to log into the server settings screen by using cookie values taken through eavesdropped communications or by attacks to the user's web browser.</p>",
+  "cve": [
+    {
+      "id": "CVE-2024-21824",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-287",
+          "url": "https://cwe.mitre.org/data/definitions/287.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "5.3",
+  "severity": "MEDIUM",
+  "affect": "<p>An attacker could log into the server setting screen.<br />Reference : <a href=\"https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-21824\">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-21824</a></p>",
+  "models": [
+    {
+      "name": "SP 230DNw",
+      "component": "Firmware",
+      "version": "Ver 1.05 or earlier"
+    }
+  ],
+  "checkVersion": "<p>Check the Firmware Version on the Operation Panel<br />1. Press ▲ or ▼ to display the [Machine Info.] option, and then press OK.<br />2. Press ▲ or ▼ to display the [Firmware Version] option, and then press OK.<br />3. The firmware version is displayed on the LCD.</p>",
+  "measures": "<p>Please update firmware by following the Firmware Update Guide, found in the link below:<br /><a href=\"https://support.ricoh.com/bb_v1oi/html/oi/r/model/sp230dnw/sp230dnwen.htm\">https://support.ricoh.com/bb_v1oi/html/oi/r/model/sp230dnw/sp230dnwen.htm</a></p>",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "history": [
+    {
+      "updatedAt": "2024-03-06T16:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000166-2024-000002",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors."
+}

@@ -1,0 +1,83 @@
+{
+  "title": "Vulnerabilities in the PostScript interpreter(CVE-2023-50734, CVE-2023-50735, CVE-2023-50736) and an input validation vulnerability in the SE Menu(CVE-2023-50737) towards Ricoh products",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-2024-000001",
+  "importance": "Important",
+  "publishedAt": "2024-02-05T13:00:00+09:00",
+  "updatedAt": "2024-02-05T13:00:00+09:00",
+  "version": "1.00E",
+  "explanation": "<p>Ricoh has been identified vulnerabilities in the PostScript interpreter(CVE-2023-50734, CVE-2023-50735, CVE-2023-50736) and an input validation vulnerability in the SE Menu(CVE-2023-50737) towards Ricoh printers.</p>\n<p>&nbsp;</p>\n<p>List 1 below shows the affected printers. Ricoh offers measures detailed in the hyperlinked pages in the list.</p>\n<p>&nbsp;</p>\n<p>CVE-2023-50734：Buffer overflow vulnerability in PostScript interpreter that can be leveraged by an attacker to execute arbitrary code.<br />CVE-2023-50735：Heap corruption vulnerability in PostScript interpreter that can be leveraged by an attacker to execute arbitrary code.<br />CVE-2023-50736：Memory corruption vulnerability in PostScript interpreter that can be leveraged by an attacker to execute arbitrary code.<br />CVE-2023-50737：Vulnerability in one of the SE menu routines can be leveraged by an attacker to execute arbitrary code.</p>",
+  "cve": [
+    {
+      "id": "CVE-2023-50734",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-121",
+          "url": "https://cwe.mitre.org/data/definitions/121.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-50735",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-465",
+          "url": "https://cwe.mitre.org/data/definitions/465.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-50736",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-131",
+          "url": "https://cwe.mitre.org/data/definitions/131.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-50737",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-20",
+          "url": "https://cwe.mitre.org/data/definitions/20.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "9.1",
+  "severity": "CRITICAL",
+  "status": "",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "thanks": "",
+  "history": [
+    {
+      "updatedAt": "2024-02-05T13:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/vul?id=ricoh-2024-000001",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors.",
+  "list1Title": "",
+  "list2Title": "List1:Ricoh products and services affected by this vulnerability",
+  "productStatus": {
+    "businessFields": [],
+    "products": [
+      {
+        "name": "M C240FW",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000067-2024-000001'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000067-2024-000001</a>"
+      },
+      {
+        "name": "P C200W",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000065-2024-000001'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000065-2024-000001</a>"
+      }
+    ]
+  }
+}

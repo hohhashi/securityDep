@@ -1,0 +1,63 @@
+{
+  "title": "RICOH MP C4503Z/C5503Z/C6003Z への「リコー製プリンタおよび複合機におけるバッファオーバーフローの脆弱性」(CVE-2024-47939)の影響について",
+  "company": "株式会社リコー",
+  "id": "ricoh-prod000069-2024-000011",
+  "importance": "Important",
+  "publishedAt": "2024-10-31T12:00:00+09:00",
+  "updatedAt": "2025-03-24T18:00:00+09:00",
+  "version": "1.02J",
+  "explanation": "<p>日頃は弊社製品をご愛用いただきまして、誠にありがとうございます。<br />RICOH MP C4503Z/C5503Z/C6003Z に対し、「リコー製プリンタおよび複合機におけるバッファオーバーフローの脆弱性」(CVE-2024-47939)による影響が確認されました。より強固なセキュリティーを確保するため、本製品をご利用のお客様におかれましては、以下に記載の対処を頂けますようお願いいたします。</p>\n<p>&nbsp;</p>\n<p>脆弱性の内容につきましては、以下のURLをご参照ください。<br /><a href=\"https://jvn.jp/jp/JVN87770340/\">https://jvn.jp/jp/JVN87770340/</a></p>",
+  "cve": [
+    {
+      "id": "CVE-2024-47939",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-121",
+          "url": "https://cwe.mitre.org/data/definitions/121.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "7.7",
+  "severity": "HIGH",
+  "affect": "<p>遠隔の第三者によって、細工されたリクエストを受け取るとサービス妨害(DoS) を受けたり、一部の機器設定が変えられたりする可能性があります。</p>",
+  "models": [
+    {
+      "name": "RICOH MP C4503Z/C5503Z/C6003Z",
+      "component": "本体F/W",
+      "version": "Web Support :2.17 以下 , WebUapl:2.06 以下 , Printer:2.24 以下"
+    }
+  ],
+  "checkVersion": "<p>操作パネルおよびWebブラウザーから確認できます。</p>\n<p>&nbsp;</p>\n<p>【操作部】</p>\n<p>下記の操作で確認できます。</p>\n<p>本体操作部の設定＞システム設定＞本体/操作パネルの情報＞ファームウェアバージョン表示</p>\n<p>&nbsp;</p>\n<p>【Webブラウザー】</p>\n<p>1：Web ブラウザーを起動します。</p>\n<p>2：Web ブラウザーのアドレスバーに「http://（機器のアドレスまたはホスト名）/」と入力し、機器にアクセスします。</p>\n<p>3：Web Image Monitor のトップページで、［ログイン］をクリックします。</p>\n<p>4：管理者のログインユーザー名とログインパスワードを入力して、［ログイン］をクリックします。</p>\n<p>5：［機器の管理］-［設定］をクリックします。</p>\n<p>6：［機器］-［ファームウェアアップデート］をクリックします。</p>\n<p>7：［ファームウェアバージョン］-［モジュール名］の［Web Support］［Web Uapl］［Printer］のバージョンを確認します。</p>",
+  "measures": "<p>製品・サービスをインターネットに直接接続せず、ファイアウォールやブロードバンドルーターなどで保護されたネットワーク内やプライベートIPアドレスを設定してご利用いただくことで、脆弱性のリスクを低減することが可能です。より強固なセキュリティーを確保するには、ファームアップデートツール「RICOH Firmware Update Tool」を使用し最新のファームウェアへアップデートしてください。<br /><a href=\"https://www.ricoh.co.jp/products/list/ricoh-firmware-update-tool\">https://www.ricoh.co.jp/products/list/ricoh-firmware-update-tool</a></p>",
+  "jvn": [
+    {
+      "id": "JVN#87770340",
+      "url": "https://jvn.jp/jp/JVN87770340/index.html"
+    }
+  ],
+  "contact": "<p>リコーテクニカルコールセンター</p>\n<p>Tel: 0120-892-111</p>\n<p>※ 対応時間：祝日を除く月～金 9:00～17:00</p>",
+  "history": [
+    {
+      "updatedAt": "2025-03-24T18:00:00+09:00",
+      "version": "1.02J",
+      "company": "株式会社リコー",
+      "changes": "CVSSv3スコア、影響の訂正"
+    },
+    {
+      "updatedAt": "2024-12-17T13:00:00+09:00",
+      "version": "1.01J",
+      "company": "株式会社リコー",
+      "changes": "対処方法の更新"
+    },
+    {
+      "updatedAt": "2024-10-31T12:00:00+09:00",
+      "version": "1.00J",
+      "company": "株式会社リコー",
+      "changes": "新規作成"
+    }
+  ],
+  "url": "https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000069-2024-000011",
+  "authenticityGuarantee": "このURLリンク先と内容の異なる、あるいはURLを省略した、このドキュメントのテキストのコピーは、重要な情報の欠落や誤りの可能性がありますのでご注意ください。"
+}

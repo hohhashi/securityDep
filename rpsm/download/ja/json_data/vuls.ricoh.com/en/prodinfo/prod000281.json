@@ -1,0 +1,108 @@
+{
+  "name": "IM C3010SD/C3510SD",
+  "id": "prod000281",
+  "advisories": [
+    {
+      "id": "ricoh-prod000281-2026-000004",
+      "model": "IM C3010SD/C3510SD",
+      "component": "Firmware",
+      "title": "IM C3010SD/C3510SD: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000281-2026-000004",
+      "model": "IM C3010SD/C3510SD",
+      "component": "Firmware",
+      "title": "IM C3010SD/C3510SD: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000281-2026-000004",
+      "model": "IM C3010SD/C3510SD",
+      "component": "Firmware",
+      "title": "IM C3010SD/C3510SD: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000281-2026-000004",
+      "model": "IM C3010SD/C3510SD",
+      "component": "Firmware",
+      "title": "IM C3010SD/C3510SD: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000281-2026-000004",
+      "model": "IM C3010SD/C3510SD",
+      "component": "Firmware",
+      "title": "IM C3010SD/C3510SD: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000281-2025-000001",
+      "model": "IM C3010SD/IM C3510SD",
+      "component": "Firmware",
+      "title": "Specific Ricoh MFP and Printer Products - Reflected Cross-Site Scripting Vulnerability via Web Image Monitor (CVE-2025-41393) in IM C3010SD/IM C3510SD",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2025-41393",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-41393"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-02-26+09:00",
+      "updatedAt": "2026-02-26+09:00"
+    }
+  ]
+}

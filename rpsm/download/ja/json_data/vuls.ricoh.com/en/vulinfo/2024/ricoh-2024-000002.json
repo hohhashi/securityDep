@@ -1,0 +1,65 @@
+{
+  "title": "Specific Ricoh MFP and Printer Products - Session Management Vulnerability (CVE-2024-21824)",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-2024-000002",
+  "importance": "",
+  "publishedAt": "2024-03-06T16:00:00+09:00",
+  "updatedAt": "2024-03-06T16:00:00+09:00",
+  "version": "1.00E",
+  "explanation": "<p>A vulnerability in Web Based Management could allow an unauthenticated, remote attacker to log into the server settings screen by using cookie values taken through eavesdropped communications or by attacks to the user's web browser.</p>\n<p>&nbsp;</p>\n<p>List 1 below shows the vulnerable products and services. Ricoh offers countermeasures as detailed in the listed links.</p>",
+  "cve": [
+    {
+      "id": "CVE-2024-21824",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-287",
+          "url": "https://cwe.mitre.org/data/definitions/287.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "5.3",
+  "severity": "MEDIUM",
+  "status": "",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "thanks": "",
+  "history": [
+    {
+      "updatedAt": "2024-03-06T16:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/vul?id=ricoh-2024-000002",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors.",
+  "list1Title": "",
+  "list2Title": "List1:Ricoh products and services affected by this vulnerability",
+  "productStatus": {
+    "businessFields": [],
+    "products": [
+      {
+        "name": "SP 230DNw",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000166-2024-000002'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000166-2024-000002</a>"
+      },
+      {
+        "name": "P 201W",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000167-2024-000002'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000167-2024-000002</a>"
+      },
+      {
+        "name": "M 340W",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000168-2024-000002'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000168-2024-000002</a>"
+      },
+      {
+        "name": "SP 230SFNw",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000169-2024-000002'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000169-2024-000002</a>"
+      },
+      {
+        "name": "M 340FW",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000170-2024-000002'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000170-2024-000002</a>"
+      }
+    ]
+  }
+}

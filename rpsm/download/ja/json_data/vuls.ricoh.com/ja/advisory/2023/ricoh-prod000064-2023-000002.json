@@ -1,0 +1,148 @@
+{
+  "title": "RICOH P C200SFLへの「Server-Side Request Forgery(SSRF)に対する脆弱性」(CVE-2023-23560)、「PostScriptインタープリタに於ける脆弱性」(CVE-2023-26063_26066)、「入力検証の脆弱性」(CVE-2023-26067)、「Embedded Web Serverの入力処理の脆弱性」(CVE-2023-26068)、「Web APIの入力検証の脆弱性」(CVE-2023-26069)および「SNMP機能の入力検証の脆弱性」(CVE-2023-26070)の影響について",
+  "company": "株式会社リコー",
+  "id": "ricoh-prod000064-2023-000002",
+  "importance": "",
+  "publishedAt": "2023-02-21T14:00:00+09:00",
+  "updatedAt": "2023-04-05T09:00:00+09:00",
+  "version": "1.01J",
+  "explanation": "<p>日頃は弊社製品をご愛用いただきまして、誠にありがとうございます。<br />RICOH P C200SFLに対し、「SSRFに対する脆弱性」(CVE-2023-23560)、「PostScriptインタープリタに於ける脆弱性」(CVE-2023-26063_26066)、「入力検証の脆弱性」(CVE-2023-26067)、「Embedded Web Serverの入力処理の脆弱性」(CVE-2023-26068)、「Web APIの入力検証の脆弱性」(CVE-2023-26069)および「SNMP機能の入力検証の脆弱性」(CVE-2023-26070)と同様の影響が確認されました。より強固なセキュリティーを確保するため、本製品をご利用のお客様におかれましては、以下に記載の対処を頂けますようお願いいたします。</p>",
+  "cve": [
+    {
+      "id": "CVE-2023-23560",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-23560",
+      "cwe": [
+        {
+          "id": "CWE-918",
+          "url": "https://cwe.mitre.org/data/definitions/918.html"
+        },
+        {
+          "id": "CWE-20",
+          "url": "https://cwe.mitre.org/data/definitions/20.html"
+        },
+        {
+          "id": "CWE-77",
+          "url": "https://cwe.mitre.org/data/definitions/77.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26063",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-843",
+          "url": "https://cwe.mitre.org/data/definitions/843.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26064",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-847",
+          "url": "https://cwe.mitre.org/data/definitions/847.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26065",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-190",
+          "url": "https://cwe.mitre.org/data/definitions/190.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26066",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-129",
+          "url": "https://cwe.mitre.org/data/definitions/129.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26067",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-20",
+          "url": "https://cwe.mitre.org/data/definitions/20.html"
+        },
+        {
+          "id": "CWE-269",
+          "url": "https://cwe.mitre.org/data/definitions/269.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26068",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-20",
+          "url": "https://cwe.mitre.org/data/definitions/20.html"
+        },
+        {
+          "id": "CWE-267",
+          "url": "https://cwe.mitre.org/data/definitions/267.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26069",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-20",
+          "url": "https://cwe.mitre.org/data/definitions/20.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26070",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-20",
+          "url": "https://cwe.mitre.org/data/definitions/20.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "9.0",
+  "severity": "CRITICAL",
+  "affect": "<p>今回見つかった脆弱性を利用して、デバイス上で任意のコードをリモートで実行できるようになる可能性があります。<br />「CVE-2023-26067」については、この脆弱性を利用してデバイスを侵害する事はできなく、別の手段で既にデバイスを侵害して特権を得ている攻撃者によって利用される可能性があります。</p>",
+  "models": [
+    {
+      "name": "RICOH P C200SFL",
+      "component": "ファームウェア",
+      "version": "1.05(CXLBL.081.227)以下"
+    }
+  ],
+  "checkVersion": "<p>ホーム画面より、設定&gt;デバイス&gt;このプリンタについて&gt;ファームウェアバージョン と順に選択をしてファームウェアのバージョンを確認して下さい。</p>",
+  "measures": "<p>「ソフトウェアダウンロード」サイトから最新のファームウェアをダウンロードし、アップデートを行ってください。<br />「ソフトウェアダウンロード」サイト<br /><a href=\"https://support.ricoh.com/bbv2/html/dr_ut_d/ipsio/model/pc200sfl/firmware/firmware.htm\">https://support.ricoh.com/bbv2/html/dr_ut_d/ipsio/model/pc200sfl/firmware/firmware.htm</a></p>\n<p>対策バージョン: 1.06(CXLBL.081.234)</p>",
+  "jvn": [],
+  "contact": "<p>リコーテクニカルコールセンター<br />Tel: 0120-892-111<br />※ 対応時間：祝日を除く月～金 9:00～17:00</p>",
+  "history": [
+    {
+      "updatedAt": "2023-04-05T09:00:00+09:00",
+      "version": "1.01J",
+      "company": "株式会社リコー",
+      "changes": "影響する脆弱性情報の追加、タイトル/影響するバージョン/対処方法の更新"
+    },
+    {
+      "updatedAt": "2023-02-21T14:00:00+09:00",
+      "version": "1.00J",
+      "company": "株式会社リコー",
+      "changes": "新規公開"
+    }
+  ],
+  "url": "https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000064-2023-000002",
+  "authenticityGuarantee": "このURLリンク先と内容の異なる、あるいはURLを省略した、このドキュメントのテキストのコピーは、重要な情報の欠落や誤りの可能性がありますのでご注意ください。"
+}

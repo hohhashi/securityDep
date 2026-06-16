@@ -1,0 +1,23 @@
+{
+  "name": "RICOH Interactive Whiteboard Lt for Open Controller",
+  "id": "prod000095",
+  "advisories": [
+    {
+      "id": "ricoh-prod000095-2023-000005",
+      "model": "RICOH Interactive Whiteboard Lt for Open Controller",
+      "component": "Firmware",
+      "title": "Notice on potential impact of \"Apache ActiveMQ remote code execution vulnerability\" (CVE-2023-46604) towards RICOH Interactive Whiteboard Lt for Open Controller.",
+      "importance": "Important",
+      "severity": "CRITICAL",
+      "cve": [
+        {
+          "id": "CVE-2023-46604",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-46604"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2023-11-21+09:00",
+      "updatedAt": "2023-12-25+09:00"
+    }
+  ]
+}

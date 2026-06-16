@@ -1,0 +1,57 @@
+{
+  "name": "SP 6430DN",
+  "id": "prod000139",
+  "advisories": [
+    {
+      "id": "ricoh-prod000139-2025-000001",
+      "model": "SP 6430DN",
+      "component": "Firmware",
+      "title": "Specific Ricoh MFP and Printer Products - Reflected Cross-Site Scripting Vulnerability via Web Image Monitor (CVE-2025-41393) in SP 6430DN",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2025-41393",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-41393"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2025-06-09+09:00",
+      "updatedAt": "2025-06-09+09:00"
+    },
+    {
+      "id": "ricoh-prod000139-2024-000011",
+      "model": "SP 6430DN",
+      "component": "Firmware",
+      "title": "Specific Ricoh MFP and Printer Products - Buffer overflow vulnerability(CVE-2024-47939)in SP 6430DN",
+      "importance": "Important",
+      "severity": "HIGH",
+      "cve": [
+        {
+          "id": "CVE-2024-47939",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2024-10-31+09:00",
+      "updatedAt": "2025-03-25+09:00"
+    },
+    {
+      "id": "ricoh-prod000139-2023-000006",
+      "model": "SP 6430DN",
+      "component": "Firmware",
+      "title": "Specific Ricoh MFP and Printer Products -Cross-site scripting vulnerable in SP 6430DN",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2022-37406",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-37406"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2024-05-28+09:00",
+      "updatedAt": "2024-05-28+09:00"
+    }
+  ]
+}

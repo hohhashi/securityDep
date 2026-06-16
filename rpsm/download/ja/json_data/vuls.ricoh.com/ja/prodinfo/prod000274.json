@@ -1,0 +1,28 @@
+{
+  "name": "RICOH IM C431/C431F",
+  "id": "prod000274",
+  "advisories": [
+    {
+      "id": "ricoh-prod000274-2025-000001",
+      "model": "RICOH IM C431/C431F",
+      "component": "本体F/W",
+      "title": "RICOH IM C431/C431Fへの「反射型クロスサイトスクリプティングの脆弱性」の影響について",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2025-41393",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-41393"
+        }
+      ],
+      "jvn": [
+        {
+          "id": "JVN#20474768",
+          "url": "https://jvn.jp/jp/JVN20474768/index.html"
+        }
+      ],
+      "publishedAt": "2025-12-15+09:00",
+      "updatedAt": "2025-12-15+09:00"
+    }
+  ]
+}

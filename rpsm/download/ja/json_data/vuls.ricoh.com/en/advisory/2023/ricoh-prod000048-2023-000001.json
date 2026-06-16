@@ -1,0 +1,81 @@
+{
+  "title": "Notice the elevation of administrator privileges vulnerability in Printer Driver Packager NX.",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-prod000048-2023-000001",
+  "importance": "",
+  "publishedAt": "2023-02-21T14:00:00+09:00",
+  "updatedAt": "2023-06-14T13:00:00+09:00",
+  "version": "1.05E",
+  "explanation": "<p>Ricoh understands the importance of security and is committed to managing its products and services with the most advanced security technologies possible for its customers worldwide.</p>\n<p><br />Ricoh is aware of the reported \"local privilege escalation\" affects certain products and services that Ricoh develops, manufactures, and offers.</p>\n<p><br />There is a vulnerability about local privilege escalation in the driver installation package created by Printer Driver Packager NX.</p>",
+  "cve": [
+    {
+      "id": "CVE-2023-30759",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-345",
+          "url": "https://cwe.mitre.org/data/definitions/345.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "7.8",
+  "severity": "HIGH",
+  "affect": "<p>There is a vulnerability to local privilege escalation by the malicious attack if the administrator password is set driver installation package created with Printer Driver Packager NX.</p>",
+  "models": [
+    {
+      "name": "Printer Driver Packager NX　",
+      "component": "Application",
+      "version": "v1.0.02～v1.1.25"
+    }
+  ],
+  "checkVersion": "<p>To find out your Printer Driver Packager NX version.<br />1. Start Printer Driver Packager NX.<br />2. Select [Help] - [About] from the menu.</p>",
+  "measures": "<p>Please install Printer Driver Packager NX v1.1.26 (overwriting the previous version is also possible) and recreate the driver installation package.</p>",
+  "jvn": [
+    {
+      "id": "JVNVU#92207133",
+      "url": "https://jvn.jp/en/vu/JVNVU92207133/"
+    }
+  ],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "history": [
+    {
+      "updatedAt": "2023-06-14T13:00:00+09:00",
+      "version": "1.05E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated CVE ID/CWE ID/CVSSv3 score"
+    },
+    {
+      "updatedAt": "2023-06-02T11:00:00+09:00",
+      "version": "1.04E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated CVSSv3 score"
+    },
+    {
+      "updatedAt": "2023-05-31T10:00:00+09:00",
+      "version": "1.03E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated CVSSv3 score"
+    },
+    {
+      "updatedAt": "2023-04-21T14:00:00+09:00",
+      "version": "1.02E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated CVSSv3 score"
+    },
+    {
+      "updatedAt": "2023-03-02T15:30:00+09:00",
+      "version": "1.01E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated"
+    },
+    {
+      "updatedAt": "2023-02-21T14:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000048-2023-000001",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors."
+}

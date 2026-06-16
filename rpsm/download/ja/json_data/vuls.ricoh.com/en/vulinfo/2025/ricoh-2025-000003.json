@@ -1,0 +1,103 @@
+{
+  "title": "Specific Ricoh MFP and Printer Products - Vulnerabilities in the PostScript interpreter (CVE-2024-11344, CVE-2024-11345, CVE-2024-11346, CVE-2024-11347) and the embedded web server (CVE-2025-1127)",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-2025-000003",
+  "importance": "Important",
+  "publishedAt": "2025-03-18T03:00:00+09:00",
+  "updatedAt": "2025-03-21T13:30:00+09:00",
+  "version": "1.01E",
+  "explanation": "<p>Ricoh has identified vulnerabilities in the PostScript interpreter (CVE-2024-11344, CVE-2024-11345, CVE-2024-11346, CVE-2024-11347) and the embedded web server (CVE-2025-1127) towards Ricoh products.</p>\n<p>&nbsp;</p>\n<p>These vulnerabilities allow arbitrary code to be executed remotely.</p>\n<p>&nbsp;</p>\n<p>CVE-2024-11344: A type confusion vulnerability has been identified in the Postscript interpreter.<br />CVE-2024-11345: A heap-based memory vulnerability has been identified in the Postscript interpreter.<br />CVE-2024-11346: A type confusion vulnerability has been identified in the Postscript interpreter.<br />CVE-2024-11347: An integer overflow vulnerability has been identified in the Postscript interpreter.<br />CVE-2025-1127: A combination Path Traversal and Concurrent Execution vulnerability exists within the embedded web server.</p>\n<p>&nbsp;</p>\n<p>List 1 below shows the affected printers. Ricoh offers countermeasures detailed in the hyperlinked pages in the list.</p>",
+  "cve": [
+    {
+      "id": "CVE-2024-11344",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-11344",
+      "cwe": [
+        {
+          "id": "CWE-843",
+          "url": "https://cwe.mitre.org/data/definitions/843.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2024-11345",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-11345",
+      "cwe": [
+        {
+          "id": "CWE-466",
+          "url": "https://cwe.mitre.org/data/definitions/466.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2024-11346",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-11346",
+      "cwe": [
+        {
+          "id": "CWE-843",
+          "url": "https://cwe.mitre.org/data/definitions/843.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2024-11347",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-11347",
+      "cwe": [
+        {
+          "id": "CWE-190",
+          "url": "https://cwe.mitre.org/data/definitions/190.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2025-1127",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-1127",
+      "cwe": [
+        {
+          "id": "CWE-22",
+          "url": "https://cwe.mitre.org/data/definitions/22.html"
+        },
+        {
+          "id": "CWE-362",
+          "url": "https://cwe.mitre.org/data/definitions/362.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "9.1",
+  "severity": "CRITICAL",
+  "status": "",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "thanks": "",
+  "history": [
+    {
+      "updatedAt": "2025-03-21T13:30:00+09:00",
+      "version": "1.01E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Corrected spelling mistake."
+    },
+    {
+      "updatedAt": "2025-03-18T03:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/vul?id=ricoh-2025-000003",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors.",
+  "list1Title": "",
+  "list2Title": "List1:Ricoh products and services affected by this vulnerability",
+  "productStatus": {
+    "businessFields": [],
+    "products": [
+      {
+        "name": "M C240FW",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000067-2025-000003'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000067-2025-000003</a>"
+      },
+      {
+        "name": "P C200W",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000065-2025-000003'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000065-2025-000003</a>"
+      }
+    ]
+  }
+}

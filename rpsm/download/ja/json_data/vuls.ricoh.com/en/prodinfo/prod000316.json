@@ -1,0 +1,91 @@
+{
+  "name": "IM 7010",
+  "id": "prod000316",
+  "advisories": [
+    {
+      "id": "ricoh-prod000316-2026-000004",
+      "model": "IM 7010",
+      "component": "Firmware",
+      "title": "IM 7010: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000316-2026-000004",
+      "model": "IM 7010",
+      "component": "Firmware",
+      "title": "IM 7010: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000316-2026-000004",
+      "model": "IM 7010",
+      "component": "Firmware",
+      "title": "IM 7010: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000316-2026-000004",
+      "model": "IM 7010",
+      "component": "Firmware",
+      "title": "IM 7010: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000316-2026-000004",
+      "model": "IM 7010",
+      "component": "Firmware",
+      "title": "IM 7010: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "title": "Notice on potential impact of a heap buffer overflow vulnerability in libwebp / libvpx towards IM C7010",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-prod000159-2023-000003",
+  "importance": "Important",
+  "publishedAt": "2024-02-26T13:00:00+09:00",
+  "updatedAt": "2024-02-26T13:00:00+09:00",
+  "version": "1.00E",
+  "explanation": "<p>Ricoh understands the importance of security and is committed to managing its products and services with the most advanced security technologies possible for its customers worldwide.&nbsp;<br />Ricoh is aware of the reported &nbsp;\"Heap buffer overflow vulnerability in libwebp / libvpx\" (CVE-2023-4863/5217) affects IM C7010.</p>\n<p>&nbsp;</p>\n<p>Ricoh offers measures detailed below.</p>",
+  "cve": [
+    {
+      "id": "CVE-2023-4863",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-4863",
+      "cwe": [
+        {
+          "id": "CWE-787",
+          "url": "https://cwe.mitre.org/data/definitions/787.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-5217",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-5217",
+      "cwe": [
+        {
+          "id": "CWE-787",
+          "url": "https://cwe.mitre.org/data/definitions/787.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "8.8",
+  "severity": "HIGH",
+  "affect": "<p>Heap buffer overflow allowed a remote attacker to perform an out of bounds memory write via a crafted HTML page.</p>",
+  "models": [
+    {
+      "name": "IM C7010",
+      "component": "Firmware",
+      "version": "CheetahSystem　1.08.1 or earlier"
+    }
+  ],
+  "checkVersion": "<p>How to view the firmware version:<br />1. Access Web Image Monitor from your browser.<br />https://\"IP address or hostname of the device\"<br />2. Log in with Administrator privileges.<br />3. Navigate to Device Management &gt; Configuration &gt; Device Settings &gt; Firmware Update</p>",
+  "measures": "<p>Please download the updated firmware at the following links:<br /><a href=\"https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/imc7010/imc7010.htm\">https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/imc7010/imc7010.htm</a></p>",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "history": [
+    {
+      "updatedAt": "2024-02-26T13:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000159-2023-000003",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors."
+}

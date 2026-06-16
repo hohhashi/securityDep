@@ -1,0 +1,28 @@
+{
+  "name": "RICOH Pro 1357EX/1107EX/907EX",
+  "id": "prod000206",
+  "advisories": [
+    {
+      "id": "ricoh-prod000206-2023-000006",
+      "model": "RICOH Pro 1357EX/1107EX/907EX",
+      "component": "本体F/W",
+      "title": "RICOH Pro 1357EX/1107EX/907EX への「クロスサイトスクリプティングの脆弱性」(CVE-2022-37406)の影響について",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2022-37406",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-37406"
+        }
+      ],
+      "jvn": [
+        {
+          "id": "JVN#24659622",
+          "url": "https://jvn.jp/jp/JVN24659622/index.html"
+        }
+      ],
+      "publishedAt": "2024-05-28+09:00",
+      "updatedAt": "2024-05-28+09:00"
+    }
+  ]
+}

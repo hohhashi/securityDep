@@ -1,0 +1,65 @@
+{
+  "title": "Specific Ricoh MFP and Printer Products - CA Certificate Handling Vulnerability (CVE-2025-53869)",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-2026-000001",
+  "importance": "",
+  "publishedAt": "2026-01-28T16:30:00+09:00",
+  "updatedAt": "2026-01-28T16:30:00+09:00",
+  "version": "1.00E",
+  "explanation": "<p>Specific MFPs and printers are potentially vulnerable to an issue in the handling of CA (Certificate Authority) certificate data obtained from a server.<br>This vulnerability may allow an attacker to manipulate connection information and redirect the device to an attacker-controlled server.<br>As a result, unauthorized CA certificates may be installed, potentially compromising TLS communications.</p>\n<p>&nbsp;</p>",
+  "cve": [
+    {
+      "id": "CVE-2025-53869",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-295",
+          "url": "https://cwe.mitre.org/data/definitions/295.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "3.7",
+  "severity": "LOW",
+  "status": "",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>\n<p>&nbsp;</p>",
+  "thanks": "",
+  "history": [
+    {
+      "updatedAt": "2026-01-28T16:30:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/vul?id=ricoh-2026-000001",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors.",
+  "list1Title": "",
+  "list2Title": "List1:Ricoh products and services affected by this vulnerability",
+  "productStatus": {
+    "businessFields": [],
+    "products": [
+      {
+        "name": "SP 230DNw",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000166-2026-000001'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000166-2026-000001</a>"
+      },
+      {
+        "name": "M 340FW",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000170-2026-000001'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000170-2026-000001</a>"
+      },
+      {
+        "name": "P 201W",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000167-2026-000001'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000167-2026-000001</a>"
+      },
+      {
+        "name": "SP 230SFNw",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000169-2026-000001'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000169-2026-000001</a>"
+      },
+      {
+        "name": "M 340W",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000168-2026-000001'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000168-2026-000001</a>"
+      }
+    ]
+  }
+}

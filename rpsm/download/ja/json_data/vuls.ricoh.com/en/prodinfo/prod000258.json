@@ -1,0 +1,23 @@
+{
+  "name": "MP 2553ZSP/3053ZSP/3353ZSP",
+  "id": "prod000258",
+  "advisories": [
+    {
+      "id": "ricoh-prod000258-2024-000011",
+      "model": "MP 2553ZSP/3053ZSP/3353ZSP",
+      "component": "Firmware",
+      "title": "Specific Ricoh MFP and Printer Products - Buffer overflow vulnerability(CVE-2024-47939) in MP 2553ZSP/3053ZSP/3353ZSP",
+      "importance": "Important",
+      "severity": "HIGH",
+      "cve": [
+        {
+          "id": "CVE-2024-47939",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2025-04-14+09:00",
+      "updatedAt": "2025-04-14+09:00"
+    }
+  ]
+}

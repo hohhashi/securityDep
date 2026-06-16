@@ -1,0 +1,449 @@
+{
+  "title": "Specific Ricoh MFP and Printer Products - Buffer overflow vulnerability (CVE-2024-47939)",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-2024-000011",
+  "importance": "Important",
+  "publishedAt": "2024-10-31T12:00:00+09:00",
+  "updatedAt": "2025-06-16T12:00:00+09:00",
+  "version": "1.08E",
+  "explanation": "<p>Ricoh has identified a buffer overflow vulnerability (CVE-2024-47939) when using the Web Image Monitor that could potentially allow a denial of service (DoS) or changes to some device settings.</p>\n<p>&nbsp;</p>\n<p>List 1 below shows the affected products and services.&nbsp;<br />Ricoh offers countermeasures detailed in the hyperlinked pages in the list.</p>\n<p>&nbsp;</p>\n<p>Note:<br />We have identified an issue with the <a href=\"https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/r_firm/r_firm.htm\">Ricoh Firmware Update Tool</a> where firmware updates may fail when attempting to update multiple devices of the same model simultaneously.<br />This issue has been resolved in the latest version of the tool.<br />We kindly request that you ensure you are using the most recent version of the <a href=\"https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/r_firm/r_firm.htm\">Ricoh Firmware Update Tool</a>.<br />In the table below, devices that are likely to encounter the issue are marked with an asterisk.</p>\n<p>&nbsp;</p>",
+  "cve": [
+    {
+      "id": "CVE-2024-47939",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-47939",
+      "cwe": [
+        {
+          "id": "CWE-121",
+          "url": "https://cwe.mitre.org/data/definitions/121.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "7.7",
+  "severity": "HIGH",
+  "status": "",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "thanks": "We would like to thank Zhihong Tian, ​​Hui Lu, Guocheng Wu, and Xingchi Chen of the Cyberspace Advanced Technology Institute of Guangzhou University for reporting this vulnerability.",
+  "history": [
+    {
+      "updatedAt": "2025-06-16T12:00:00+09:00",
+      "version": "1.08E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated List1"
+    },
+    {
+      "updatedAt": "2025-04-14T18:00:00+09:00",
+      "version": "1.07E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated List1"
+    },
+    {
+      "updatedAt": "2025-03-24T18:00:00+09:00",
+      "version": "1.06E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated CVSSv3 base score and Potential impact"
+    },
+    {
+      "updatedAt": "2025-03-10T20:00:00+09:00",
+      "version": "1.05E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated List1"
+    },
+    {
+      "updatedAt": "2025-02-10T15:00:00+09:00",
+      "version": "1.04E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated List1"
+    },
+    {
+      "updatedAt": "2025-01-23T16:00:00+09:00",
+      "version": "1.03E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated List1"
+    },
+    {
+      "updatedAt": "2025-01-14T17:00:00+09:00",
+      "version": "1.02E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Added Note"
+    },
+    {
+      "updatedAt": "2024-12-09T20:00:00+09:00",
+      "version": "1.01E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated List1"
+    },
+    {
+      "updatedAt": "2024-10-31T12:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/vul?id=ricoh-2024-000011",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors.",
+  "list1Title": "",
+  "list2Title": "List1:Ricoh products and services affected by this vulnerability",
+  "productStatus": {
+    "businessFields": [],
+    "products": [
+      {
+        "name": "MP C2011SP",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000129-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000129-2024-000011</a>"
+      },
+      {
+        "name": "MP 2553SP/3053/3053SP/3353/3353SP",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000257-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000257-2024-000011</a>"
+      },
+      {
+        "name": "MP 2553ZSP/3053ZSP/3353ZSP",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000258-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000258-2024-000011</a>"
+      },
+      {
+        "name": "MP W7100SP/W8140SP",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000132-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000132-2024-000011</a>"
+      },
+      {
+        "name": "MP W6700/W6700SP",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000226-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000226-2024-000011</a>"
+      },
+      {
+        "name": "MP CW2200",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000227-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000227-2024-000011</a>"
+      },
+      {
+        "name": "Aficio SP C730DN",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000145-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000145-2024-000011</a>"
+      },
+      {
+        "name": "Aficio MP 4002/4002SP/5002/5002SP",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000252-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000252-2024-000011</a>"
+      },
+      {
+        "name": "Aficio SP 8300DN",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000228-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000228-2024-000011</a>"
+      },
+      {
+        "name": "MP C4502/C5502",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000224-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000224-2024-000011</a>"
+      },
+      {
+        "name": "Aficio SP C830/C831",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000238-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000238-2024-000011</a>"
+      },
+      {
+        "name": "Aficio MP C3002/C3502",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000127-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000127-2024-000011</a>"
+      },
+      {
+        "name": "SP 4510SF",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000217-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000217-2024-000011</a>"
+      },
+      {
+        "name": "Aficio MP C305",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000218-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000218-2024-000011</a>"
+      },
+      {
+        "name": "Pro 8100S/8110S/8120S",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000253-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000253-2024-000011</a>"
+      },
+      {
+        "name": "Pro 8210/8220",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000245-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000245-2024-000011</a>"
+      },
+      {
+        "name": "MP 305+",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000015-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000015-2024-000011</a>"
+      },
+      {
+        "name": "MP 6002/7502/9002 *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000220-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000220-2024-000011</a>"
+      },
+      {
+        "name": "M C2001",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000018-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000018-2024-000011</a>"
+      },
+      {
+        "name": "MP C307/C407",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000062-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000062-2024-000011</a>"
+      },
+      {
+        "name": "MP C401SP/C401SRSP(The model with Smart Operation Panel) *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000256-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000256-2024-000011</a>"
+      },
+      {
+        "name": "MP C401SP/C401SRSP *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000131-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000131-2024-000011</a>"
+      },
+      {
+        "name": "MP CW2201 *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000059-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000059-2024-000011</a>"
+      },
+      {
+        "name": "SP 4520DN *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000229-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000229-2024-000011</a>"
+      },
+      {
+        "name": "SP 4510DN *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000140-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000140-2024-000011</a>"
+      },
+      {
+        "name": "Pro 8200S/8210S/8220S",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000243-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000243-2024-000011</a>"
+      },
+      {
+        "name": "Pro 8110/8120",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000254-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000254-2024-000011</a>"
+      },
+      {
+        "name": "MP 501SPF/601SPF *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000123-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000123-2024-000011</a>"
+      },
+      {
+        "name": "IM 550F/600F/600SRF *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000013-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000013-2024-000011</a>"
+      },
+      {
+        "name": "SP 5300DN/5310DN *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000135-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000135-2024-000011</a>"
+      },
+      {
+        "name": "P 800/801 *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000136-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000136-2024-000011</a>"
+      },
+      {
+        "name": "IM 2702",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000009-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000009-2024-000011</a>"
+      },
+      {
+        "name": "MP C8003/C6503",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000128-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000128-2024-000011</a>"
+      },
+      {
+        "name": "IM C6500/C8000",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000001-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000001-2024-000011</a>"
+      },
+      {
+        "name": "IM 350F/350/430F/430Fb",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000016-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000016-2024-000011</a>"
+      },
+      {
+        "name": "P 501/502 *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000137-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000137-2024-000011</a>"
+      },
+      {
+        "name": "IM 2500/3000/3500/4000/5000/6000",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000010-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000010-2024-000011</a>"
+      },
+      {
+        "name": "MP 2555/3055/3555/4055/5055/6055",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000011-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000011-2024-000011</a>"
+      },
+      {
+        "name": "SP 8400DN *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000138-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000138-2024-000011</a>"
+      },
+      {
+        "name": "SP 6430DN",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000139-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000139-2024-000011</a>"
+      },
+      {
+        "name": "IM C530F/C530FB",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000017-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000017-2024-000011</a>"
+      },
+      {
+        "name": "MP 402SPF *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000057-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000057-2024-000011</a>"
+      },
+      {
+        "name": "IM C400F/C400SRF/C300F/C300",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000008-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000008-2024-000011</a>"
+      },
+      {
+        "name": "P C600 *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000143-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000143-2024-000011</a>"
+      },
+      {
+        "name": "Aficio MP 2001/2501 *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000219-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000219-2024-000011</a>"
+      },
+      {
+        "name": "MP 6503/7503/9003",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000058-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000058-2024-000011</a>"
+      },
+      {
+        "name": "IM 7000/8000/9000",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000012-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000012-2024-000011</a>"
+      },
+      {
+        "name": "MP C3003/C3503 (The model without Smart Operation Panel) *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000041-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000041-2024-000011</a>"
+      },
+      {
+        "name": "MP C4503/C5503/C6003 (The model without Smart Operation Panel) *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000042-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000042-2024-000011</a>"
+      },
+      {
+        "name": "MP C2003/C2503 (The model without Smart Operation Panel) *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000043-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000043-2024-000011</a>"
+      },
+      {
+        "name": "RICOH MP C3004ex/C3504ex",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000035-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000035-2024-000011</a>"
+      },
+      {
+        "name": "RICOH MP C2004ex/C2504ex",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000037-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000037-2024-000011</a>"
+      },
+      {
+        "name": "RICOH MP C4504ex/C5504ex/C6004ex",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000036-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000036-2024-000011</a>"
+      },
+      {
+        "name": "RICOH MP C3004/C3504",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000002-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000002-2024-000011</a>"
+      },
+      {
+        "name": "RICOH MP C2004/C2504",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000004-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000004-2024-000011</a>"
+      },
+      {
+        "name": "RICOH MP C4504/C5504/C6004",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000003-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000003-2024-000011</a>"
+      },
+      {
+        "name": "IM C3000/C3500",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000005-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000005-2024-000011</a>"
+      },
+      {
+        "name": "IM C2000/C2500",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000007-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000007-2024-000011</a>"
+      },
+      {
+        "name": "IM C4500/C5500/C6000",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000006-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000006-2024-000011</a>"
+      },
+      {
+        "name": "SP C840DN/C842DN *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000144-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000144-2024-000011</a>"
+      },
+      {
+        "name": "SP C340DN *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000232-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000232-2024-000011</a>"
+      },
+      {
+        "name": "SP C342DN *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000233-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000233-2024-000011</a>"
+      },
+      {
+        "name": "MP C501SP *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000130-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000130-2024-000011</a>"
+      },
+      {
+        "name": "IM CW2200",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000060-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000060-2024-000011</a>"
+      },
+      {
+        "name": "IP CW2200 *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000162-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000162-2024-000011</a>"
+      },
+      {
+        "name": "Aficio MP 301 *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000223-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000223-2024-000011</a>"
+      },
+      {
+        "name": "SP C360SNw/C360SFNw/C361SFNw *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000055-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000055-2024-000011</a>"
+      },
+      {
+        "name": "SP C352DN *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000239-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000239-2024-000011</a>"
+      },
+      {
+        "name": "SP C360DNw *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000146-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000146-2024-000011</a>"
+      },
+      {
+        "name": "SP C435DN *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000147-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000147-2024-000011</a>"
+      },
+      {
+        "name": "SP C440DN *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000148-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000148-2024-000011</a>"
+      },
+      {
+        "name": "MP C3003/C3503 (The model with Smart Operation Panel) *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000038-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000038-2024-000011</a>"
+      },
+      {
+        "name": "MP C4503/C5503/C6003 (The model with Smart Operation Panel) *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000039-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000039-2024-000011</a>"
+      },
+      {
+        "name": "MP C2003/C2503 (The model with Smart Operation Panel) *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000040-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000040-2024-000011</a>"
+      },
+      {
+        "name": "MP C6502/C8002 *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000225-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000225-2024-000011</a>"
+      },
+      {
+        "name": "MP 2554/3054/3554/4054/5054/6054 *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000255-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000255-2024-000011</a>"
+      },
+      {
+        "name": "MP 2554ZSP/3054ZSP/3554ZSP/4054AZSP/5054AZSP/6054ZSP *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000216-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000216-2024-000011</a>"
+      },
+      {
+        "name": "MP C306/C406 *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000061-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000061-2024-000011</a>"
+      },
+      {
+        "name": "Pro 8300S/8310S/8320S",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000244-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000244-2024-000011</a>"
+      },
+      {
+        "name": "Pro 8310/8320",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000246-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000246-2024-000011</a>"
+      },
+      {
+        "name": "Pro C5200S/Pro C5210S",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000247-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000247-2024-000011</a>"
+      },
+      {
+        "name": "Pro C5300S/C5310S",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000019-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000019-2024-000011</a>"
+      },
+      {
+        "name": "Pro C5300SL",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000161-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000161-2024-000011</a>"
+      },
+      {
+        "name": "Pro C7200S/C7210S/C7200SX/C7210SX/C7200SL",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000056-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000056-2024-000011</a>"
+      },
+      {
+        "name": "Pro C7200/C7210/C7200X/C7210X/C7200e",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000250-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000250-2024-000011</a>"
+      },
+      {
+        "name": "Pro C9100/9110",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000241-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000241-2024-000011</a>"
+      },
+      {
+        "name": "Pro C7100S/C7110S/C7100SX/C7110SX",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000248-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000248-2024-000011</a>"
+      },
+      {
+        "name": "Pro C7100/C7110/C7100X/C7110X",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000249-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000249-2024-000011</a>"
+      },
+      {
+        "name": "Pro C9200/9210",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000242-2024-000011'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000242-2024-000011</a>"
+      }
+    ]
+  }
+}

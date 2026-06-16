@@ -1,0 +1,91 @@
+{
+  "name": "Pro 8400S/8410S",
+  "id": "prod000270",
+  "advisories": [
+    {
+      "id": "ricoh-prod000270-2026-000004",
+      "model": "Pro 8400S/8410S",
+      "component": "Firmware",
+      "title": "Pro 8400S/8410S: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41226"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-05-11+09:00",
+      "updatedAt": "2026-05-11+09:00"
+    },
+    {
+      "id": "ricoh-prod000270-2026-000004",
+      "model": "Pro 8400S/8410S",
+      "component": "Firmware",
+      "title": "Pro 8400S/8410S: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41226"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-05-11+09:00",
+      "updatedAt": "2026-05-11+09:00"
+    },
+    {
+      "id": "ricoh-prod000270-2026-000004",
+      "model": "Pro 8400S/8410S",
+      "component": "Firmware",
+      "title": "Pro 8400S/8410S: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41226"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-05-11+09:00",
+      "updatedAt": "2026-05-11+09:00"
+    },
+    {
+      "id": "ricoh-prod000270-2026-000004",
+      "model": "Pro 8400S/8410S",
+      "component": "Firmware",
+      "title": "Pro 8400S/8410S: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41226"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-05-11+09:00",
+      "updatedAt": "2026-05-11+09:00"
+    },
+    {
+      "id": "ricoh-prod000270-2026-000004",
+      "model": "Pro 8400S/8410S",
+      "component": "Firmware",
+      "title": "Pro 8400S/8410S: Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41226"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-05-11+09:00",
+      "updatedAt": "2026-05-11+09:00"
+    }
+  ]
+}

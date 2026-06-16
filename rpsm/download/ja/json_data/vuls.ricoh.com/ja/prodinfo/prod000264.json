@@ -1,0 +1,116 @@
+{
+  "name": "RICOH Pro 8420Y/8420HT/8410Y/8410HT",
+  "id": "prod000264",
+  "advisories": [
+    {
+      "id": "ricoh-prod000264-2026-000004",
+      "model": "RICOH Pro 8420Y/8420HT/8410Y/8410HT",
+      "component": "本体F/W",
+      "title": "RICOH Pro 8420Y/8420HT/8410Y/8410HTへの「オープンリダイレクトの脆弱性」の影響について",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [
+        {
+          "id": "JVN#65118274",
+          "url": "https://jvn.jp/jp/JVN65118274/index.html"
+        }
+      ],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000264-2026-000004",
+      "model": "RICOH Pro 8420Y/8420HT/8410Y/8410HT\t",
+      "component": "本体F/W",
+      "title": "RICOH Pro 8420Y/8420HT/8410Y/8410HTへの「オープンリダイレクトの脆弱性」の影響について",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [
+        {
+          "id": "JVN#65118274",
+          "url": "https://jvn.jp/jp/JVN65118274/index.html"
+        }
+      ],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000264-2026-000004",
+      "model": "RICOH Pro 8420Y/8420HT/8410Y/8410HT\t",
+      "component": "本体F/W",
+      "title": "RICOH Pro 8420Y/8420HT/8410Y/8410HTへの「オープンリダイレクトの脆弱性」の影響について",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [
+        {
+          "id": "JVN#65118274",
+          "url": "https://jvn.jp/jp/JVN65118274/index.html"
+        }
+      ],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000264-2026-000004",
+      "model": "RICOH Pro 8420Y/8420HT/8410Y/8410HT\t",
+      "component": "本体F/W",
+      "title": "RICOH Pro 8420Y/8420HT/8410Y/8410HTへの「オープンリダイレクトの脆弱性」の影響について",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": ""
+        }
+      ],
+      "jvn": [
+        {
+          "id": "JVN#65118274",
+          "url": "https://jvn.jp/jp/JVN65118274/index.html"
+        }
+      ],
+      "publishedAt": "2026-04-30+09:00",
+      "updatedAt": "2026-04-30+09:00"
+    },
+    {
+      "id": "ricoh-prod000264-2025-000001",
+      "model": "RICOH Pro 8420Y/8420HT/8410Y/8410HT",
+      "component": "本体F/W",
+      "title": "RICOH Pro 8420Y/8420HT/8410Y/8410HTへの「反射型クロスサイトスクリプティングの脆弱性」の影響について",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2025-41393",
+          "url": ""
+        }
+      ],
+      "jvn": [
+        {
+          "id": "JVN#20474768",
+          "url": "https://jvn.jp/jp/JVN20474768/index.html"
+        }
+      ],
+      "publishedAt": "2025-05-12+09:00",
+      "updatedAt": "2025-05-12+09:00"
+    }
+  ]
+}

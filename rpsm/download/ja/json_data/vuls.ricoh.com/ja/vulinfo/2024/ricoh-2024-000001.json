@@ -1,0 +1,83 @@
+{
+  "title": "「PostScriptインタープリタに於ける脆弱性」(CVE-2023-50734~50736)、「SEメニューの入力検証に於ける脆弱性」(CVE-2023-50737)によるリコー製品への影響について",
+  "company": "株式会社リコー",
+  "id": "ricoh-2024-000001",
+  "importance": "Important",
+  "publishedAt": "2024-02-05T13:00:00+09:00",
+  "updatedAt": "2024-02-05T13:00:00+09:00",
+  "version": "1.00J",
+  "explanation": "<p>&nbsp;日頃は弊社製品をご愛用いただきまして、誠にありがとうございます。<br />当社が開発、製造し、日本国内で販売する製品・サービスに対し、「PostScriptインタープリタに於ける脆弱性」(CVE-2023-50734~50736)、「SEメニューの入力検証に於ける脆弱性」(CVE-2023-50737)による影響が確認されました。より強固なセキュリティーを確保するため、以下(表1)に記載の製品・サービスをご利用のお客様におかれましては、表中のリンク先ページに記載の対処を頂けますようお願いいたします。</p>\n<p>&nbsp;</p>\n<p>[脆弱性概要]</p>\n<p>&nbsp;</p>\n<p>CVE-2023-50734（CVSSv3スコア9.0）：PostScriptインタープリタにバッファオーバーフローの脆弱性が確認されました。<br />CVE-2023-50735（CVSSv3スコア9.0）：PostScriptインタープリタにヒープ破損の脆弱性が確認されました。<br />CVE-2023-50736（CVSSv3スコア9.0）：PostScriptインタープリタにメモリ破損の脆弱性が確認されてました。<br />CVE-2023-50737（CVSSv3スコア9.1）：SEメニュー於ける入力検証の脆弱性が確認されました。</p>\n<p>&nbsp;</p>\n<p>今回見つかった脆弱性を利用して、デバイス上で任意のコードをリモートで実行できるようになる可能性があります。</p>",
+  "cve": [
+    {
+      "id": "CVE-2023-50734",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-121",
+          "url": "https://cwe.mitre.org/data/definitions/121.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-50735",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-465",
+          "url": "https://cwe.mitre.org/data/definitions/465.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-50736",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-131",
+          "url": "https://cwe.mitre.org/data/definitions/131.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-50737",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-20",
+          "url": "https://cwe.mitre.org/data/definitions/20.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "9.1",
+  "severity": "CRITICAL",
+  "status": "",
+  "jvn": [],
+  "contact": "<p>リコーテクニカルコールセンター<br />Tel: 0120-892-111<br />※ 対応時間：祝日を除く月～金 9:00～17:00</p>",
+  "thanks": "",
+  "history": [
+    {
+      "updatedAt": "2024-02-05T13:00:00+09:00",
+      "version": "1.00J",
+      "company": "株式会社リコー",
+      "changes": "新規公開"
+    }
+  ],
+  "url": "https://jp.ricoh.com/security/products/vulnerabilities/vul?id=ricoh-2024-000001",
+  "authenticityGuarantee": "このURLリンク先と内容の異なる、あるいはURLを省略した、このドキュメントのテキストのコピーは、重要な情報の欠落や誤りの可能性がありますのでご注意ください。",
+  "list1Title": "",
+  "list2Title": "表1.脆弱性への対処が必要なリコー製品・サービス",
+  "productStatus": {
+    "businessFields": [],
+    "products": [
+      {
+        "name": "RICOH P C200SFL",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000064-2024-000001'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000064-2024-000001</a>"
+      },
+      {
+        "name": "RICOH P C200L",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000063-2024-000001'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000063-2024-000001</a>"
+      }
+    ]
+  }
+}

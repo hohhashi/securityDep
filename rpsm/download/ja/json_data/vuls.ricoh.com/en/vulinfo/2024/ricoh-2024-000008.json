@@ -1,0 +1,81 @@
+{
+  "title": "Specific Ricoh MFP and Printer Products - Buffer overflow vulnerability(CVE-2024-39927)",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-2024-000008",
+  "importance": "",
+  "publishedAt": "2024-07-09T12:00:00+09:00",
+  "updatedAt": "2025-01-14T17:00:00+09:00",
+  "version": "1.02E",
+  "explanation": "<p>Ricoh has identified a buffer overflow vulnerability(CVE-2024-39927).</p>\n<p>&nbsp;</p>\n<p>List 1 below shows the affected products and services.&nbsp;<br />Ricoh offers countermeasures detailed in the hyperlinked pages in the list.</p>\n<p>&nbsp;</p>\n<p>There is a possibility of a denial of service (DoS) attack or partial data destruction caused by a remote attacker.<br />No arbitrary code can be executed.</p>\n<p>&nbsp;</p>\n<p>Note:<br />We have identified an issue with the <a href=\"https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/r_firm/r_firm.htm\">Ricoh Firmware Update Tool</a> where firmware updates may fail when attempting to update multiple devices of the same model simultaneously.<br />This issue has been resolved in the latest version of the tool.<br />We kindly request that you ensure you are using the most recent version of the <a href=\"https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/r_firm/r_firm.htm\">Ricoh Firmware Update Tool</a>.<br />In the table below, devices that are likely to encounter the issue are marked with an asterisk.</p>",
+  "cve": [
+    {
+      "id": "CVE-2024-39927",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-787",
+          "url": "https://cwe.mitre.org/data/definitions/787.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "8.2",
+  "severity": "HIGH",
+  "status": "",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "thanks": "",
+  "history": [
+    {
+      "updatedAt": "2025-01-14T17:00:00+09:00",
+      "version": "1.02E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Added Note"
+    },
+    {
+      "updatedAt": "2024-07-09T19:00:00+09:00",
+      "version": "1.01E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated CVSSv3 score"
+    },
+    {
+      "updatedAt": "2024-07-09T12:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/vul?id=ricoh-2024-000008",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors.",
+  "list1Title": "",
+  "list2Title": "List1:Ricoh products and services affected by this vulnerability",
+  "productStatus": {
+    "businessFields": [],
+    "products": [
+      {
+        "name": "IP C8500 *",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000165-2024-000008'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000165-2024-000008</a>"
+      },
+      {
+        "name": "IM 370/370F/460F/460FTL",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000160-2024-000008'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000160-2024-000008</a>"
+      },
+      {
+        "name": "IM C7010",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000159-2024-000008'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000159-2024-000008</a>"
+      },
+      {
+        "name": "IM C2010/C2510",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000158-2024-000008'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000158-2024-000008</a>"
+      },
+      {
+        "name": "IM C4510/C5510/C6010",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000157-2024-000008'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000157-2024-000008</a>"
+      },
+      {
+        "name": "IM C3010/C3510",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000156-2024-000008'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000156-2024-000008</a>"
+      }
+    ]
+  }
+}

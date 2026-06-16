@@ -1,0 +1,23 @@
+{
+  "name": "MP 2554/3054/3554/4054/5054/6054",
+  "id": "prod000255",
+  "advisories": [
+    {
+      "id": "ricoh-prod000255-2024-000011",
+      "model": "MP 2554/3054/3554/4054/5054/6054",
+      "component": "Firmware",
+      "title": "Specific Ricoh MFP and Printer Products - Buffer overflow vulnerability(CVE-2024-47939)in MP 2554/3054/3554/4054/5054/6054",
+      "importance": "Important",
+      "severity": "HIGH",
+      "cve": [
+        {
+          "id": "CVE-2024-47939",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2024-10-31+09:00",
+      "updatedAt": "2025-03-24+09:00"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "title": "Specific Ricoh Printer Products - Java TM Platform vulnerability in SP C840DN/C842DN",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-prod000144-2024-000010",
+  "importance": "",
+  "publishedAt": "2024-08-06T13:00:00+09:00",
+  "updatedAt": "2024-08-23T13:00:00+09:00",
+  "version": "1.01E",
+  "explanation": "<p>Ricoh has identified a vulnerability in Java TM Platform that would automatically enable outdated TLS versions (TLS 1.0 and TLS 1.1) when a firmware update is performed.&nbsp;</p>",
+  "cve": [
+    {
+      "id": "CVE-2024-41995",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-1188",
+          "url": "https://cwe.mitre.org/data/definitions/1188.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "2.4",
+  "severity": "LOW",
+  "affect": "<p>When communicating with a Java application, a connection using TLS 1.0 or TLS 1.1 may be made, which are vulnerable versions.</p>",
+  "models": [
+    {
+      "name": "SP C840DN/C842DN (Model with JavaVM card option only)",
+      "component": "Firmware",
+      "version": "JavaTM Platform 12.89 or earlier"
+    }
+  ],
+  "checkVersion": "<p>How to check the firmware version:<br />1. Access Web Image Monitor from your browser.<br />https://\"IP address\" or \"hostname\" of the device.<br />2. Log in with Administrator privileges.<br />3. Navigate to Device Management &gt; Configuration &gt; Extended Feature Settings &gt; Extended Feature Info &gt; JavaTM Platform</p>",
+  "measures": "<p>There are two steps that need to be followed to fully address the vulnerability:</p>\n<p>&nbsp;</p>\n<p>Step 1:<br />Please visit the following link and open the \"Firmware\" tab to download the RICOH Firmware Update Tool (JavaTM Platform) and update the firmware to the latest version: <a href=\"http://support.ricoh.com/bb/html/dr_ut_e/rc3/model/spc840dn/spc840dn.htm\">http://support.ricoh.com/bb/html/dr_ut_e/rc3/model/spc840dn/spc840dn.htm</a></p>\n<p>Note: Please be careful not to download \"RICOH Firmware Update Tool,\" and be sure to use the \"RICOH Firmware Update Tool (JavaTM Platform)\".</p>\n<p>&nbsp;</p>\n<p>By updating to the latest firmware, TLS 1.0 and 1.1 will not be enabled automatically. However, this is only effective for future updates and due to technical reasons the issue may still occur after the update performed in Step 1. Therefore, be sure to complete Step 2 as well.</p>\n<p>&nbsp;</p>\n<p>Step 2:<br />Follow the steps below to manually disable TLS 1.0 and TLS1.1:<br />1. Access Web Image Monitor from your browser.<br />https://\"IP address\" or \"hostname\" of the device.<br />2. Log in with Administrator privileges.<br />3. Navigate to Device Management &gt; Configuration &gt; Extended Feature Settings &gt; Administrator Tools &gt; Select Available Functions.<br />4. Set TLS1.0(SSL Server) and TLS1.1(SSL Server) to [Inactive].<br />5. Click the [Apply] button.</p>",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "history": [
+    {
+      "updatedAt": "2024-08-23T13:00:00+09:00",
+      "version": "1.01E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated Products or Services"
+    },
+    {
+      "updatedAt": "2024-08-06T13:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000144-2024-000010",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors."
+}

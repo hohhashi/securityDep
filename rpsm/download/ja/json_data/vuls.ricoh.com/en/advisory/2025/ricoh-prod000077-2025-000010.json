@@ -1,0 +1,52 @@
+{
+  "title": "Notice on potential impact of \"Vulnerability in the RICOH Streamline NX Administration Tool Allowing Tampering of Operation History\" towards RICOH Streamline NX V3",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-prod000077-2025-000010",
+  "importance": "",
+  "publishedAt": "2025-09-05T14:00:00+09:00",
+  "updatedAt": "2025-09-16T16:30:00+09:00",
+  "version": "1.01E",
+  "explanation": "<p>Ricoh understands the importance of security and is committed to managing its products and services with the most advanced security technologies possible for its customers worldwide.<br>Ricoh is aware of the reported \"Vulnerability in the RICOH Streamline NX Administration Tool Allowing Tampering of Operation History\" affects RICOH Streamline NX V3.</p>\n<p>&nbsp;</p>\n<p>During an application penetration test, it was identified that in several functions of RICOH Streamline NX, the username of the user who performed an operation is recorded directly from a value contained in the HTTP request. As a result, by tampering with the relevant portion of the HTTP request, an attacker could modify the recorded username of the user who executed the operation.</p>\n<p>&nbsp;</p>\n<p>Ricoh offers measures detailed below.</p>",
+  "cve": [
+    {
+      "id": "CVE-2025-58422",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-348",
+          "url": "https://cwe.mitre.org/data/definitions/348.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "3.1",
+  "severity": "LOW",
+  "affect": "<p>&nbsp;Impact on Confidentiality: No impact.<br>&nbsp;Impact on Integrity: The record of the user who performed the operation can be tampered with.&nbsp;<br>&nbsp;Impact on Availability: No impact.<br>The following UI functions which have *updated* type field read from client supplied values are impacted.<br>- Embedded Login Screen- Embedded Authentication<br>- Authentication Priority List<br>- Embedded Print- Embedded Scan<br>- Embedded Setting<br>- PC Client Location Profiles<br>- Authentication Profile<br>- Built-In Functions<br>- Embedded Scan Functions<br>- Metadata Database Connection<br>- Replacement Table<br>- Zone OCR Form<br>- PDF Stamper<br>- Cloud Authentication Settings<br>- Shared Connector Settings<br>- Workflow Design<br>- Device Application<br>- Profile Configuration<br>- Profile Tasks<br>- Print Rules<br>- Groups<br>- Departments<br>- Cost Center<br>- Users<br>- Permissions<br>- Synchronization Tasks<br>- Delegation Server Failover/Load Balancing Group- Delegation Server Load Balancer Association</p>",
+  "models": [
+    {
+      "name": "RICOH Streamline NX V3",
+      "component": "Administration Tool",
+      "version": "3.5.1~3.243.0(24R3)"
+    }
+  ],
+  "checkVersion": "<p>1. Login Administration Tool<br>2. Open System - Server Settings - System Information and Settings from the left pane</p>",
+  "measures": "<p>For versions prior to RICOH Streamline NX 3.251.0 (25R1), applying the patch will resolve this issue. We recommend upgrading to version 3.251.0 (25R1) or later, which addresses this vulnerability.<br>As a temporary measure, use HTTPS and ensure that certificates are not leaked. Do not use any leaked certificates; instead, replace them with new certificates.</p>",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "history": [
+    {
+      "updatedAt": "2025-09-16T16:30:00+09:00",
+      "version": "1.01E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated Resolution"
+    },
+    {
+      "updatedAt": "2025-09-05T14:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000077-2025-000010",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors."
+}

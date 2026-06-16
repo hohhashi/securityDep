@@ -1,0 +1,142 @@
+{
+  "name": "MP 2555/3055/3555/4055/5055/6055",
+  "id": "prod000011",
+  "advisories": [
+    {
+      "id": "ricoh-prod000011-2026-000004",
+      "model": "MP 2555/3055/3555/4055/5055/6055",
+      "component": "Firmware",
+      "title": "MP 2555/3055/3555/4055/5055/6055:  Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41226"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-05-11+09:00",
+      "updatedAt": "2026-05-11+09:00"
+    },
+    {
+      "id": "ricoh-prod000011-2026-000004",
+      "model": "MP 2555/3055/3555/4055/5055/6055",
+      "component": "Firmware",
+      "title": "MP 2555/3055/3555/4055/5055/6055:  Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41226"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-05-11+09:00",
+      "updatedAt": "2026-05-11+09:00"
+    },
+    {
+      "id": "ricoh-prod000011-2026-000004",
+      "model": "MP 2555/3055/3555/4055/5055/6055",
+      "component": "Firmware",
+      "title": "MP 2555/3055/3555/4055/5055/6055:  Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41226"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-05-11+09:00",
+      "updatedAt": "2026-05-11+09:00"
+    },
+    {
+      "id": "ricoh-prod000011-2026-000004",
+      "model": "MP 2555/3055/3555/4055/5055/6055",
+      "component": "Firmware",
+      "title": "MP 2555/3055/3555/4055/5055/6055:  Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41226"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-05-11+09:00",
+      "updatedAt": "2026-05-11+09:00"
+    },
+    {
+      "id": "ricoh-prod000011-2026-000004",
+      "model": "MP 2555/3055/3555/4055/5055/6055",
+      "component": "Firmware",
+      "title": "MP 2555/3055/3555/4055/5055/6055:  Open Redirect Vulnerability in Web Image Monitor",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-41226",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41226"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2026-05-11+09:00",
+      "updatedAt": "2026-05-11+09:00"
+    },
+    {
+      "id": "ricoh-prod000011-2024-000011",
+      "model": "MP 2555/3055/3555/4055/5055/6055",
+      "component": "Firmware",
+      "title": "Specific Ricoh MFP and Printer Products - Buffer overflow vulnerability(CVE-2024-47939)in MP 2555/3055/3555/4055/5055/6055",
+      "importance": "Important",
+      "severity": "HIGH",
+      "cve": [
+        {
+          "id": "CVE-2024-47939",
+          "url": ""
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2024-10-31+09:00",
+      "updatedAt": "2025-03-25+09:00"
+    },
+    {
+      "id": "ricoh-prod000011-2023-000006",
+      "model": "MP 2555/3055/3555/4055/5055/6055",
+      "component": "Firmware",
+      "title": "Specific Ricoh MFP and Printer Products -Cross-site scripting vulnerable in MP 2555/3055/3555/4055/5055/6055",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2022-37406",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-37406"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2024-05-28+09:00",
+      "updatedAt": "2024-05-28+09:00"
+    },
+    {
+      "id": "ricoh-prod000011-2022-000002",
+      "model": "MP 2555/3055/3555/4055/5055/6055",
+      "component": "Firmware",
+      "title": "Notice on potential impact of \"a threat of leakage of the folder user password\" vulnerability (CVE-2022-43969) towards MP 2555/3055/3555/4055/5055/6055",
+      "importance": "Important",
+      "severity": "CRITICAL",
+      "cve": [
+        {
+          "id": "CVE-2022-43969",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-43969"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2022-12-26+09:00",
+      "updatedAt": "2023-01-24+09:00"
+    }
+  ]
+}

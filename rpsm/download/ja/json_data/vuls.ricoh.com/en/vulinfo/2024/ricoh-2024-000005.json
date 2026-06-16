@@ -1,0 +1,49 @@
+{
+  "title": "Notice of security investigation: Vulnerability that an attacker can escalate privileges to NT Authority\\System on the OS where RICOH Streamline NX PC Client is installed.",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-2024-000005",
+  "importance": "",
+  "publishedAt": "2024-06-18T13:30:00+09:00",
+  "updatedAt": "2024-06-18T13:30:00+09:00",
+  "version": "1.00E",
+  "explanation": "<p>Ricoh understands the importance of security and is committed to managing its products and services with the most advanced security technologies possible for its customers worldwide.<br />Ricoh is aware of the reported \"Vulnerability that an attacker can escalate privileges to NT Authority\\System on the OS where RICOH Streamline NX PC Client is installed.\" affects certain products and services that Ricoh develops, manufactures, and offers.</p>\n<p>&nbsp;</p>\n<p>List 1 below shows the affected products and services. Ricoh offers measures detailed in the hyperlinked pages in the list.</p>",
+  "cve": [
+    {
+      "id": "CVE-2024-36480",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-798",
+          "url": "https://cwe.mitre.org/data/definitions/798.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "5.1",
+  "severity": "MEDIUM",
+  "status": "",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "thanks": "officially acknowledge our contributor:\nAbian Blome from Siemens Energy.",
+  "history": [
+    {
+      "updatedAt": "2024-06-18T13:30:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/vul?id=ricoh-2024-000005",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors.",
+  "list1Title": "",
+  "list2Title": "List1:Ricoh products and services affected by this vulnerability",
+  "productStatus": {
+    "businessFields": [],
+    "products": [
+      {
+        "name": "RICOH Streamline NX V3",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000077-2024-000005'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000077-2024-000005</a>"
+      }
+    ]
+  }
+}

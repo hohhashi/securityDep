@@ -1,0 +1,155 @@
+{
+  "title": "「Server-Side Request Forgery(SSRF)に対する脆弱性」(CVE-2023-23560)、「PostScriptインタープリタに於ける脆弱性」(CVE-2023-26063_26066)、「入力検証の脆弱性」(CVE-2023-26067)、「Embedded Web Serverの入力処理の脆弱性」(CVE-2023-26068)、「Web APIの入力検証の脆弱性」(CVE-2023-26069)および「SNMP機能の入力検証の脆弱性」(CVE-2023-26070)によるリコー製品への影響について",
+  "company": "株式会社リコー",
+  "id": "ricoh-2023-000002",
+  "importance": "",
+  "publishedAt": "2023-02-21T14:00:00+09:00",
+  "updatedAt": "2023-04-05T09:00:00+09:00",
+  "version": "1.01J",
+  "explanation": "<p>日頃は弊社製品をご愛用いただきまして、誠にありがとうございます。<br />当社が開発、製造し、日本国内で販売する主要な製品・サービスに対する、「Server-Side Request Forgery(SSRF)に対する脆弱性」(CVE-2023-23560)、「PostScriptインタープリターに於ける脆弱性」(CVE-2023-26063～26066)、「入力検証の脆弱性」(CVE-2023-26067)、「Embedded Web Serverの入力処理の脆弱性」(CVE-2023-26068)、「Web APIの入力検証の脆弱性」(CVE-2023-26069)および「SNMP機能の入力検証の脆弱性」(CVE-2023-26070)による影響の調査状況および調査結果につきましては以下(表1)をご参照ください。</p>\n<p>&nbsp;</p>\n<p>[脆弱性概要]<br />CVE-2023-23560（CVSSv3スコア9.0）：SSRF攻撃が発生する可能性があります。<br />CVE-2023-26063（CVSSv3スコア9.0）：PostScriptインタープリターで型の混乱が発生する可能性があります。<br />CVE-2023-26064（CVSSv3スコア9.0）：PostScriptインタープリターで領域外書込が発生する可能性があります。<br />CVE-2023-26065（CVSSv3スコア9.0）：PostScriptインタープリターで整数オーバフローが発生する可能性があります。<br />CVE-2023-26066（CVSSv3スコア9.0）：スタックがPostScriptインタープリターで不適切に検証される可能性があります。<br />CVE-2023-26067（CVSSv3スコア8.0）：内部コンポーネントの脆弱性により、既にデバイスを侵害して特権を得ている攻撃者によって利用される可能性があります。※この脆弱性を利用してデバイスを侵害する事はできません。既に別の手段で侵害されているデバイスのみが影響を受けます。<br />CVE-2023-26068（CVSSv3スコア8.5）：組み込みWebサーバが入力データを適切にサニタイズしない可能性があります。<br />CVE-2023-26069（CVSSv3スコア9.0）：Web APIに於ける入力検証の脆弱性を利用される可能性があります。<br />CVE-2023-26070（CVSSv3スコア9.0）：SNMP機能に於ける入力検証の脆弱性を利用される可能性があります。</p>\n<p>&nbsp;</p>\n<p>今回見つかった脆弱性を利用して、デバイス上で任意のコードをリモートで実行できるようになる可能性があります。</p>",
+  "cve": [
+    {
+      "id": "CVE-2023-23560",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-23560",
+      "cwe": [
+        {
+          "id": "CWE-918",
+          "url": "https://cwe.mitre.org/data/definitions/918.html"
+        },
+        {
+          "id": "CWE-20",
+          "url": "https://cwe.mitre.org/data/definitions/20.html"
+        },
+        {
+          "id": "CWE-77",
+          "url": "https://cwe.mitre.org/data/definitions/77.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26063",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-843",
+          "url": "https://cwe.mitre.org/data/definitions/843.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26064",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-847",
+          "url": "https://cwe.mitre.org/data/definitions/847.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26065",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-190",
+          "url": "https://cwe.mitre.org/data/definitions/190.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26066",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-129",
+          "url": "https://cwe.mitre.org/data/definitions/129.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26067",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-20",
+          "url": "https://cwe.mitre.org/data/definitions/20.html"
+        },
+        {
+          "id": "CWE-269",
+          "url": "https://cwe.mitre.org/data/definitions/269.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26068",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-20",
+          "url": "https://cwe.mitre.org/data/definitions/20.html"
+        },
+        {
+          "id": "CWE-267",
+          "url": "https://cwe.mitre.org/data/definitions/267.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26069",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-20",
+          "url": "https://cwe.mitre.org/data/definitions/20.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2023-26070",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-20",
+          "url": "https://cwe.mitre.org/data/definitions/20.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "9.0",
+  "severity": "CRITICAL",
+  "status": "",
+  "jvn": [],
+  "contact": "<p>リコーテクニカルコールセンター<br />Tel: 0120-892-111<br />※ 対応時間：祝日を除く月～金 9:00～17:00</p>",
+  "thanks": "",
+  "history": [
+    {
+      "updatedAt": "2023-04-05T09:00:00+09:00",
+      "version": "1.01J",
+      "company": "株式会社リコー",
+      "changes": "タイトル更新、影響する脆弱性情報の追加"
+    },
+    {
+      "updatedAt": "2023-02-21T14:00:00+09:00",
+      "version": "1.00J",
+      "company": "株式会社リコー",
+      "changes": "新規公開"
+    }
+  ],
+  "url": "https://jp.ricoh.com/security/products/vulnerabilities/vul?id=ricoh-2023-000002",
+  "authenticityGuarantee": "このURLリンク先と内容の異なる、あるいはURLを省略した、このドキュメントのテキストのコピーは、重要な情報の欠落や誤りの可能性がありますのでご注意ください。",
+  "list1Title": "",
+  "list2Title": "表1.脆弱性への対処が必要なリコー製品・サービス",
+  "productStatus": {
+    "businessFields": [],
+    "products": [
+      {
+        "name": "RICOH P C200SFL",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000064-2023-000002'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000064-2023-000002</a>"
+      },
+      {
+        "name": "RICOH P C200L",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000063-2023-000002'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000063-2023-000002</a>"
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "RICOH SP C740",
+  "id": "prod000287",
+  "advisories": [
+    {
+      "id": "ricoh-prod000287-2026-000002",
+      "model": "RICOH SP C740",
+      "component": "Configuration Tool",
+      "title": "「Windowsサービスの実行ファイルパスが引用符で囲まれていないことによる脆弱性」によるリコー製品への影響について",
+      "importance": "",
+      "severity": "MEDIUM",
+      "cve": [
+        {
+          "id": "CVE-2026-24466",
+          "url": ""
+        }
+      ],
+      "jvn": [
+        {
+          "id": "JVN#55395471",
+          "url": "https://jvn.jp/jp/JVN55395471/index.html"
+        }
+      ],
+      "publishedAt": "2026-02-09+09:00",
+      "updatedAt": "2026-02-09+09:00"
+    }
+  ]
+}

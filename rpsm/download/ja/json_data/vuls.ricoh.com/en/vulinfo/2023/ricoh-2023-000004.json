@@ -1,0 +1,44 @@
+{
+  "title": "Notice of security investigation: \"Vulnerability of SLP (Service Location Protocol) implementation that allows reflected DoS attacks via UDP\"  (CVE-2023-29552)",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-2023-000004",
+  "importance": "",
+  "publishedAt": "2023-10-02T12:00:00+09:00",
+  "updatedAt": "2023-10-02T12:00:00+09:00",
+  "version": "1.00E",
+  "explanation": "<p>Ricoh understands the importance of security and is committed to managing its products and services with the most advanced security technologies possible for its customers worldwide.<br />Ricoh is aware of the reported \"Vulnerability of SLP (Service Location Protocol) implementation that allows reflected DoS attacks via UDP\" (CVE-2023-29552) affects certain products and services that Ricoh develops, manufactures, and offers.</p>\n<p>&nbsp;</p>\n<p>Please refer to the following URL for vulnerability description.<br /><a href=\"https://nvd.nist.gov/vuln/detail/CVE-2023-29552\">https://nvd.nist.gov/vuln/detail/CVE-2023-29552</a></p>\n<p>&nbsp;</p>\n<p>List 1 below shows the affected products and services. Ricoh offers measures detailed in the hyperlinked pages in the list.</p>",
+  "cve": [
+    {
+      "id": "CVE-2023-29552",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-29552",
+      "cwe": []
+    }
+  ],
+  "cvss": "7.5",
+  "severity": "HIGH",
+  "status": "",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "thanks": "",
+  "history": [
+    {
+      "updatedAt": "2023-10-02T12:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/vul?id=ricoh-2023-000004",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors.",
+  "list1Title": "",
+  "list2Title": "List1:Ricoh products and services affected by this vulnerability",
+  "productStatus": {
+    "businessFields": [],
+    "products": [
+      {
+        "name": "RICOH Streamline NX V3",
+        "id": "<p>Affected. For details, please refer to the following URL.</p><a href='https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000077-2023-000004'>https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000077-2023-000004</a>"
+      }
+    ]
+  }
+}

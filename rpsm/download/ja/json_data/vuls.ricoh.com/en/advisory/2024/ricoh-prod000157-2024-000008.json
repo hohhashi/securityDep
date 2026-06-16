@@ -1,0 +1,70 @@
+{
+  "title": "Specific Ricoh MFP and Printer Products - Buffer overflow vulnerability(CVE-2024-39927) in IM C4510/C5510/C6010",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-prod000157-2024-000008",
+  "importance": "",
+  "publishedAt": "2024-07-09T12:00:00+09:00",
+  "updatedAt": "2024-11-14T17:30:00+09:00",
+  "version": "1.04E",
+  "explanation": "<p>Ricoh has identified a buffer overflow vulnerability(CVE-2024-39927) affecting IM C4510/C5510/C6010.</p>",
+  "cve": [
+    {
+      "id": "CVE-2024-39927",
+      "url": "",
+      "cwe": [
+        {
+          "id": "CWE-787",
+          "url": "https://cwe.mitre.org/data/definitions/787.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "8.2",
+  "severity": "HIGH",
+  "affect": "<p>There is a possibility of a denial of service (DoS) attack or partial data destruction caused by a remote attacker.<br />No arbitrary code can be executed.</p>",
+  "models": [
+    {
+      "name": "IM C4510/C5510/C6010",
+      "component": "Firmware",
+      "version": "Prior to System/Copy 2.00-00"
+    }
+  ],
+  "checkVersion": "<p>How to view the firmware version:<br />1. Access Web Image Monitor from your browser.<br />https://\"IP address or hostname of the device\"<br />2. Log in with Administrator privileges.<br />3. Navigate to Device Management &gt; Configuration &gt; Device Settings &gt; Firmware Update</p>",
+  "measures": "<p>Please download the updated firmware at the following links:</p>\n<p><a href=\"https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/imc4510/imc4510.htm\">https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/imc4510/imc4510.htm</a></p>",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "history": [
+    {
+      "updatedAt": "2024-11-14T17:30:00+09:00",
+      "version": "1.04E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated Resolution"
+    },
+    {
+      "updatedAt": "2024-09-10T14:30:00+09:00",
+      "version": "1.03E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated Resolution"
+    },
+    {
+      "updatedAt": "2024-07-11T13:00:00+09:00",
+      "version": "1.02E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated affected versions"
+    },
+    {
+      "updatedAt": "2024-07-09T19:00:00+09:00",
+      "version": "1.01E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Updated CVSSv3 score"
+    },
+    {
+      "updatedAt": "2024-07-09T12:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000157-2024-000008",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors."
+}

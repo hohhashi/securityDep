@@ -1,0 +1,66 @@
+{
+  "title": "M C240FW - Vulnerabilities in the PostScript Interpreter (CVE-2025-65079, CVE-2025-65080, CVE-2025-65081)",
+  "company": "Ricoh Company, Ltd.",
+  "id": "ricoh-prod000067-2026-000003",
+  "importance": "",
+  "publishedAt": "2026-02-24T13:00:00+09:00",
+  "updatedAt": "2026-02-24T13:00:00+09:00",
+  "version": "1.00E",
+  "explanation": "<p>Ricoh has identified multiple vulnerabilities in the PostScript Interpreter affecting the M C240FW.</p>\n<p>CVE-2025-65079 (CVSS v4.0 Base Score: 6.9): A heap-based buffer overflow vulnerability in the PostScript Interpreter. &nbsp;<br>CVE-2025-65080 (CVSS v4.0 Base Score: 6.9): A type confusion vulnerability in the PostScript Interpreter. &nbsp;<br>CVE-2025-65081 (CVSS v4.0 Base Score: 6.9): An out-of-bounds read vulnerability in the PostScript Interpreter.</p>",
+  "cve": [
+    {
+      "id": "CVE-2025-65079",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-65079",
+      "cwe": [
+        {
+          "id": "CWE-122",
+          "url": "https://cwe.mitre.org/data/definitions/122.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2025-65080",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-65080",
+      "cwe": [
+        {
+          "id": "CWE-843",
+          "url": "https://cwe.mitre.org/data/definitions/843.html"
+        }
+      ]
+    },
+    {
+      "id": "CVE-2025-65081",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-65081",
+      "cwe": [
+        {
+          "id": "CWE-125",
+          "url": "https://cwe.mitre.org/data/definitions/125.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "",
+  "severity": "",
+  "affect": "<p>These vulnerabilities may allow an attacker to execute arbitrary code as an unprivileged user.</p>",
+  "models": [
+    {
+      "name": "M C240FW",
+      "component": "Firmware",
+      "version": "Ver.1.13 or earlier"
+    }
+  ],
+  "checkVersion": "<p>To check the firmware version of the device:</p>\n<p>1. On the operation panel, select:<br>&nbsp; &nbsp;Settings &rarr; Reports &rarr; Menu Setting Page</p>\n<p>2. Verify the firmware level listed under &ldquo;Device Information&rdquo;.</p>",
+  "measures": "<p>Please download the updated firmware from the following link:<br><a href=\"https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/mc240fw/mc240fw.htm\">https://support.ricoh.com/bb/html/dr_ut_e/rc3/model/mc240fw/mc240fw.htm</a></p>\n<p>&nbsp;</p>\n<p>Fixed version: Ver.1.14</p>",
+  "jvn": [],
+  "contact": "<p>Please contact your local Ricoh representative or dealer if you have any queries.</p>",
+  "history": [
+    {
+      "updatedAt": "2026-02-24T13:00:00+09:00",
+      "version": "1.00E",
+      "company": "Ricoh Company, Ltd.",
+      "changes": "Initial public release"
+    }
+  ],
+  "url": "https://www.ricoh.com/products/security/vulnerabilities/adv?id=ricoh-prod000067-2026-000003",
+  "authenticityGuarantee": "Please note that any copy or paraphrase of the text of this document that differs in content from the distribution URL link, or omits the URL, is an uncontrolled copy and may lack important information or contain factual errors."
+}

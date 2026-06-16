@@ -1,0 +1,71 @@
+{
+  "title": "RICOH IP 500SFへの「オープンリダイレクトの脆弱性」(CVE-2026-41226) の影響について",
+  "company": "株式会社リコー",
+  "id": "ricoh-prod000034-2026-000004",
+  "importance": "",
+  "publishedAt": "2026-05-11T12:00:00+09:00",
+  "updatedAt": "2026-05-11T12:00:00+09:00",
+  "version": "1.00J",
+  "explanation": "<p>日頃は弊社製品をご愛用いただきまして、誠にありがとうございます。<br>RICOH IP 500SFに対し、「オープンリダイレクトの脆弱性」(CVE-2026-41226) による影響が確認されました。より強固なセキュリティーを確保するため、本製品をご利用のお客様におかれましては、以下に記載の対処を頂けますようお願いいたします。</p>\n<p>脆弱性の内容につきましては、以下のURLをご参照ください。<br><a href=\"https://jvn.jp/jp/JVN65118274/\">https://jvn.jp/jp/JVN65118274/</a></p>\n<p>&nbsp;</p>",
+  "cve": [
+    {
+      "id": "CVE-2026-41226",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41226",
+      "cwe": [
+        {
+          "id": "CWE-601",
+          "url": "https://cwe.mitre.org/data/definitions/601.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "4.7",
+  "severity": "MEDIUM",
+  "affect": "<p>細工されたURLにアクセスした場合に、弊社複合機/プリンタを介して第三者が指定した外部サイトへ遷移してしまう可能性があります。<br>この脆弱性が悪用された場合、正規サービスを装ったURLから不正なサイトへ誘導される可能性があります。<br>送信元や内容に心当たりのないメールやメッセージに記載されたURLはクリックしないようご注意ください。</p>",
+  "models": [
+    {
+      "name": "RICOH IP 500SF",
+      "component": "本体F/W",
+      "version": "Web Support : 1.17以下"
+    },
+    {
+      "name": "RICOH IP 500SF",
+      "component": "本体F/W",
+      "version": "Web Uapl : 1.08以下"
+    },
+    {
+      "name": "RICOH IP 500SF",
+      "component": "本体F/W",
+      "version": "NetworkDocBox : 1.21以下"
+    },
+    {
+      "name": "RICOH IP 500SF",
+      "component": "本体F/W",
+      "version": "Printer : 1.14以下"
+    },
+    {
+      "name": "RICOH IP 500SF",
+      "component": "本体F/W",
+      "version": "System/Copy : 1.23以下"
+    }
+  ],
+  "checkVersion": "<p>操作パネルおよびWebブラウザーから確認できます。</p>\n<p>&nbsp;</p>\n<p>【操作部】</p>\n<p>下記の操作で確認できます。</p>\n<p>本体操作部の設定＞システム設定＞本体/操作パネルの情報＞ファームウェアバージョン表示</p>\n<p>&nbsp;</p>\n<p>【Webブラウザー】</p>\n<p>1：Web ブラウザーを起動します。</p>\n<p>2：Web ブラウザーのアドレスバーに「http://（機器のアドレスまたはホスト名）/」と入力し、機器にアクセスします。</p>\n<p>3：Web Image Monitor のトップページで、［ログイン］をクリックします。</p>\n<p>4：管理者のログインユーザー名とログインパスワードを入力して、［ログイン］をクリックします。</p>\n<p>5：［機器の管理］-［設定］をクリックします。</p>\n<p>6：［機器］-［ファームウェアアップデート］をクリックします。</p>\n<p>7：［ファームウェアバージョン］-［モジュール名］の［Web Support］［Web Uapl］［NetworkDocBox］［Printer］［System/Copy］のバージョンを確認します。</p>",
+  "measures": "<p>ファームアップデートツール「RICOH Firmware Update Tool」を使用し最新のファームウェアへアップデートしてください。</p>",
+  "jvn": [
+    {
+      "id": "JVN#65118274",
+      "url": "https://jvn.jp/jp/JVN65118274/index.html"
+    }
+  ],
+  "contact": "<p>リコーテクニカルコールセンター</p>\n<p>Tel: 0120-892-111</p>\n<p>※ 対応時間：祝日を除く月～金 9:00～17:00</p>",
+  "history": [
+    {
+      "updatedAt": "2026-05-11T12:00:00+09:00",
+      "version": "1.00J",
+      "company": "株式会社リコー",
+      "changes": "新規作成"
+    }
+  ],
+  "url": "https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000034-2026-000004",
+  "authenticityGuarantee": "このURLリンク先と内容の異なる、あるいはURLを省略した、このドキュメントのテキストのコピーは、重要な情報の欠落や誤りの可能性がありますのでご注意ください。"
+}

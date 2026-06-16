@@ -1,0 +1,23 @@
+{
+  "name": "Aficio SG3100SNw",
+  "id": "prod000071",
+  "advisories": [
+    {
+      "id": "ricoh-prod000071-2022-000002",
+      "model": "Aficio SG 3100SNw",
+      "component": "Firmware",
+      "title": "Notice on potential impact of \"a threat of leakage of the folder user password\" vulnerability (CVE-2022-43969) towards Aficio SG 3100SNw",
+      "importance": "Important",
+      "severity": "CRITICAL",
+      "cve": [
+        {
+          "id": "CVE-2022-43969",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-43969"
+        }
+      ],
+      "jvn": [],
+      "publishedAt": "2023-08-30+09:00",
+      "updatedAt": "2023-08-30+09:00"
+    }
+  ]
+}
