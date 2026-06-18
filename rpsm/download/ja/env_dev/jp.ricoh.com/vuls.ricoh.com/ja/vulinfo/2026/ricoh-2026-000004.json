@@ -1,0 +1,214 @@
+{
+  "title": "「リコー製Web Image Monitorを実装している複数のレーザープリンタおよび複合機（MFP）におけるオープンリダイレクトの脆弱性」(CVE-2026-41226) によるリコー製品への影響について",
+  "company": "株式会社リコー",
+  "id": "ricoh-2026-000004",
+  "importance": "",
+  "publishedAt": "2026-04-30T12:00:00+09:00",
+  "updatedAt": "2026-06-15T12:00:00+09:00",
+  "version": "1.02J",
+  "explanation": "<p>日頃は弊社製品をご愛用いただきまして、誠にありがとうございます。<br>当社が開発、製造し、日本国内で販売する製品・サービスに対し、「リコー製Web Image Monitorを実装している複数のレーザープリンタおよび複合機（MFP）におけるオープンリダイレクトの脆弱性」(CVE-2026-41226) による影響が確認されました。<br>より強固なセキュリティーを確保するため、以下(表1)に記載の製品・サービスをご利用のお客様におかれましては、表中のリンク先ページに記載の対処を頂けますようお願いいたします。</p>\n<p>&nbsp;</p>\n<p>[脆弱性概要]<br>細工されたURLにアクセスした場合に、弊社複合機/プリンタを介して第三者が指定した外部サイトへ遷移してしまう可能性があります。<br>この脆弱性が悪用された場合、正規サービスを装ったURLから不正なサイトへ誘導される可能性があります。<br>送信元や内容に心当たりのないメールやメッセージに記載されたURLはクリックしないようご注意ください。</p>",
+  "cve": [
+    {
+      "id": "CVE-2026-41226",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-41226",
+      "cwe": [
+        {
+          "id": "CWE-601",
+          "url": "https://cwe.mitre.org/data/definitions/601.html"
+        }
+      ]
+    }
+  ],
+  "cvss": "4.7",
+  "severity": "MEDIUM",
+  "status": "",
+  "jvn": [
+    {
+      "id": "JVN#65118274",
+      "url": "https://jvn.jp/jp/JVN65118274/index.html"
+    }
+  ],
+  "contact": "<p>リコーテクニカルコールセンター<br>Tel: 0120-892-111<br>※ 対応時間：祝日を除く月～金 9:00～17:00</p>",
+  "thanks": "本脆弱性をご報告いただいたSIXGEN社のTony Kirkland様に感謝いたします。",
+  "history": [
+    {
+      "updatedAt": "2026-06-15T12:00:00+09:00",
+      "version": "1.02J",
+      "company": "株式会社リコー",
+      "changes": "表１の更新"
+    },
+    {
+      "updatedAt": "2026-05-11T12:00:00+09:00",
+      "version": "1.01J",
+      "company": "株式会社リコー",
+      "changes": "表１の更新"
+    },
+    {
+      "updatedAt": "2026-04-30T12:00:00+09:00",
+      "version": "1.00J",
+      "company": "株式会社リコー",
+      "changes": "新規公開"
+    }
+  ],
+  "url": "https://jp.ricoh.com/security/products/vulnerabilities/vul?id=ricoh-2026-000004",
+  "authenticityGuarantee": "このURLリンク先と内容の異なる、あるいはURLを省略した、このドキュメントのテキストのコピーは、重要な情報の欠落や誤りの可能性がありますのでご注意ください。",
+  "list1Title": "",
+  "list2Title": "表1.脆弱性への対処が必要なリコー製品・サービス",
+  "productStatus": {
+    "businessFields": [],
+    "products": [
+      {
+        "name": "RICOH Pro 8420S/8410S/8400S",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000263-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000263-2026-000004</a>"
+      },
+      {
+        "name": "RICOH MP C306",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000053-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000053-2026-000004</a>"
+      },
+      {
+        "name": "RICOH MP CW1201/CW2201",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000050-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000050-2026-000004</a>"
+      },
+      {
+        "name": "RICOH Pro 8420Y/8420HT/8410Y/8410HT",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000264-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000264-2026-000004</a>"
+      },
+      {
+        "name": "RICOH P C6010/C6010M",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000259-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000259-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IP C6020/C6020M",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000154-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000154-2026-000004</a>"
+      },
+      {
+        "name": "RICOH P 6520/6520M/6510/6510M/6500",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000260-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000260-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IP 6530/6530M",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000155-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000155-2026-000004</a>"
+      },
+      {
+        "name": "RICOH P 501/501M/500/500M",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000113-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000113-2026-000004</a>"
+      },
+      {
+        "name": "RICOH SP 8400/8400M/8400a1/8400M a1",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000114-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000114-2026-000004</a>"
+      },
+      {
+        "name": "RICOH P C375/C375M",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000267-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000267-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM C3000/C3500",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000025-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000025-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM C2000/C2500",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000027-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000027-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM C4500/C5500/C6000",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000026-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000026-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM C300",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000028-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000028-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM 2500/3500/4000/5000/6000",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000029-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000029-2026-000004</a>"
+      },
+      {
+        "name": "RICOH Pro C5400S/C5410S",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000273-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000273-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM CW1200/CW2200",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000051-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000051-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM 430F",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000032-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000032-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IP 500SF",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000034-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000034-2026-000004</a>"
+      },
+      {
+        "name": "RICOH MP 2555/3555/4055/5055/6055",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000030-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000030-2026-000004</a>"
+      },
+      {
+        "name": "RICOH MP 9003/7503/6503",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000049-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000049-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM C3510/C3010",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000149-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000149-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM C2510/C2010",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000151-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000151-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM C6010/C5510/C4510",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000150-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000150-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM C7010",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000153-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000153-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM C3010SD",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000275-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000275-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM C4510SD/C6010SD",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000276-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000276-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM C320F",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000265-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000265-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM 2510/3510",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000320-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000320-2026-000004</a>"
+      },
+      {
+        "name": "RICOH Pro C5310S/C5300S",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000021-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000021-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IP C8510/C8510M/C8500/C8500M",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000164-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000164-2026-000004</a>"
+      },
+      {
+        "name": "RICOH Pro 8320S/8310S/8300S",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000205-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000205-2026-000004</a>"
+      },
+      {
+        "name": "RICOH MP C307",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000054-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000054-2026-000004</a>"
+      },
+      {
+        "name": "RICOH IM 4510/6010",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000321-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000321-2026-000004</a>"
+      },
+      {
+        "name": "RICOH MP C3004/C3504",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000022-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000022-2026-000004</a>"
+      },
+      {
+        "name": "RICOH MP C4504/C5504/C6004",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000023-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000023-2026-000004</a>"
+      },
+      {
+        "name": "RICOH MP C2504",
+        "id": "<p>影響あり。詳細はこちらを参照ください。</p><a href='https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000024-2026-000004'>https://jp.ricoh.com/security/products/vulnerabilities/adv?id=ricoh-prod000024-2026-000004</a>"
+      }
+    ]
+  }
+}

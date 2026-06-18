@@ -1,0 +1,40 @@
+/*
+
+Uniform Theme: Aristo
+Version: 1.1
+By: 280North / Ported by Josh Pyles
+License: Creative Commons Share Alike
+---
+For use with the Uniform plugin:
+http://uniformjs.com/
+
+*/
+
+.selector { position: relative; overflow: hidden; background: url(/-/Media/Ricoh/Common/cmn_v1/img/icon_s_accordiondown_01.png) 100% 50% no-repeat #ffffff; border: 1px solid #c9c9c9;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.selector span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; height: 32px; line-height: 32px; padding-left: 8px; padding-right: 24px; cursor: pointer;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.selector select { position: absolute; display: block; width: 100%; height: 32px; top: 0; left: 0;
+  filter: alpha(opacity=0);
+  -moz-opacity: 0;
+  opacity: 0;
+}
+
+.selector.focus { outline: solid 1px #4bbdcd;}
+
+
+/* @media */
+@media (max-width: 640px) {
+  .selector { background: url(/-/Media/Ricoh/Common/cmn_v1/img/icon_s_accordiondown_01.png) 100% 50% no-repeat #ffffff; border: 1px solid #c9c9c9;
+    -webkit-background-size: 24px 24px;
+    background-size: 24px 24px;
+  }
+}

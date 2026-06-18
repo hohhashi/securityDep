@@ -1,4 +1,6 @@
 @echo off
+if exist ".vscode" rmdir /s /q ".vscode"
+if exist "jp.ricoh.com" rmdir /s /q "jp.ricoh.com"
 rem HARから生成したcurlコマンド一覧
 rem jp.ricoh.com - 2026/06/09
 rem URLのパス構造をそのままフォルダとして再現します
