@@ -160,17 +160,18 @@ body {
 }
 
 .gl-header_logo {
-  padding: 20px 10px 14px 16px;
+  padding: 12px 10px 14px 16px;
 }
 
 .gl-header_logo > a {
   display: block;
-  max-width: 88px;
+  max-width: 128px;
   line-height: 1;
 }
 
 .gl-header_logo > a img {
   display: block;
+  width: 100%;
   transition: opacity 0.25s ease-out;
 }
 
@@ -2451,7 +2452,7 @@ body {
     width: 100%;
   }
   .gl-header_logo a {
-    max-width: 125px;
+    max-width: 189px;
   }
   .gl-header.-horizontal .gl-header_inner {
     display: grid;
@@ -2464,7 +2465,7 @@ body {
 
   .gl-header.-horizontal .gl-header_logo {
     grid-area: logo;
-    padding: 22px 0 32px;
+    padding: 16px 0 16px;
   }
 
   .gl-header.-horizontal .gl-header_utilities {
