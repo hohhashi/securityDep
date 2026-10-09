@@ -2,7 +2,7 @@
 echo === setup_jp_ricoh_com_vul ===
 echo.
 
-rem このbatファイルと同じフォルダにpyファイルがあることを確認
+rem batファイルと同じフォルダにpyファイルがあることを確認
 if not exist "%~dp0patch_jp_ricoh_com_vul.py" (
     echo ERROR: patch_jp_ricoh_com_vul.py が見つかりません
     echo        このbatファイルと同じフォルダに置いてください
@@ -14,7 +14,7 @@ rem cd /d で bat のあるフォルダに移動
 cd /d "%~dp0"
 
 rem py (Windows Python Launcher) を優先して使用
-py --version >/dev/null 2>&1
+py --version >nul 2>&1
 if not errorlevel 1 (
     py patch_jp_ricoh_com_vul.py
     goto :check

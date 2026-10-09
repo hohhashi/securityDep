@@ -1,0 +1,156 @@
+@charset "utf-8";
+
+/*************************************************
+CSS
+/cmn_v2/css/gl_footer.css より作成
+
+15.06.30
+update:22.02.18
+*************************************************/
+
+/* ------------------------- TOC
+Global Footer
+Media Queries
+-------------------------- */
+
+
+
+/* ============================================================ Global Footer */
+#gl_footer { padding-bottom: 40px; border-top: 2px solid #dedede; border-bottom: 4px solid #cf142b; background: #f3f3f3; }
+
+
+/* ============================== Footer Relation */
+.ft_rlt { background: #f3f3f3; }
+#gl_footer .ft_rlt { max-width: 1008px; margin: 0 auto; padding: 0 8px; }
+#gl_footer .ft_rlt .ft_rlt_inr { padding: 16px 0; border-bottom: 1px solid #c9c9c9; }
+#gl_footer .ft_rlt .ft_rlt_inr .ft_rlt_ttl { font-size: 20px; font-weight: bold; }
+
+
+/* ============================== Footer Bread Crumb  */
+#gl_footer .ft_brd_crmb { max-width: 1024px; margin: 0 auto; }
+
+#gl_footer .ft_brd_crmb p { margin-top: 0; }
+#gl_footer .ft_brd_crmb ul,
+#gl_footer .ft_brd_crmb ol,
+#gl_footer .ft_brd_crmb ul li,
+#gl_footer .ft_brd_crmb ol li { margin: 0; padding: 0; list-style: none; }
+
+#gl_footer .ft_brd_crmb .ft_brd_crmb_lst { overflow: hidden; margin: 0 8px; padding: 16px 0; border-bottom: 1px solid #c9c9c9; }
+#gl_footer .ft_brd_crmb .ft_brd_crmb_lst li { float: left; margin-right: 6px; font-size: 14px; }
+#gl_footer .ft_brd_crmb .ft_brd_crmb_lst li:after { content: ">"; }
+#gl_footer .ft_brd_crmb .ft_brd_crmb_lst li.act:after { content: ""; }
+#gl_footer .ft_brd_crmb .ft_brd_crmb_lst li a,
+#gl_footer .ft_brd_crmb .ft_brd_crmb_lst li span { padding: 0 6px 0 0; }
+
+
+/* ============================== Footer Local Navigation */
+#gl_footer .ft_lc_nv { max-width: 1024px; margin: 0 auto; }
+#gl_footer .ft_lc_nv .ft_lc_nv_lst { overflow: hidden; margin: 0 8px; padding: 24px 0 16px; list-style: none; border-bottom: 1px solid #c9c9c9; }
+#gl_footer .ft_lc_nv .ft_lc_nv_lst li { float: left; width: 33.333%; margin-top: 0; margin-bottom: 8px; }
+#gl_footer .ft_lc_nv .ft_lc_nv_lst li a,
+#gl_footer .ft_lc_nv .ft_lc_nv_lst li span { display: inline-block; padding-left: 24px; background: url(../img/icon_s_right_01.png) 0 -0.2em no-repeat; }
+#gl_footer .ft_lc_nv .ft_lc_nv_lst li.act a,
+#gl_footer .ft_lc_nv .ft_lc_nv_lst li.act span { color: #333333; }
+
+
+/* ============================== Footer Direct Navigation */
+#gl_footer .ft_dr_nv { max-width: 1008px; margin: 0 auto; padding: 0 8px; }
+#gl_footer .ft_dr_nv .ft_dr_nv_inr { padding: 24px 0 16px; border-bottom: 1px solid #c9c9c9; }
+#gl_footer .ft_dr_nv .ft_dr_nv_inr .ft_dr_nv_ttl { font-size: 20px; font-weight: bold; }
+
+
+/* ============================== Footer Utility */
+#gl_footer .ft_ut { width: 100%; }
+#gl_footer > * + .ft_ut { margin-top: -1px; border-top: 1px solid #c9c9c9; }
+
+#gl_footer .ft_ut p { margin-top: 0; }
+#gl_footer .ft_ut ul,
+#gl_footer .ft_ut ol,
+#gl_footer .ft_ut ul li,
+#gl_footer .ft_ut ol li { margin: 0; padding: 0; list-style: none; }
+
+#gl_footer .ft_ut .ft_ut_inr { overflow: hidden; max-width: 1008px; margin: 0 auto; padding: 24px 8px 0; }
+#gl_footer .ft_ut .ft_ut_inr .ft_ut_lst { float: left; overflow: hidden; }
+#gl_footer .ft_ut .ft_ut_inr .ft_ut_lst li { float: left; margin-bottom: 8px; border-right: 1px solid #dedede; }
+#gl_footer .ft_ut .ft_ut_inr .ft_ut_lst li:first-child { border-left: 1px solid #dedede; }
+#gl_footer .ft_ut .ft_ut_inr .ft_ut_lst li a { display: block; padding: 0 16px; color: #666666; font-size: 14px; line-height: 1.2; }
+#gl_footer .ft_ut .ft_ut_inr .ft_pg_top { float: right; padding: 0 8px; border-left: 1px solid #dedede; border-right: 1px solid #dedede; }
+#gl_footer .ft_ut .ft_ut_inr .ft_pg_top a { display: block; padding: 0 8px 0 32px; background: url(../img/icon_s_up_01.png) 0 50% no-repeat; }
+
+
+/* ============================== Footer Connect */
+#gl_footer .ft_cnct { max-width: 1008px; margin: 16px auto 0; padding: 0 8px; }
+
+#gl_footer .ft_cnct p { margin-top: 0; }
+#gl_footer .ft_cnct ul,
+#gl_footer .ft_cnct ol,
+#gl_footer .ft_cnct ul li,
+#gl_footer .ft_cnct ol li { margin: 0; padding: 0; list-style: none; }
+
+#gl_footer .ft_cnct .ft_cnct_ttl { float: left; margin-right: 40px; font-weight: bold; overflow: hidden; }
+#gl_footer .ft_cnct .ft_cnct_lst { overflow: hidden; }
+#gl_footer .ft_cnct .ft_cnct_lst li { display: inline-block; margin: 0 16px 8px 0; }
+#gl_footer .ft_cnct .ft_cnct_lst li img { vertical-align: bottom; }
+#gl_footer .ft_cnct .ft_cnct_lst li.ft_cnct_lst_more { vertical-align: middle; font-size: 14px; }
+
+
+/* ============================== Footer Copy */
+#gl_footer .ft_copy { max-width: 1008px; margin: 16px auto 0; padding: 0 8px; color: #999999; font-size: 12px; }
+
+
+
+
+/* ============================================================ Media Queries */
+@media (max-width: 640px) {
+	#gl_footer { padding-bottom: 16px; border-bottom: 8px solid #cf142b; }
+
+
+	/* ============================== Footer Bread Crumb */
+	#gl_footer .ft_brd_crmb .ft_brd_crmb_lst { border-bottom: 1px solid #dedede; }
+	#gl_footer .ft_brd_crmb .ft_brd_crmb_lst li { margin-right: 3px; }
+	#gl_footer .ft_brd_crmb .ft_brd_crmb_lst li a,
+	#gl_footer .ft_brd_crmb .ft_brd_crmb_lst li span { padding: 0 3px 0 0; }
+
+
+	/* ============================== Footer Local Navigation */
+	#gl_footer .ft_lc_nv { border: none; }
+	#gl_footer .ft_lc_nv .ft_lc_nv_lst { padding: 0; border-bottom: none; }
+	#gl_footer .ft_lc_nv .ft_lc_nv_lst li { float: none; width: 100%; margin-bottom: 0; padding: 0; border-bottom: 1px solid #dedede; }
+	#gl_footer .ft_lc_nv .ft_lc_nv_lst li a,
+	#gl_footer .ft_lc_nv .ft_lc_nv_lst li span { display: block; padding: 16px 32px 16px 8px; background: url(../img/icon_l_right_01.png) 100% 50% no-repeat;
+		-webkit-background-size: 32px 32px;
+		background-size: 32px 32px;
+	}
+
+
+	/* ============================== Footer Direct Navigation */
+	#gl_footer .ft_dr_nv { display: none; }
+
+
+	/* ============================== Footer Utility */
+	#gl_footer > * + .ft_ut { margin-top: 0; border: none; }
+	#gl_footer .ft_ut .ft_ut_inr { width: 100%; padding: 0; }
+	#gl_footer .ft_ut .ft_ut_inr .ft_ut_lst { float: none; margin: 0 8px; padding: 24px 0 4px; border-left: none; }
+	#gl_footer .ft_ut .ft_ut_inr .ft_ut_lst li { margin-bottom: 20px; }
+	#gl_footer .ft_ut .ft_ut_inr .ft_ut_lst li:first-child { border-left: none; }
+	#gl_footer .ft_ut .ft_ut_inr .ft_ut_lst li:last-child { border: none; }
+	#gl_footer .ft_ut .ft_ut_inr .ft_ut_lst li a { padding: 0 8px; font-size: 14px; }
+	#gl_footer .ft_ut .ft_ut_inr .ft_pg_top { float: none; border: none; border-top: 1px solid #c9c9c9; border-bottom: 1px solid #dedede; text-align: right; }
+	#gl_footer .ft_ut .ft_ut_inr .ft_pg_top a { display: inline-block; padding: 12px 8px 12px 32px; font-size: 14px; text-align: right; background-image: url(../img/icon_l_up_01.png);
+		-webkit-background-size: 32px 32px;
+		background-size: 32px 32px;
+	}
+
+
+	/* ============================== Footer Connect */
+	#gl_footer .ft_cnct { margin-top: 24px; }
+	#gl_footer .ft_cnct .ft_cnct_ttl { float: none; margin-right: 0; }
+	#gl_footer .ft_cnct .ft_cnct_lst { margin-top: 12px; }
+	#gl_footer .ft_cnct .ft_cnct_lst li { margin: 0 12px 6px 0; }
+	#gl_footer .ft_cnct .ft_cnct_lst li.ft_cnct_lst_more { display: block; }
+
+
+	/* ============================== Footer Copy */
+	#gl_footer .ft_copy { margin-top: 12px; text-align: center; }
+}
+

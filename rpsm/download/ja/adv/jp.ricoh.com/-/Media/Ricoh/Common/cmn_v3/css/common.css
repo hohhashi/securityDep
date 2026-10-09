@@ -1,0 +1,280 @@
+@charset "utf-8";
+
+/*************************************************
+CSS
+/cmn_v1/css/common.css より作成
+
+14.10.01
+update:22.02.18
+*************************************************/
+
+/* ------------------------- TOC
+Setting
+Wrapper
+Contents
+Heading
+List
+Dl Dt Dd
+Table
+Form
+-------------------------- */
+
+
+
+/* ============================================================ Setting */
+html { height: 100%; }
+body { -webkit-text-size-adjust: 100%; line-height: 1.4; height: 100%; color: #333333; background: #ffffff; font-size: 16px; font-family: Arial, sans-serif; }
+
+a,
+a:link { color: #0000cc; text-decoration: none; }
+a:visited { color: #551a8b; text-decoration: none; }
+a:hover,
+a:active { color: #0000cc; text-decoration: underline; }
+
+a img, a:link img, a:visited img, a:hover img, a:active img { border: none; text-decoration: none; }
+
+strong { font-weight: bold; }
+em { font-style: normal; }
+
+img { -ms-interpolation-mode: bicubic; }
+
+/*
+input:-moz-placeholder,
+textarea:-moz-placeholder,
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder,
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder { color: #999999; }
+*/
+
+
+/* ============================== Clearfix */
+.clr:before,
+.clr:after { content: ""; display: table; }
+.clr:after { clear: both; }
+.clr { zoom: 1; }
+
+
+/* ============================== Multi */
+.ofz { overflow: hidden; zoom: 1; }
+.indent { padding-left: 1em; text-indent: -1em; }
+
+
+/* ============================== Hide Text */
+.hide { position: absolute; left: -9999px; }
+
+
+
+/* ============================================================ Wrapper */
+#wrapper {}
+
+
+
+/* ============================================================ Contents */
+#contents { z-index: 1; }
+.cnt_max { max-width: 1024px; margin: 0 auto; }
+
+
+/* ============================== Section */
+.sct_bg00 { padding:      0; background: #ffffff; }
+.sct_bg01 { padding: 40px 0; background: #ffffff; }
+.sct_bg02 { padding: 40px 0; background: rgba(243, 243, 243, 0.4); }
+
+/* @media */
+@media (max-width: 640px) {
+	.sct_bg01,
+	.sct_bg02 { padding: 20px 0; }
+}
+
+
+/* ============================================================ Heading */
+.hd01 { overflow: hidden; max-width: 1008px; margin: 16px auto 8px; padding: 0 8px; font-size: 30px; font-weight: bold; }
+.hd02 { overflow: hidden; font-size: 26px; font-weight: bold; }
+.hd03 { overflow: hidden; font-size: 22px; font-weight: bold; }
+.hd04 { overflow: hidden; font-size: 22px; font-weight: bold; color: #717171; }
+.hd05 { overflow: hidden; font-size: 20px; font-weight: bold; }
+.hd06 { overflow: hidden; font-size: 20px; font-weight: bold; color: #717171; }
+
+/* RSS */
+.hd01 .hd_rss,
+.hd02 .hd_rss,
+.hd03 .hd_rss,
+.hd04 .hd_rss,
+.hd05 .hd_rss,
+.hd06 .hd_rss { display: block; float: right; height: 16px; margin-top: 8px; margin-right: 4px; padding-left: 20px; background: url(../img/icon_s_rss_03.png) 0 0 no-repeat; font-size: 12px; font-weight: normal; }
+
+/* @media */
+@media (max-width: 640px) {
+	.hd01 { font-size: 24px; margin: 8px 0 0; padding-left: 8px; padding-right: 8px; }
+	.hd02 { font-size: 22px; }
+	.hd03 { font-size: 20px; }
+	.hd04 { font-size: 20px; }
+	.hd05 { font-size: 18px; }
+	.hd06 { font-size: 18px; }
+
+	/* RSS */
+	.hd01 .hd_rss,
+	.hd02 .hd_rss,
+	.hd03 .hd_rss,
+	.hd04 .hd_rss,
+	.hd05 .hd_rss,
+	.hd06 .hd_rss { background-image: url(../img/icon_m_rss_03.png);
+		-webkit-background-size: 16px 16px;
+		background-size: 16px 16px;
+	}
+}
+
+
+
+/* ============================================================ List */
+ul.nml li { padding-left: 40px; background: url(../img/bullet_ul_01.png) 20px 0.5em no-repeat; }
+ul.nml li.clm { background-position: 20px 1.0em; }
+ol.nml { list-style: decimal; margin-left: 40px; }
+ol.nml ol {}
+
+/* @media */
+@media (max-width: 640px) {
+	ul.nml li {
+		-webkit-background-size: 3px 3px;
+		background-size: 3px 3px;
+	}
+}
+
+
+
+/* ============================================================ Dl Dt Dd */
+dl.nml {}
+dl.nml dt { font-weight: bold; }
+
+
+
+/* ============================================================ Table */
+table.nml { width: 100%; border-top: 1px solid #999999; border-left: 1px solid #999999; }
+table.nml th,
+table.nml td { padding: 8px 16px; border-right: 1px solid #999999; border-bottom: 1px solid #999999; vertical-align: top; }
+table.nml thead th,
+table.nml thead td { padding: 16px 16px; background: #c9c9c9; text-align: left; }
+table.nml tbody th { background: #dedede; text-align: left; }
+table.nml tbody td { background: #ffffff; }
+
+
+.tbl_ico { display: none; }
+.tbl_wrapper { display: none; }
+
+/* @media */
+@media (max-width: 640px) {
+	.smallTable.hidden { display: none; }
+	.tbl_ico { display: block; }
+	.tbl_ico img { width: 100%; height: auto; }
+	.tbl_wrapper { width: 1024px; margin-top: 50px; padding: 0 15px; }
+	.tbl_btn { margin-bottom: 20px; }
+}
+
+
+
+/* ============================================================ Form */
+input, button, textarea, select { -webkit-appearance: none; appearance: none; border: none; margin: 0; padding: 0; }
+
+
+/* ============================== Radio,Checkbox */
+input:focus + label {
+	outline: solid 1px #4bbdcd;
+}
+
+input.nml[type=radio] { -webkit-appearance: radio; appearance: radio; }
+input.nml[type=checkbox] { -webkit-appearance: checkbox; appearance: checkbox; }
+input.nml[type=radio],
+input.nml[type=checkbox] { display: inline-block; }
+input.nml[type=radio] + label,
+input.nml[type=checkbox] + label { position: relative; display: inline-block; cursor: pointer; }
+
+@media (min-width: 1px) {
+	input.nml[type=radio],
+	input.nml[type=checkbox] { position: absolute; opacity: 0; margin: 0; }
+	input.nml[type=radio] + label,
+	input.nml[type=checkbox] + label { padding-left: 34px; }
+	input.nml[type=radio] + label::before,
+	input.nml[type=checkbox] + label::before { display: block; width: 24px; height: 24px; margin-top: -12px;
+		position: absolute; top: 0.7em; left: 0;
+		content: "";
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	input.nml[type=radio] + label::before { border: 2px solid #999999;
+		-webkit-border-radius: 12px;
+		border-radius: 12px;
+	}
+	input.nml[type=checkbox] + label::before { border: 2px solid #999999;
+		-webkit-border-radius: 6px;
+		border-radius: 6px;
+	}
+	/* checked */
+	input.nml[type=radio]:checked + label::before { border: 2px solid #4bbdcd; }
+	input.nml[type=checkbox]:checked + label::before { border: 2px solid #4bbdcd; }
+	input.nml[type=radio]:checked + label::after,
+	input.nml[type=checkbox]:checked + label::after { display: block;
+		position: absolute; top: 0.7em;
+		content: "";
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	input.nml[type=radio]:checked + label::after { width: 14px; height: 14px; margin-top: -7px;
+		left: 5px;
+		background: #4bbdcd;
+		border-radius: 7px;
+	}
+	input.nml[type=checkbox]:checked + label::after { width: 12px; height: 6px; margin-top: -4px;
+		left: 6px;
+		border-left: 3px solid #4bbdcd;
+		border-bottom: 3px solid #4bbdcd;
+		-ms-transform: rotate(-45deg);
+		-webkit-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+	}
+}
+
+/* error,requisite */
+.err_box { background-color: #f8ccc9;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+.req_box { background-color: #fef5f4;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+
+/* ============================== Submit */
+input.nml[type=submit] {}
+
+
+/* ============================== Text */
+input.nml[type=text] { padding: 7px 8px; font-size: 16px; border: 1px solid #c9c9c9;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+/* error,requisite */
+input.nml.err[type=text] { background: #f8ccc9; border: 1px solid #ed171f; }
+input.nml.req[type=text] { background: #fef5f4; border: 1px solid #f8ccc9; }
+
+
+/* ============================== Select */
+/* error,requisite */
+.slct_nml.err > .selector { background-color: #f8ccc9; border: 1px solid #ed171f; }
+.slct_nml.req > .selector { background-color: #fef5f4; border: 1px solid #f8ccc9; }
+
+
+/* ============================== Textarea */
+textarea.nml { padding: 8px; font-size: 16px; font-family: inherit; background: #ffffff; border: 1px solid #c9c9c9;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+/* error,requisite */
+textarea.nml.err { background: #f8ccc9; border: 1px solid #ed171f; }
+textarea.nml.req { background: #fef5f4; border: 1px solid #f8ccc9; }
+
+

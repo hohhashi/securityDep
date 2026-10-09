@@ -432,6 +432,14 @@ var app = new Vue({
         || document.location.hostname == "stg-prv-wrc.scms.jp.ricoh.com"
         || document.location.hostname == "stg-prv-jrc.scms.jp.ricoh.com");
     fileName = "https://vuls.ricoh.com/ja/vulinfolist.json?" + dateParam;
+    function localizeVulUrl(url) {
+      if (!isLocal) return url;
+      return url
+        .replace(/\/vul(\?|$)/, "/vul.html$1")
+        .replace(/\/adv(\?|$)/, "/adv.html$1")
+        .replace(/\/product(\?|$)/, "/product.html$1")
+        .replace(/\/list_products(\?|$)/, "/list_products.html$1");
+    }
     //データロード
     var VULINFO_IDB_NAME = "vulinfoFolderHandleDB";
     var VULINFO_IDB_STORE = "handles";
@@ -564,9 +572,9 @@ var app = new Vue({
           let tempFirstTime = tempFirstEdition.substring(tempFirstEdition.length - 6);
           self.allItems[i]["firstEdition"] = tempFirstDate + tempFirstTime;
           //リンクURL
-          self.allItems[i]["linkUrl"] = "/security/products/vulnerabilities/vul"
-            + (document.location.hostname == "127.0.0.1" ? ".html" : "")
-            + "?id=" + self.allItems[i].id;
+          self.allItems[i]["linkUrl"] = localizeVulUrl(
+            "/security/products/vulnerabilities/vul?id=" + self.allItems[i].id
+          );
           //self.allItems[i]["linkUrl"] = "vul?id=" + self.allItems[i].id;
         }
         //オプションの配列の順序をソート

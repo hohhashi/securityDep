@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+/*************************************************
+CSS
+/cookie-management/css/common.css
+
+2024.05.28
+*************************************************/
+
+button#ot-sdk-btn.ot-sdk-show-settings:hover {
+  display: inline-block;
+  text-decoration: underline transparent;
+  text-underline-offset: 0.3rem;
+  transition: text-decoration-color 0.25s ease-out, -webkit-text-decoration-color 0.25s ease-out;
+  text-decoration-color: inherit;
+  color: inherit;
+}
