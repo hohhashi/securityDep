@@ -202,7 +202,7 @@ content = patch_block_regex('step1 (FSA)', PRODUCT_JS_PATH, OLD_BLOCK_PATTERN, N
 # -----------------------------------------------
 
 LINKURL_PATTERN = re.compile(
-    r'([ \t]*)(?://[^\n]*\n[ \t]*)?'
+    r'([ \t]*)(?://[^\n]*\n[ \t]*)?' 
     r'self\.allItems\[i\]\["linkUrl"\] = "/security/products/vulnerabilities/adv\?id=" \+\s+self\.allItems\[i\]\.id;'
 )
 

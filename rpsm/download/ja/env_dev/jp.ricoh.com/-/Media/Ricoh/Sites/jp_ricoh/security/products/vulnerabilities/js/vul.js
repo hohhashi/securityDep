@@ -25,7 +25,21 @@ var app = new Vue({
   el: "#vulinfoApp",
   data: {
     jsondata: "",
-    item: "",
+    item: {
+      importance: "",
+      version: "",
+      jvn: [],
+      severity: "",
+      status: "",
+      businessFields: [],
+      list1Title: "",
+      products: [],
+      list2Title: "",
+      thanks: "",
+      history: [],
+      url: "",
+      authenticityGuarantee: ""
+    },
     isError:false
   },
   methods: {
@@ -51,6 +65,15 @@ var app = new Vue({
           || document.location.hostname == "stg-prv-jrc.scms.jp.ricoh.com"
           || document.location.hostname == "stg-prv-wrc.scms.jp.ricoh.com");
       fileName = "https://vuls.ricoh.com/ja/vulinfo/" + gID.substr(6, 4) + "/" + gID + ".json?" + dateParam;
+      function localizeVulUrl(url) {
+        if (!isLocal) return url;
+        return url
+          .replace(/^https?:\/\/[^\/]+/, "")
+          .replace(/\/vul(\?|$)/, "/vul.html$1")
+          .replace(/\/adv(\?|$)/, "/adv.html$1")
+          .replace(/\/product(\?|$)/, "/product.html$1")
+          .replace(/\/list_products(\?|$)/, "/list_products.html$1");
+      }
       //データロード
       var VULINFO_IDB_NAME = "vulinfoFolderHandleDB";
       var VULINFO_IDB_STORE = "handles";
@@ -176,36 +199,58 @@ var app = new Vue({
       }
       (isLocal ? loadVulDataViaFolderHandle() : axios.get(fileName))
       .then(function(response) {
-        self.item = response.data;
+        var d = response.data;
         //表示用データ作成
         //最終更新日
-        tempLastUpdate = self.item["updatedAt"];
-        let tempLastUpdateTS = Date.parse(tempLastUpdate);
-        let tempLastUpdateDT = new Date(tempLastUpdateTS);
-        self.item["lastUpdate"] = dayjs(tempLastUpdateDT).format('YYYY年MM月DD日 H時mm分');
+        var tempLastUpdate = d["updatedAt"];
+        var tempLastUpdateDT = new Date(Date.parse(tempLastUpdate));
+        d["lastUpdate"] = dayjs(tempLastUpdateDT).format('YYYY年MM月DD日 H時mm分');
         //発行日
-        tempFirstEdition = self.item["publishedAt"];
-        let tempFirstEditionTS = Date.parse(tempFirstEdition);
-        let tempFirstEditionDT = new Date(tempFirstEditionTS);
-        self.item["firstEdition"] = dayjs(tempFirstEditionDT).format('YYYY年MM月DD日 H時mm分');
+        var tempFirstEdition = d["publishedAt"];
+        var tempFirstEditionDT = new Date(Date.parse(tempFirstEdition));
+        d["firstEdition"] = dayjs(tempFirstEditionDT).format('YYYY年MM月DD日 H時mm分');
         //
-        self.item["businessFields"] = self.item.productStatus.businessFields;
-        for(let i=0; i<self.item["businessFields"].length; i++){
-          self.item["businessFields"][i]["count"]=0;
-          let categories = self.item["businessFields"][i]["categories"];
-          for(let s=0; s<categories.length; s++){
-            self.item["businessFields"][i]["categories"][s]["count"]=0;
-            let subcategories = categories[s]["subCategories"];
-            for(let l=0; l<subcategories.length; l++){
-              self.item["businessFields"][i]["count"]++;
-              self.item["businessFields"][i]["categories"][s]["count"]++;
+        d["businessFields"] = d.productStatus.businessFields;
+        for(var i=0; i<d["businessFields"].length; i++){
+          d["businessFields"][i]["count"]=0;
+          var categories = d["businessFields"][i]["categories"];
+          for(var s=0; s<categories.length; s++){
+            d["businessFields"][i]["categories"][s]["count"]=0;
+            var subcategories = categories[s]["subCategories"];
+            for(var l=0; l<subcategories.length; l++){
+              d["businessFields"][i]["count"]++;
+              d["businessFields"][i]["categories"][s]["count"]++;
             }
           }
         }
-        self.item["products"] = self.item.productStatus.products;
-        for(i=0; i<self.item.history.length; i++){
-          self.item.history[i]["date"] = self.item.history[i]["updatedAt"];//最終更新日
+        d["products"] = d.productStatus.products;
+        if(isLocal){
+          for(var pi=0; pi<d["products"].length; pi++){
+            var prod = d["products"][pi];
+            if(typeof prod.id === "string"){
+              // href 属性を書き換え（シングルクォート）
+              prod.id = prod.id.replace(/href='([^']*)'/g,
+                function(m, url){ return "href='" + localizeVulUrl(url) + "'"; }
+              );
+              // href 属性を書き換え（ダブルクォート）
+              prod.id = prod.id.replace(/href="([^"]*)"/g,
+                function(m, url){ return 'href="' + localizeVulUrl(url) + '"'; }
+              );
+              // リンクテキスト（>URL</a> の部分）を現在のホストのURLに書き換え
+              prod.id = prod.id.replace(/>https?:\/\/[^<]*<\/a>/g,
+                function(m){
+                  var text = m.slice(1, -4); // >と</a>を除いたURL部分
+                  return '>' + document.location.origin + localizeVulUrl(text) + '</a>';
+                }
+              );
+            }
+          }
         }
+        for(var hi=0; hi<d.history.length; hi++){
+          d.history[hi]["date"] = d.history[hi]["updatedAt"];//最終更新日
+        }
+        // 全処理が終わってから Vue に渡す → reactivity が一度だけ発火
+        self.item = d;
       })
       .catch(function (error) {
           self.isError = true;

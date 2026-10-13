@@ -51,6 +51,15 @@ var app = new Vue({
           || document.location.hostname == "stg-prv-jrc.scms.jp.ricoh.com"
           || document.location.hostname == "stg-prv-wrc.scms.jp.ricoh.com");
       fileName = "https://vuls.ricoh.com/ja/vulinfo/" + gID.substr(6, 4) + "/" + gID + ".json?" + dateParam;
+      function localizeVulUrl(url) {
+        if (!isLocal) return url;
+        return url
+          .replace(/^https?:\/\/[^\/]+/, "")
+          .replace(/\/vul(\?|$)/, "/vul.html$1")
+          .replace(/\/adv(\?|$)/, "/adv.html$1")
+          .replace(/\/product(\?|$)/, "/product.html$1")
+          .replace(/\/list_products(\?|$)/, "/list_products.html$1");
+      }
       //データロード
       var VULINFO_IDB_NAME = "vulinfoFolderHandleDB";
       var VULINFO_IDB_STORE = "handles";
@@ -203,6 +212,19 @@ var app = new Vue({
           }
         }
         self.item["products"] = self.item.productStatus.products;
+        if(isLocal){
+          for(var pi=0; pi<self.item["products"].length; pi++){
+            var prod = self.item["products"][pi];
+            if(typeof prod.id === "string"){
+              prod.id = prod.id.replace(/href='([^']*)'/g,
+                function(m, url){ return 'href=\'' + localizeVulUrl(url) + '\''; }
+              );
+              prod.id = prod.id.replace(/href="([^"]*)"/g,
+                function(m, url){ return 'href="' + localizeVulUrl(url) + '"'; }
+              );
+            }
+          }
+        }
         for(i=0; i<self.item.history.length; i++){
           self.item.history[i]["date"] = self.item.history[i]["updatedAt"];//最終更新日
         }

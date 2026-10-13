@@ -91,6 +91,15 @@ NEW_BLOCK = (
     '          || document.location.hostname == "stg-prv-jrc.scms.jp.ricoh.com"\n'
     '          || document.location.hostname == "stg-prv-wrc.scms.jp.ricoh.com");\n'
     '      fileName = "https://vuls.ricoh.com/ja/vulinfo/" + gID.substr(6, 4) + "/" + gID + ".json?" + dateParam;\n'
+    '      function localizeVulUrl(url) {\n'
+    '        if (!isLocal) return url;\n'
+    '        return url\n'
+    '          .replace(/^https?:\\/\\/[^\\/]+/, "")\n'
+    '          .replace(/\\/vul(\\?|$)/, "/vul.html$1")\n'
+    '          .replace(/\\/adv(\\?|$)/, "/adv.html$1")\n'
+    '          .replace(/\\/product(\\?|$)/, "/product.html$1")\n'
+    '          .replace(/\\/list_products(\\?|$)/, "/list_products.html$1");\n'
+    '      }\n'
     '      //データロード\n'
     '      var VULINFO_IDB_NAME = "vulinfoFolderHandleDB";\n'
     '      var VULINFO_IDB_STORE = "handles";\n'
@@ -219,6 +228,47 @@ NEW_BLOCK = (
 )
 
 patch_block_regex(VUL_JS_PATH, OLD_BLOCK_PATTERN, NEW_BLOCK)
+
+# --------------------------------------------
+# patch vul.js: rewrite adv links inside product.id HTML when isLocal
+# vul.html uses v-html="product.id" where product.id contains raw HTML:
+#   <a href='https://jp.ricoh.com/.../adv?id=...'>https://jp.ricoh.com/.../adv?id=...</a>
+# Both the href attribute (single-quoted) and the link text contain the full URL.
+# We inject a loop that rewrites both occurrences using localizeVulUrl().
+# --------------------------------------------
+
+PRODUCTS_OLD = '        self.item["products"] = self.item.productStatus.products;'
+
+PRODUCTS_INJECT = (
+    '        self.item["products"] = self.item.productStatus.products;\n'
+    '        if(isLocal){\n'
+    '          for(var pi=0; pi<self.item["products"].length; pi++){\n'
+    '            var prod = self.item["products"][pi];\n'
+    '            if(typeof prod.id === "string"){\n'
+    "              prod.id = prod.id.replace(/href='([^']*)'/g,\n"
+    "                function(m, url){ return 'href=\\'' + localizeVulUrl(url) + '\\''; }\n"
+    '              );\n'
+    "              prod.id = prod.id.replace(/href=\"([^\"]*)\"/g,\n"
+    '                function(m, url){ return \'href="\' + localizeVulUrl(url) + \'"\'; }\n'
+    '              );\n'
+    '            }\n'
+    '          }\n'
+    '        }'
+)
+
+def patch_products_linkurl(path):
+    if not os.path.exists(path):
+        print(f'NOT FOUND: {path}')
+        return
+    content, encoding, had_crlf = read_file(path)
+    if PRODUCTS_OLD not in content:
+        print(f'SKIP: {path} (products target line not found)')
+        return
+    new_content = content.replace(PRODUCTS_OLD, PRODUCTS_INJECT, 1)
+    write_file(path, new_content, encoding, had_crlf)
+    print(f'OK: {path}')
+
+patch_products_linkurl(VUL_JS_PATH)
 
 # -----------------------------------------------
 # patch template.js
