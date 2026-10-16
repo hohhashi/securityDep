@@ -18,7 +18,6 @@ def read_file(path):
     except UnicodeDecodeError:
         text = raw.decode('shift-jis')
         encoding = 'shift-jis'
-    # normalize line endings to \n while reading; we restore \r\n on write
     had_crlf = '\r\n' in text
     text = text.replace('\r\n', '\n')
     return text, encoding, had_crlf
@@ -29,60 +28,105 @@ def write_file(path, content, encoding, had_crlf):
     with open(path, 'w', encoding=encoding, newline='') as f:
         f.write(content)
 
-def patch_block_regex(path, pattern, new_block):
-    """Replace a regex-matched multi-line block with new_block.
-    Tolerant of whitespace variations (e.g. substr(6, 4) vs substr( 6, 4 ))."""
-    if not os.path.exists(path):
-        print(f'NOT FOUND: {path}')
-        return
-    content, encoding, had_crlf = read_file(path)
-    new_content, count = re.subn(pattern, new_block, content, count=1)
-    if count == 0:
-        print(f'SKIP: {path} (target block not found)')
-        return
-    write_file(path, new_content, encoding, had_crlf)
-    print(f'OK: {path}')
-
-def patch_file(path, condition_fn, new_code):
-    """Legacy line-based patch (kept for template.js)."""
-    if not os.path.exists(path):
-        print(f'NOT FOUND: {path}')
-        return
-    content, encoding, had_crlf = read_file(path)
-    lines = content.split('\n')
-    replaced = False
-    new_lines = []
-    for line in lines:
-        if condition_fn(line):
-            new_lines.append(new_code)
-            replaced = True
-        else:
-            new_lines.append(line)
-    if replaced:
-        write_file(path, '\n'.join(new_lines), encoding, had_crlf)
-        print(f'OK: {path}')
-    else:
-        print(f'SKIP: {path} (target line not found)')
-
-# --------------------------------------------
-# patch vul.js: replace fileName resolution + axios call in one go
-# --------------------------------------------
+# -----------------------------------------------
+# patch vul.js
+#
+# 変更内容:
+#   1. data.item の初期値を空文字から空オブジェクトに変更
+#      (Vue の初期レンダリング時の TypeError を防ぐ)
+#   2. axios.get 一本から isLocal 分岐に変更
+#      - isLocal 時: File System Access API + IndexedDB でローカル JSON を読む
+#      - 非 isLocal 時: 従来の axios.get
+#   3. データ加工を Vue への代入前にまとめて行う
+#      (reactivity の問題を避けるため)
+#   4. isLocal 時に product.id 内の adv リンクを書き換え
+#      - href 属性: localizeVulUrl() でローカルパスへ変換
+#      - リンクテキスト: document.location.origin + localizeVulUrl() で現ホストURLへ変換
+# -----------------------------------------------
 
 VUL_JS_PATH = (
     'jp.ricoh.com/-/Media/Ricoh/Sites/jp_ricoh'
     '/security/products/vulnerabilities/js/vul.js'
 )
 
-# Matches the original fileName/axios block regardless of spacing
-# variations inside substr(...) calls, e.g. substr(6, 4) or substr( 6, 4 ).
+# -----------------------------------------------
+# patch 1: data.item の初期値
+# -----------------------------------------------
+
+ITEM_OLD = '    item: "",\n    isError:false'
+
+ITEM_NEW = (
+    '    item: {\n'
+    '      importance: "",\n'
+    '      version: "",\n'
+    '      jvn: [],\n'
+    '      severity: "",\n'
+    '      status: "",\n'
+    '      businessFields: [],\n'
+    '      list1Title: "",\n'
+    '      products: [],\n'
+    '      list2Title: "",\n'
+    '      thanks: "",\n'
+    '      history: [],\n'
+    '      url: "",\n'
+    '      authenticityGuarantee: ""\n'
+    '    },\n'
+    '    isError:false'
+)
+
+# -----------------------------------------------
+# patch 2: fileName/axios ブロックを isLocal 分岐 + 全処理まとめ版に置換
+#
+# 元コード（パッチ前）:
+#   let fileName = "https://vuls.ricoh.com/..." + gID + ".json?" + dateParam;
+#   //データロード
+#   axios
+#   .get(fileName)
+#   .then(function(response) {
+#     self.item = response.data;
+#     ...加工...
+#   })
+#
+# 新コード（パッチ後）:
+#   let fileName;
+#   let isLocal = (...);
+#   fileName = "https://vuls.ricoh.com/..." + gID + ".json?" + dateParam;
+#   function localizeVulUrl(...) { ... }
+#   //データロード
+#   var VULINFO_IDB_NAME = ...;
+#   ...IndexedDB + File System Access API の関数群...
+#   (isLocal ? loadVulDataViaFolderHandle() : axios.get(fileName))
+#   .then(function(response) {
+#     var d = response.data;
+#     ...加工（Vue への代入前にまとめて）...
+#     self.item = d;
+#   })
+# -----------------------------------------------
+
+# 元の fileName〜.then(function(response){ ブロックにマッチする正規表現
+# substr の空白バリエーション等に対応
 OLD_BLOCK_PATTERN = re.compile(
-    r'[ \t]*let fileName = "https://vuls\.ricoh\.com/ja/vulinfo/"\s*\+\s*'
-    r'gID\.substr\(\s*6\s*,\s*4\s*\)\s*\+\s*"/"\s*\+\s*gID\s*\+\s*"\.json\?"\s*\+\s*dateParam;\n'
+    r'[ \t]*let fileName = "https://vuls\.ricoh\.com/ja/vulinfo/"'
+    r'\s*\+\s*gID\.substr\(\s*6\s*,\s*4\s*\)\s*\+\s*"/"\s*\+\s*gID\s*\+\s*"\.json\?"\s*\+\s*dateParam;\n'
     r'(?:[ \t]*//.*\n)*'
     r'[ \t]*//データロード\n'
     r'[ \t]*axios\n'
     r'[ \t]*\.get\(fileName\)\n'
-    r'[ \t]*\.then\(function\(response\)\s*\{'
+    r'[ \t]*\.then\(function\(response\)\s*\{\n'
+    r'[ \t]*self\.item = response\.data;\n'
+    r'[ \t]*//表示用データ作成\n'
+    r'[ \t]*//最終更新日\n'
+    r'[ \t]*tempLastUpdate = self\.item\["updatedAt"\];\n'
+    r'[ \t]*let tempLastUpdateTS = Date\.parse\(tempLastUpdate\);\n'
+    r'[ \t]*let tempLastUpdateDT = new Date\(tempLastUpdateTS\);\n'
+    r'[ \t]*self\.item\["lastUpdate"\] = dayjs\(tempLastUpdateDT\)\.format\(\'YYYY年MM月DD日 H時mm分\'\);\n'
+    r'[ \t]*//発行日\n'
+    r'[ \t]*tempFirstEdition = self\.item\["publishedAt"\];\n'
+    r'[ \t]*let tempFirstEditionTS = Date\.parse\(tempFirstEdition\);\n'
+    r'[ \t]*let tempFirstEditionDT = new Date\(tempFirstEditionTS\);\n'
+    r'[ \t]*self\.item\["firstEdition"\] = dayjs\(tempFirstEditionDT\)\.format\(\'YYYY年MM月DD日 H時mm分\'\);\n'
+    r'[ \t]*//',
+    re.MULTILINE
 )
 
 NEW_BLOCK = (
@@ -224,75 +268,195 @@ NEW_BLOCK = (
     '          });\n'
     '      }\n'
     '      (isLocal ? loadVulDataViaFolderHandle() : axios.get(fileName))\n'
-    '      .then(function(response) {'
+    '      .then(function(response) {\n'
+    '        var d = response.data;\n'
+    '        //表示用データ作成\n'
+    '        //最終更新日\n'
+    '        var tempLastUpdate = d["updatedAt"];\n'
+    '        var tempLastUpdateDT = new Date(Date.parse(tempLastUpdate));\n'
+    '        d["lastUpdate"] = dayjs(tempLastUpdateDT).format(\'YYYY年MM月DD日 H時mm分\');\n'
+    '        //発行日\n'
+    '        var tempFirstEdition = d["publishedAt"];\n'
+    '        var tempFirstEditionDT = new Date(Date.parse(tempFirstEdition));\n'
+    '        d["firstEdition"] = dayjs(tempFirstEditionDT).format(\'YYYY年MM月DD日 H時mm分\');\n'
+    '        //'
 )
 
-patch_block_regex(VUL_JS_PATH, OLD_BLOCK_PATTERN, NEW_BLOCK)
+# -----------------------------------------------
+# patch 3: .then の中身（businessFields 〜 self.item = d）
+#
+# 元コード:
+#   //
+#   self.item["businessFields"] = self.item.productStatus.businessFields;
+#   for(let i=0; ...) { ... }
+#   self.item["products"] = self.item.productStatus.products;
+#   for(i=0; i<self.item.history.length; i++){
+#     self.item.history[i]["date"] = self.item.history[i]["updatedAt"];
+#   }
+#
+# 新コード:
+#   //
+#   d["businessFields"] = d.productStatus.businessFields;
+#   for(var i=0; ...) { ... }
+#   d["products"] = d.productStatus.products;
+#   if(isLocal){ ... adv リンク書き換え ... }
+#   for(var hi=0; hi<d.history.length; hi++){
+#     d.history[hi]["date"] = d.history[hi]["updatedAt"];
+#   }
+#   self.item = d;
+# -----------------------------------------------
 
-# --------------------------------------------
-# patch vul.js: rewrite adv links inside product.id HTML when isLocal
-# vul.html uses v-html="product.id" where product.id contains raw HTML:
-#   <a href='https://jp.ricoh.com/.../adv?id=...'>https://jp.ricoh.com/.../adv?id=...</a>
-# Both the href attribute (single-quoted) and the link text contain the full URL.
-# We inject a loop that rewrites both occurrences using localizeVulUrl().
-# --------------------------------------------
-
-PRODUCTS_OLD = '        self.item["products"] = self.item.productStatus.products;'
-
-PRODUCTS_INJECT = (
+THEN_OLD = (
+    '        //\n'
+    '        self.item["businessFields"] = self.item.productStatus.businessFields;\n'
+    '        for(let i=0; i<self.item["businessFields"].length; i++){\n'
+    '          self.item["businessFields"][i]["count"]=0;\n'
+    '          let categories = self.item["businessFields"][i]["categories"];\n'
+    '          for(let s=0; s<categories.length; s++){\n'
+    '            self.item["businessFields"][i]["categories"][s]["count"]=0;\n'
+    '            let subcategories = categories[s]["subCategories"];\n'
+    '            for(let l=0; l<subcategories.length; l++){\n'
+    '              self.item["businessFields"][i]["count"]++;\n'
+    '              self.item["businessFields"][i]["categories"][s]["count"]++;\n'
+    '            }\n'
+    '          }\n'
+    '        }\n'
     '        self.item["products"] = self.item.productStatus.products;\n'
+    '        for(i=0; i<self.item.history.length; i++){\n'
+    '          self.item.history[i]["date"] = self.item.history[i]["updatedAt"];//最終更新日\n'
+    '        }\n'
+    '      })'
+)
+
+THEN_NEW = (
+    '        //\n'
+    '        d["businessFields"] = d.productStatus.businessFields;\n'
+    '        for(var i=0; i<d["businessFields"].length; i++){\n'
+    '          d["businessFields"][i]["count"]=0;\n'
+    '          var categories = d["businessFields"][i]["categories"];\n'
+    '          for(var s=0; s<categories.length; s++){\n'
+    '            d["businessFields"][i]["categories"][s]["count"]=0;\n'
+    '            var subcategories = categories[s]["subCategories"];\n'
+    '            for(var l=0; l<subcategories.length; l++){\n'
+    '              d["businessFields"][i]["count"]++;\n'
+    '              d["businessFields"][i]["categories"][s]["count"]++;\n'
+    '            }\n'
+    '          }\n'
+    '        }\n'
+    '        d["products"] = d.productStatus.products;\n'
     '        if(isLocal){\n'
-    '          for(var pi=0; pi<self.item["products"].length; pi++){\n'
-    '            var prod = self.item["products"][pi];\n'
+    '          for(var pi=0; pi<d["products"].length; pi++){\n'
+    '            var prod = d["products"][pi];\n'
     '            if(typeof prod.id === "string"){\n'
-    "              prod.id = prod.id.replace(/href='([^']*)'/g,\n"
-    "                function(m, url){ return 'href=\\'' + localizeVulUrl(url) + '\\''; }\n"
+    '              // href 属性を書き換え（シングルクォート）\n'
+    '              prod.id = prod.id.replace(/href=\'([^\']*)\'/g,\n'
+    "                function(m, url){ return \"href='\" + localizeVulUrl(url) + \"'\"; }\n"
     '              );\n'
-    "              prod.id = prod.id.replace(/href=\"([^\"]*)\"/g,\n"
+    '              // href 属性を書き換え（ダブルクォート）\n'
+    '              prod.id = prod.id.replace(/href="([^"]*)"/g,\n'
     '                function(m, url){ return \'href="\' + localizeVulUrl(url) + \'"\'; }\n'
+    '              );\n'
+    '              // リンクテキスト（>URL</a> の部分）を現在のホストのURLに書き換え\n'
+    '              prod.id = prod.id.replace(/>https?:\\/\\/[^<]*<\\/a>/g,\n'
+    '                function(m){\n'
+    '                  var text = m.slice(1, -4);\n'
+    '                  return \'>\' + document.location.origin + localizeVulUrl(text) + \'</a>\';\n'
+    '                }\n'
     '              );\n'
     '            }\n'
     '          }\n'
-    '        }'
+    '        }\n'
+    '        for(var hi=0; hi<d.history.length; hi++){\n'
+    '          d.history[hi]["date"] = d.history[hi]["updatedAt"];//最終更新日\n'
+    '        }\n'
+    '        // 全処理が終わってから Vue に渡す → reactivity が一度だけ発火\n'
+    '        self.item = d;\n'
+    '      })'
 )
-
-def patch_products_linkurl(path):
-    if not os.path.exists(path):
-        print(f'NOT FOUND: {path}')
-        return
-    content, encoding, had_crlf = read_file(path)
-    if PRODUCTS_OLD not in content:
-        print(f'SKIP: {path} (products target line not found)')
-        return
-    new_content = content.replace(PRODUCTS_OLD, PRODUCTS_INJECT, 1)
-    write_file(path, new_content, encoding, had_crlf)
-    print(f'OK: {path}')
-
-patch_products_linkurl(VUL_JS_PATH)
 
 # -----------------------------------------------
 # patch template.js
 # -----------------------------------------------
 
-patch_file(
-    path=(
-        'jp.ricoh.com/-/Media/Ricoh/Common'
-        '/cmn_g_header_footer/js/template.js'
-    ),
-    condition_fn=lambda line: (
-        'templateBase' in line
-        and 'template.src' in line
-    ),
-    new_code=(
-        'var template = document.createElement("script");\n'
-        'template.src = "/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase.js";'
-    )
+TEMPLATE_JS_PATH = (
+    'jp.ricoh.com/-/Media/Ricoh/Common'
+    '/cmn_g_header_footer/js/template.js'
 )
 
 # -----------------------------------------------
-# generate .vscode/settings.json
+# 実行
 # -----------------------------------------------
 
+def patch_item_init(path):
+    if not os.path.exists(path):
+        print(f'NOT FOUND: {path}')
+        return False
+    content, encoding, had_crlf = read_file(path)
+    if ITEM_OLD not in content:
+        print(f'SKIP item init: {path} (already patched or not found)')
+        return True
+    new_content = content.replace(ITEM_OLD, ITEM_NEW, 1)
+    write_file(path, new_content, encoding, had_crlf)
+    print(f'OK item init: {path}')
+    return True
+
+def patch_main_block(path):
+    if not os.path.exists(path):
+        print(f'NOT FOUND: {path}')
+        return False
+    content, encoding, had_crlf = read_file(path)
+    new_content, count = OLD_BLOCK_PATTERN.subn(NEW_BLOCK, content, count=1)
+    if count == 0:
+        print(f'SKIP main block: {path} (already patched or pattern not found)')
+    else:
+        write_file(path, new_content, encoding, had_crlf)
+        print(f'OK main block: {path}')
+    return True
+
+def patch_then_block(path):
+    if not os.path.exists(path):
+        print(f'NOT FOUND: {path}')
+        return False
+    content, encoding, had_crlf = read_file(path)
+    if THEN_OLD not in content:
+        print(f'SKIP then block: {path} (already patched or not found)')
+        return True
+    new_content = content.replace(THEN_OLD, THEN_NEW, 1)
+    write_file(path, new_content, encoding, had_crlf)
+    print(f'OK then block: {path}')
+    return True
+
+def patch_template_js(path):
+    if not os.path.exists(path):
+        print(f'NOT FOUND: {path}')
+        return
+    content, encoding, had_crlf = read_file(path)
+    replaced = False
+    new_lines = []
+    for line in content.split('\n'):
+        if 'templateBase' in line and 'template.src' in line:
+            new_lines.append(
+                'var template = document.createElement("script");\n'
+                'template.src = "/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase.js";'
+            )
+            replaced = True
+        else:
+            new_lines.append(line)
+    if replaced:
+        write_file(path, '\n'.join(new_lines), encoding, had_crlf)
+        print(f'OK: {path}')
+    else:
+        print(f'SKIP: {path} (target line not found)')
+
+# vul.js の3ステップパッチ
+patch_item_init(VUL_JS_PATH)
+patch_main_block(VUL_JS_PATH)
+patch_then_block(VUL_JS_PATH)
+
+# template.js パッチ
+patch_template_js(TEMPLATE_JS_PATH)
+
+# .vscode/settings.json
 os.makedirs('.vscode', exist_ok=True)
 settings = """{
     "liveServer.settings.root": "/jp.ricoh.com",
