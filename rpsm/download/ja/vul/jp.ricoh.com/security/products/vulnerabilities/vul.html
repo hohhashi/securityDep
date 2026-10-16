@@ -199,6 +199,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   text-align: left !important;
   background-color: #d0d0d0 !important;
 }
+#vulinfoApp td.vul2-prod-name {
+  vertical-align: middle !important;
+  text-align: left !important;
+}
 
 
 /* バージョンテーブル */
@@ -214,11 +218,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 .vul2-versionTable th,
 .vul2-versionTable td {
-  border: 1px solid #d8d8d8;
-  padding: 6px 8px;
-  text-align: left;
-  vertical-align: top;
-  word-break: break-word;
+  border: 1px solid #999 !important;
+  padding: 6px 8px !important;
+  text-align: left !important;
+  vertical-align: middle !important;
+  word-break: break-word !important;
   background: none !important;
   color: #333 !important;
 }
@@ -295,6 +299,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   justify-content: center !important;
   align-items: center !important;
   padding-right: 8px !important;
+}
+
+/* v2 外側テーブル（製品・サービス / 詳細）の枠線を濃くする */
+#vulinfoApp table:not(.vul2-versionTable) th,
+#vulinfoApp table:not(.vul2-versionTable) td {
+  border: 1px solid #888 !important;
+}
+#vulinfoApp table:not(.vul2-versionTable) {
+  border-collapse: collapse !important;
 }
 
 /* 特記事項リスト */

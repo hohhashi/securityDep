@@ -5,7 +5,7 @@
 <head>
 
     
-<meta name="VIcurrentDateTime" content="639274627007388230" />
+<meta name="VIcurrentDateTime" content="639271389364528735" />
 <meta name="VirtualFolder" content="/" />
 <script type="text/javascript" src="/layouts/system/VisitorIdentification.js"></script>
 
@@ -108,6 +108,230 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <link rel="stylesheet" type="text/css" media="all" href="/-/Media/Ricoh/Common/cmn_v1/lib/uniform/jquery.uniform.css">
 <link rel="stylesheet" type="text/css" media="all" href="/-/Media/Ricoh/Sites/jp_ricoh/security/products/vulnerabilities/css/vul.css">
+<style>
+/* ---- v2 脆弱性情報ページ 追加スタイル ---- */
+
+/* CVEリスト（冒頭） */
+.vul2-cveList {
+  list-style: none;
+  margin-top: 4px !important;
+  margin-bottom: 14px !important;
+  padding-left: 1em !important;
+}
+.vul2-cveList li {
+  position: relative;
+  padding-left: 0.8em !important;
+  margin-bottom: 4px !important;
+  font-size: inherit !important;
+  color: #333 !important;
+}
+.vul2-cveList li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+}
+.vul2-cveList a {
+  color: #333 !important;
+  font-weight: normal !important;
+  text-decoration: none !important;
+  pointer-events: none !important;
+  cursor: default !important;
+}
+.vul2-cveList a::before,
+.vul2-cveList a::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* 詳細セル全体（リンク系は除外） */
+.vul2-cell,
+.vul2-cell *:not(a):not(a *) {
+  font-size: inherit !important;
+  color: #333 !important;
+}
+/* vul2-cell 内の素の <a> はサイト標準スタイルに任せる */
+.vul2-cell a {
+  color: unset;
+  font-size: inherit !important;
+}
+/* サブテキスト（バージョン確認リンク・対処方法リンク等） */
+.vul2-sub-text {
+  margin-top: 10px !important;
+  margin-left: 1em !important;
+  padding-left: 0 !important;
+  font-size: 12px !important;
+  color: #666 !important;
+}
+/* サブテキストリンクは既存サイトの c-link-a スタイルに任せる（上書きしない） */
+
+/* 各セクション */
+.vul2-detail-section {
+  margin-bottom: 14px;
+}
+.vul2-detail-section:last-child {
+  margin-bottom: 0;
+}
+.vul2-detail-title {
+  font-weight: bold !important;
+  margin-bottom: 6px !important;
+  padding-left: 1em;
+  position: relative;
+}
+.vul2-detail-title::before {
+  content: "・";
+  position: absolute;
+  left: 0;
+}
+
+/* グループラベル（テーブル上部テキスト） */
+.vul2-group-label {
+  font-size: 12px !important;
+  color: #666 !important;
+  margin: 8px 0 4px !important;
+}
+
+/* v2 製品名セル：太字にしない、フォントサイズ揃え */
+.vul2-prod-name {
+  font-weight: normal !important;
+  font-size: inherit !important;
+  color: #333 !important;
+  vertical-align: middle !important;
+  text-align: left !important;
+  background-color: #d0d0d0 !important;
+}
+#vulinfoApp td.vul2-prod-name {
+  vertical-align: middle !important;
+  text-align: left !important;
+}
+
+
+/* バージョンテーブル */
+.vul2-versionTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4px;
+  margin-bottom: 6px;
+  table-layout: fixed;
+}
+.vul2-version-indent {
+  padding-left: 1em;
+}
+.vul2-versionTable th,
+.vul2-versionTable td {
+  border: 1px solid #999 !important;
+  padding: 6px 8px !important;
+  text-align: left !important;
+  vertical-align: middle !important;
+  word-break: break-word !important;
+  background: none !important;
+  color: #333 !important;
+}
+.vul2-versionTable th {
+  background: #d0d0d0 !important;
+  font-weight: normal !important;
+  white-space: nowrap;
+  width: 30%;
+  text-align: center !important;
+}
+.vul2-versionGroupCell {
+  background: #f8f8f8 !important;
+  color: #666 !important;
+}
+
+/* バージョン確認リンク */
+.vul2-versionCheck {
+  margin-top: 6px;
+}
+
+/* 対処方法リンク一覧 */
+.vul2-links {
+  list-style: none;
+  margin: 4px 0 0 0;
+  padding: 0;
+}
+.vul2-links li {
+  margin-bottom: 2px;
+}
+
+/* お問い合わせ画像タイル（サイトグローバルの > リンク装飾を無効化） */
+.vul2-contact-tile::before,
+.vul2-contact-tile::after {
+  content: none !important;
+  display: none !important;
+}
+.vul2-contact-tile {
+  display: grid !important;
+  grid-template-columns: 80px 1fr 36px !important;
+  align-items: center !important;
+  margin-top: 12px !important;
+  border: 1px solid #c9c9c9 !important;
+  border-radius: 4px !important;
+  background: #fff !important;
+  text-decoration: none !important;
+  color: #333 !important;
+  max-width: 320px !important;
+  transition: opacity 0.3s;
+}
+.vul2-contact-tile:hover {
+  opacity: 0.7;
+}
+.vul2-contact-tile__icon {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 4px !important;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+.vul2-contact-tile__icon img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+.vul2-contact-tile__text {
+  padding: 15px !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  color: #333 !important;
+}
+.vul2-contact-tile__arrow {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding-right: 8px !important;
+}
+
+/* v2 外側テーブル（製品・サービス / 詳細）の枠線を濃くする */
+#vulinfoApp table:not(.vul2-versionTable) th,
+#vulinfoApp table:not(.vul2-versionTable) td {
+  border: 1px solid #888 !important;
+}
+#vulinfoApp table:not(.vul2-versionTable) {
+  border-collapse: collapse !important;
+}
+
+/* 特記事項リスト */
+.vul2-notes {
+  list-style: none !important;
+  margin: 0 !important;
+  margin-top: 0 !important;
+  padding: 0 !important;
+  padding-left: 1em !important;
+}
+.vul2-notes li {
+  list-style: none !important;
+  position: relative !important;
+  padding-left: 1.2em !important;
+  margin-bottom: 2px !important;
+}
+.vul2-notes li::before {
+  content: "○" !important;
+  position: absolute !important;
+  left: 0 !important;
+  font-size: 0.8em !important;
+  line-height: 1.8 !important;
+}
+</style>
 
     
     
@@ -873,7 +1097,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 															<div class="cnt_max">
 																<div class="clm">
 																	<div class="lead_wrap">
-																		<div class="lead__left" v-html="item.explanation">
+																		<!-- v1: explanation HTML をそのまま表示 -->
+																		<div class="lead__left" v-if="item.docVersion !== '2.0'" v-html="item.explanation">
+																		</div>
+																		<!-- v2: 構造化フィールドを組み立てて表示 -->
+																		<div class="lead__left" v-if="item.docVersion === '2.0'">
+																			<!-- 冒頭テキスト（status に応じた定型文 + CVEリスト） -->
+																			<div class="lead">
+																				<template v-if="item.status === 'urgent'">
+																					<p>弊社製品・サービスに影響する脆弱性が確認されました。お客様においては早急な対応をお願いします。</p>
+																				</template>
+																				<template v-else-if="item.status === 'investigating'">
+																					<p>弊社製品・サービスへの影響について調査中です。</p>
+																				</template>
+																				<template v-else-if="item.status === 'confirmed'">
+																					<p>日頃より弊社製品をご愛用いただき、誠にありがとうございます。このたび、弊社が開発・製造し、日本国内にて販売する表1に記載の製品・サービスにおいて、以下の脆弱性による影響が確認されました。</p>
+																				</template>
+																				<!-- CVE リスト -->
+																				<ul v-if="item.cveList && item.cveList.length > 0" class="vul2-cveList">
+																					<li v-for="cveItem in item.cveList">
+																						{{cveItem.id}}<template v-if="cveItem.label">&#58; {{cveItem.label}}</template>
+																					</li>
+																				</ul>
+																			</div>
+																			<!-- 影響 -->
+																			<div v-if="item.impact" v-html="item.impact"></div>
+																			<!-- 注意事項 -->
+																			<div v-if="item.caution" v-html="item.caution"></div>
+																			<!-- 暫定対策 -->
+																			<div v-if="item.interimMeasure" v-html="item.interimMeasure"></div>
+																			<!-- 恒久対策 -->
+																			<div v-if="item.permanentMeasure" v-html="item.permanentMeasure"></div>
+																			<!-- 調査中補足 -->
+																			<div v-if="item.investigatingNote" v-html="item.investigatingNote"></div>
 																		</div>
 																		<div class="lead__right">
 																			<ul>
@@ -992,9 +1248,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																		<template v-if="item.products.length > 0 ">
 																			<div class="c-table c-table--scrollX">
 																				<table data-sp-table-width="640">
+																					<template v-if="item.docVersion !== '2.0'">
 																					<colgroup>
 																						<col class="c-table__col--w20p">
-																							<col>
+																						<col>
 																					</colgroup>
 																					<thead>
 																						<tr>
@@ -1006,11 +1263,67 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																						<template v-for="product in item.products">
 																							<tr>
 																								<th class="al_l">{{product.name}}</th>
-																								<td class="al_l" v-html="product.id">
+																								<td class="al_l" v-html="product.id"></td>
+																							</tr>
+																						</template>
+																					</tbody>
+																					</template>
+																					<template v-if="item.docVersion === '2.0'">
+																					<colgroup>
+																						<col style="width:28%">
+																						<col>
+																					</colgroup>
+																					<thead>
+																						<tr>
+																							<th class="al_c">製品・サービス</th>
+																							<th class="al_c">詳細</th>
+																						</tr>
+																					</thead>
+																					<tbody>
+																						<template v-for="product in item.products">
+																							<tr>
+																								<td class="al_l vul2-prod-name">{{product.name}}</td>
+																								<td class="al_l vul2-cell">
+																									<div class="vul2-detail-section">
+																										<div class="vul2-detail-title">対象バージョン</div>
+																										<div class="vul2-version-indent">
+																											<template v-for="vg in product.versions">
+																												<p v-if="vg.group" class="vul2-group-label">{{vg.group}}</p>
+																												<table class="vul2-versionTable">
+																												<thead><tr><th>構成要素</th><th>バージョン</th></tr></thead>
+																												<tbody>
+																													<tr v-for="row in vg.rows">
+																														<td class="vul2-component">{{row.component}}</td>
+																														<td>{{row.version}}</td>
+																													</tr>
+																												</tbody>
+																												</table>
+																											</template>
+																										</div>
+																										<p v-if="product.versionCheck" class="vul2-sub-text">
+																											<a :href="product.versionCheck.url" target="_blank">{{product.versionCheck.text}}</a>
+																										</p>
+																									</div>
+																									<div class="vul2-detail-section" v-if="product.countermeasure">
+																										<div class="vul2-detail-title">対処方法</div>
+																										<div class="vul2-version-indent" v-html="product.countermeasure.text"></div>
+																										<template v-if="product.countermeasure.links && product.countermeasure.links.length > 0">
+																											<p v-for="lnk in product.countermeasure.links" class="vul2-sub-text">
+																												<a :href="lnk.url" target="_blank">{{lnk.text}}</a>
+																											</p>
+																										</template>
+																									</div>
+																									<div class="vul2-detail-section" v-if="product.notes && product.notes.length > 0">
+																										<div class="vul2-detail-title">特記事項</div>
+																										<ul class="vul2-notes">
+																											<li v-for="note in product.notes">{{note.text}}</li>
+																										</ul>
+																									</div>
 																								</td>
 																							</tr>
 																						</template>
 																					</tbody>
+																					</template>
 																				</table>
 																			</div>
 																		</template>
@@ -1026,7 +1339,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																	<div class="clm">
 																		<div>
 																			<strong class="vul_contactTitle">本件に関するお問合せ先</strong>
-																			<div v-html="item.contact">
+																			<div v-if="item.docVersion !== '2.0'" v-html="item.contact"></div>
+																			<div v-if="item.docVersion === '2.0' && item.contact">
+																				<div v-html="item.contact.text"></div>
+																				<ul v-if="item.contact.links && item.contact.links.length > 0" class="vul2-links">
+																					<li v-for="lnk in item.contact.links">
+																						<a :href="lnk.url" target="_blank">{{lnk.text}}</a>
+																					</li>
+																				</ul>
+																				<a v-if="item.contact.imageUrl" :href="item.contact.links && item.contact.links.length > 0 ? item.contact.links[0].url : '#'" target="_blank" class="vul2-contact-tile" @error.capture="$event.target.closest('a').style.display='none'">
+																					<div class="vul2-contact-tile__icon">
+																						<img :src="item.contact.imageUrl" alt="" @error="$event.target.closest('a').style.display='none'">
+																					</div>
+																					<div class="vul2-contact-tile__text">お問い合わせ窓口</div>
+																					<div class="vul2-contact-tile__arrow">
+																						<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 4l8 8-8 8" stroke="#cf142b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+																					</div>
+																				</a>
 																			</div>
 																			<br>
 																			<template v-if="item.thanks !=''">

@@ -38,7 +38,17 @@ var app = new Vue({
       thanks: "",
       history: [],
       url: "",
-      authenticityGuarantee: ""
+      authenticityGuarantee: "",
+      // v2 fields
+      docVersion: "",
+      cveList: [],
+      cve: [],
+      impact: null,
+      caution: null,
+      interimMeasure: null,
+      permanentMeasure: null,
+      investigatingNote: null,
+      contact: null
     },
     isError:false
   },
@@ -47,7 +57,7 @@ var app = new Vue({
   mounted: function() {
     var self = this;
     CheckParam.Init();
-    
+
     if(isError){
       location.href = '/security/products/vulnerabilities/';
       return false;
@@ -200,6 +210,11 @@ var app = new Vue({
       (isLocal ? loadVulDataViaFolderHandle() : axios.get(fileName))
       .then(function(response) {
         var d = response.data;
+
+        // docVersion の正規化（なければ "1.0" 扱い）
+        d["docVersion"] = d["docVersion"] || "1.0";
+        var isV2 = (d["docVersion"] === "2.0");
+
         //表示用データ作成
         //最終更新日
         var tempLastUpdate = d["updatedAt"];
@@ -209,46 +224,113 @@ var app = new Vue({
         var tempFirstEdition = d["publishedAt"];
         var tempFirstEditionDT = new Date(Date.parse(tempFirstEdition));
         d["firstEdition"] = dayjs(tempFirstEditionDT).format('YYYY年MM月DD日 H時mm分');
-        //
-        d["businessFields"] = d.productStatus.businessFields;
-        for(var i=0; i<d["businessFields"].length; i++){
-          d["businessFields"][i]["count"]=0;
-          var categories = d["businessFields"][i]["categories"];
-          for(var s=0; s<categories.length; s++){
-            d["businessFields"][i]["categories"][s]["count"]=0;
-            var subcategories = categories[s]["subCategories"];
-            for(var l=0; l<subcategories.length; l++){
-              d["businessFields"][i]["count"]++;
-              d["businessFields"][i]["categories"][s]["count"]++;
+
+        // --- v2 固有処理 ---
+        if (isV2) {
+          // cveList をそのまま使う（テンプレート側で cveList を参照）
+          d["cveList"] = d["cveList"] || [];
+          // 旧テンプレート用 cve フィールドも互換のため生成
+          d["cve"] = d["cveList"].map(function(c) {
+            return { id: c.id, url: c.url || "", cwe: c.cwe || [] };
+          });
+          // productStatus から製品リストを取り出す
+          d["businessFields"] = (d.productStatus && d.productStatus.businessFields) ? d.productStatus.businessFields : [];
+          d["list1Title"]     = (d.productStatus && d.productStatus.list1Title) ? d.productStatus.list1Title : "";
+          d["list2Title"]     = (d.productStatus && d.productStatus.list2Title) ? d.productStatus.list2Title : "";
+          d["products"]       = (d.productStatus && d.productStatus.products) ? d.productStatus.products : [];
+
+          // businessFields のカウント
+          for (var i = 0; i < d["businessFields"].length; i++) {
+            d["businessFields"][i]["count"] = 0;
+            var categories = d["businessFields"][i]["categories"];
+            for (var s = 0; s < categories.length; s++) {
+              d["businessFields"][i]["categories"][s]["count"] = 0;
+              var subcategories = categories[s]["subCategories"];
+              for (var l = 0; l < subcategories.length; l++) {
+                d["businessFields"][i]["count"]++;
+                d["businessFields"][i]["categories"][s]["count"]++;
+              }
             }
           }
-        }
-        d["products"] = d.productStatus.products;
-        if(isLocal){
-          for(var pi=0; pi<d["products"].length; pi++){
-            var prod = d["products"][pi];
-            if(typeof prod.id === "string"){
-              // href 属性を書き換え（シングルクォート）
-              prod.id = prod.id.replace(/href='([^']*)'/g,
-                function(m, url){ return "href='" + localizeVulUrl(url) + "'"; }
-              );
-              // href 属性を書き換え（ダブルクォート）
-              prod.id = prod.id.replace(/href="([^"]*)"/g,
-                function(m, url){ return 'href="' + localizeVulUrl(url) + '"'; }
-              );
-              // リンクテキスト（>URL</a> の部分）を現在のホストのURLに書き換え
-              prod.id = prod.id.replace(/>https?:\/\/[^<]*<\/a>/g,
-                function(m){
-                  var text = m.slice(1, -4); // >と</a>を除いたURL部分
-                  return '>' + document.location.origin + localizeVulUrl(text) + '</a>';
+
+          // v2 では contact は {text, links[]} オブジェクト
+          // テンプレート側で item.contact.text / item.contact.links を参照
+
+          // isLocal のとき versionCheck.url / countermeasure.links[].url をローカライズ
+          if (isLocal) {
+            for (var pi = 0; pi < d["products"].length; pi++) {
+              var prod = d["products"][pi];
+              if (prod.versionCheck && prod.versionCheck.url) {
+                prod.versionCheck.url = localizeVulUrl(prod.versionCheck.url);
+              }
+              if (prod.countermeasure && prod.countermeasure.links) {
+                for (var li = 0; li < prod.countermeasure.links.length; li++) {
+                  prod.countermeasure.links[li].url = localizeVulUrl(prod.countermeasure.links[li].url);
                 }
-              );
+              }
+            }
+            // contact links のローカライズ
+            if (d.contact && d.contact.links) {
+              for (var ci = 0; ci < d.contact.links.length; ci++) {
+                d.contact.links[ci].url = localizeVulUrl(d.contact.links[ci].url);
+              }
             }
           }
+
+        // --- v1 処理（従来通り） ---
+        } else {
+          d["businessFields"] = d.productStatus ? d.productStatus.businessFields : (d["businessFields"] || []);
+          for (var i = 0; i < d["businessFields"].length; i++) {
+            d["businessFields"][i]["count"] = 0;
+            var categories = d["businessFields"][i]["categories"];
+            for (var s = 0; s < categories.length; s++) {
+              d["businessFields"][i]["categories"][s]["count"] = 0;
+              var subcategories = categories[s]["subCategories"];
+              for (var l = 0; l < subcategories.length; l++) {
+                d["businessFields"][i]["count"]++;
+                d["businessFields"][i]["categories"][s]["count"]++;
+              }
+            }
+          }
+          d["products"] = d.productStatus ? d.productStatus.products : (d["products"] || []);
+          // v1: products[].id はHTMLリンク文字列 → ローカライズ
+          if (isLocal) {
+            for (var pi = 0; pi < d["products"].length; pi++) {
+              var prod = d["products"][pi];
+              if (typeof prod.id === "string") {
+                prod.id = prod.id.replace(/href='([^']*)'/g,
+                  function(m, url){ return "href='" + localizeVulUrl(url) + "'"; }
+                );
+                prod.id = prod.id.replace(/href="([^"]*)"/g,
+                  function(m, url){ return 'href="' + localizeVulUrl(url) + '"'; }
+                );
+                prod.id = prod.id.replace(/>https?:\/\/[^<]*<\/a>/g,
+                  function(m){
+                    var text = m.slice(1, -4);
+                    return '>' + document.location.origin + localizeVulUrl(text) + '</a>';
+                  }
+                );
+              }
+            }
+          }
+          // v1: cve フィールドをそのまま使う
+          d["cve"] = d["cve"] || [];
+          // v1: contact は HTML 文字列のまま
         }
-        for(var hi=0; hi<d.history.length; hi++){
-          d.history[hi]["date"] = d.history[hi]["updatedAt"];//最終更新日
+
+        // history の date フィールド
+        for (var hi = 0; hi < d.history.length; hi++) {
+          d.history[hi]["date"] = d.history[hi]["updatedAt"];
         }
+
+        // 本ページのURL のホスト名を動作中のホストに置き換え（ローカルは .html も補完）
+        if (d.url) {
+          d.url = d.url.replace(/^https?:\/\/[^\/]+/, window.location.origin);
+          if (isLocal) {
+            d.url = d.url.replace(/\/vul(\?|$)/, "/vul.html$1");
+          }
+        }
+
         // 全処理が終わってから Vue に渡す → reactivity が一度だけ発火
         self.item = d;
       })
