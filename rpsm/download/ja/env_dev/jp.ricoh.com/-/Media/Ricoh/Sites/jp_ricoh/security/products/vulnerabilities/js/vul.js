@@ -77,12 +77,14 @@ var app = new Vue({
       fileName = "https://vuls.ricoh.com/ja/vulinfo/" + gID.substr(6, 4) + "/" + gID + ".json?" + dateParam;
       function localizeVulUrl(url) {
         if (!isLocal) return url;
+        // vuls.ricoh.com 以外の外部URLはそのまま返す
+        if (!/^https?:\/\/vuls\.ricoh\.com(\/|$)/.test(url)) return url;
         return url
           .replace(/^https?:\/\/[^\/]+/, "")
-          .replace(/\/vul(\?|$)/, "/vul.html$1")
-          .replace(/\/adv(\?|$)/, "/adv.html$1")
-          .replace(/\/product(\?|$)/, "/product.html$1")
-          .replace(/\/list_products(\?|$)/, "/list_products.html$1");
+          .replace(/^\/vul(\?|$)/, "/vul.html$1")
+          .replace(/^\/adv(\?|$)/, "/adv.html$1")
+          .replace(/^\/product(\?|$)/, "/product.html$1")
+          .replace(/^\/list_products(\?|$)/, "/list_products.html$1");
       }
       //データロード
       var VULINFO_IDB_NAME = "vulinfoFolderHandleDB";
@@ -253,8 +255,9 @@ var app = new Vue({
             }
           }
 
-          // v2 では contact は {text, links[]} オブジェクト
-          // テンプレート側で item.contact.text / item.contact.links を参照
+          // v2 では contact は {text, link: {text, url, imageUrl?}} オブジェクト
+          // テンプレート側で item.contact.text / item.contact.link を参照
+          // imageUrl は省略可。指定するとリンクが画像カード表示になり、リンク切れ時はテキストリンクにフォールバック
 
           // isLocal のとき versionCheck.url / countermeasure.links[].url をローカライズ
           if (isLocal) {
@@ -269,11 +272,9 @@ var app = new Vue({
                 }
               }
             }
-            // contact links のローカライズ
-            if (d.contact && d.contact.links) {
-              for (var ci = 0; ci < d.contact.links.length; ci++) {
-                d.contact.links[ci].url = localizeVulUrl(d.contact.links[ci].url);
-              }
+            // contact link のローカライズ
+            if (d.contact && d.contact.link && d.contact.link.url) {
+              d.contact.link.url = localizeVulUrl(d.contact.link.url);
             }
           }
 
