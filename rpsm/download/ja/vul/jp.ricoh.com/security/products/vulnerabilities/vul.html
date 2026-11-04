@@ -1342,20 +1342,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																			<div v-if="item.docVersion !== '2.0'" v-html="item.contact"></div>
 																			<div v-if="item.docVersion === '2.0' && item.contact">
 																				<div v-html="item.contact.text"></div>
-																				<ul v-if="item.contact.links && item.contact.links.length > 0" class="vul2-links">
-																					<li v-for="lnk in item.contact.links">
-																						<a :href="lnk.url" target="_blank">{{lnk.text}}</a>
-																					</li>
-																				</ul>
-																				<a v-if="item.contact.imageUrl" :href="item.contact.links && item.contact.links.length > 0 ? item.contact.links[0].url : '#'" target="_blank" class="vul2-contact-tile" @error.capture="$event.target.closest('a').style.display='none'">
-																					<div class="vul2-contact-tile__icon">
-																						<img :src="item.contact.imageUrl" alt="" @error="$event.target.closest('a').style.display='none'">
-																					</div>
-																					<div class="vul2-contact-tile__text">お問い合わせ窓口</div>
-																					<div class="vul2-contact-tile__arrow">
-																						<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 4l8 8-8 8" stroke="#cf142b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-																					</div>
-																				</a>
+																				<!-- imageUrl あり → 画像カードタイル。画像読み込み失敗時はテキストリンクにフォールバック -->
+																				<template v-if="item.contact.link">
+																					<a v-if="item.contact.link.imageUrl" :href="item.contact.link.url" target="_blank" class="vul2-contact-tile" ref="contactTile">
+																						<div class="vul2-contact-tile__icon">
+																							<img :src="item.contact.link.imageUrl" alt="" @error="$refs.contactTile.style.display='none'; $refs.contactTextLink.style.display=''">
+																						</div>
+																						<div class="vul2-contact-tile__text">{{item.contact.link.text}}</div>
+																						<div class="vul2-contact-tile__arrow">
+																							<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 4l8 8-8 8" stroke="#cf142b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+																						</div>
+																					</a>
+																					<!-- フォールバック用テキストリンク（imageUrl あり時は初期非表示、画像エラー時に表示） -->
+																					<ul class="vul2-links" :style="item.contact.link.imageUrl ? 'display:none' : ''" ref="contactTextLink">
+																						<li><a :href="item.contact.link.url" target="_blank">{{item.contact.link.text}}</a></li>
+																					</ul>
+																				</template>
 																			</div>
 																			<br>
 																			<template v-if="item.thanks !=''">
