@@ -425,6 +425,14 @@ var app = new Vue({
     let isLocal = (document.location.hostname == "127.0.0.1"
         || document.location.hostname == "stg-prv-wrc.scms.jp.ricoh.com"
         || document.location.hostname == "stg-prv-jrc.scms.jp.ricoh.com");
+    function localizeProductUrl(url) {
+      if (!isLocal) return url;
+      return url
+        .replace(/\/vul(\?|$)/, "/vul.html$1")
+        .replace(/\/adv(\?|$)/, "/adv.html$1")
+        .replace(/\/product(\?|$)/, "/product.html$1")
+        .replace(/\/list_products(\?|$)/, "/list_products.html$1");
+    }
     //データロード
     var LIST_PRODUCTS_IDB_NAME = "vulinfoFolderHandleDB";
     var LIST_PRODUCTS_IDB_STORE = "handles";
@@ -563,6 +571,10 @@ var app = new Vue({
                 item["category"] = categoryProduct.name;
                 item["product"] = product.name;
                 item["id"] = product.id;
+                // 製品ごとの脆弱性一覧ページへのリンク
+                item["linkUrl"] = product.id
+                  ? localizeProductUrl("/security/products/vulnerabilities/product.html?id=" + product.id)
+                  : "";
                 if(temp[count] == undefined){
                   temp[count] = item;
                 }

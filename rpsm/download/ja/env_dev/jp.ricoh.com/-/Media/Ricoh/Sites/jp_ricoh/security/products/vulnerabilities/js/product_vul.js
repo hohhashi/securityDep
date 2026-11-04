@@ -46,6 +46,7 @@ var app = new Vue({
     pagenate: [],
     hashNotIncludePage: "",
     isModel:false,
+    isV2:false,
     loadingText:"読み込み中",
 
     flgPrev: true,
@@ -151,7 +152,7 @@ var app = new Vue({
       if(self.filterBySeverity!=""){
         for (let i = 0; i < tempArray_importance.length; i++) {
           let tempItem = tempArray_importance[i];
-          if(tempItem["severity"].includes(self.filterBySeverity)){
+          if((tempItem["severity"] || "").includes(self.filterBySeverity)){
             tempArray_severity.push(tempItem);
           }
         }
@@ -184,8 +185,9 @@ var app = new Vue({
       if(self.filterByCVE!=""){
         for (let i = 0; i < tempArray_keyword.length; i++) {
           let tempItem = tempArray_keyword[i];
-          for (let s = 0; s < tempItem["cve"].length; s++) {
-            if(tempItem["cve"][s]["id"].includes(self.filterByCVE)){
+          let cveList = tempItem["cve"] || [];
+          for (let s = 0; s < cveList.length; s++) {
+            if(cveList[s]["id"].includes(self.filterByCVE)){
               tempArray_cve.push(tempItem);
               break;
             }
@@ -200,8 +202,9 @@ var app = new Vue({
       if(self.filterByJVN!=""){
         for (let i = 0; i < tempArray_cve.length; i++) {
           let tempItem = tempArray_cve[i];
-          for (let s = 0; s < tempItem["jvn"].length; s++) {
-            if(tempItem["jvn"][s]["id"].includes(self.filterByJVN)){
+          let jvnList = tempItem["jvn"] || [];
+          for (let s = 0; s < jvnList.length; s++) {
+            if(jvnList[s]["id"].includes(self.filterByJVN)){
               tempArray_jvn.push(tempItem);
               break;
             }
@@ -224,7 +227,7 @@ var app = new Vue({
           tempUnixConditionAfter = tempUnixConditionAfter.getTime();
 
 
-          const tempMMYYDD = tempItem["publishedAt"].substr( 0, 10 );
+          const tempMMYYDD = (tempItem["publishedAt"] || "").substr( 0, 10 );
           let tempMMYYDDArray = tempMMYYDD.split("-");
           tempMMYYDDArray[1] = Number(tempMMYYDDArray[1]) - 1;
           let tempUnix = new Date(Date.UTC(Number(tempMMYYDDArray[0]), Number(tempMMYYDDArray[1]), Number(tempMMYYDDArray[2])));
@@ -249,7 +252,7 @@ var app = new Vue({
           tempUnixConditionAfter.setMonth(tempUnixConditionAfter.getMonth() + 1);
           tempUnixConditionAfter = tempUnixConditionAfter.getTime();
 
-          const tempMMYYDD = tempItem["updatedAt"].substr( 0, 10 );
+          const tempMMYYDD = (tempItem["updatedAt"] || "").substr( 0, 10 );
           let tempMMYYDDArray = tempMMYYDD.split("-");
           tempMMYYDDArray[1] = Number(tempMMYYDDArray[1]) - 1;
           let tempUnix = new Date(Date.UTC(Number(tempMMYYDDArray[0]), Number(tempMMYYDDArray[1]), Number(tempMMYYDDArray[2])));
@@ -523,6 +526,11 @@ var app = new Vue({
         })
         .then(function (text) {
           return { data: JSON.parse(text) };
+        })
+        .catch(function (err) {
+          // ローカル: ファイルが存在しない場合は空データで表示
+          console.warn("prodinfo ファイルが見つかりません:", self.jsonid, err);
+          return { data: { version: "2.0", name: "", id: self.jsonid, advisories: [] } };
         });
     }
     (isLocal ? loadProductDataViaFolderHandle() : axios.get(fileName))
@@ -531,83 +539,97 @@ var app = new Vue({
         console.log(fileName);
         //表示用データ作成
         self.allItems = self.item.advisories;
-        
+
+        // version 2.0: advisories は {id, title, severity, ...} のみ（component/model なし）
+        self.isV2 = (self.item.version === "2.0");
+        var isV2 = self.isV2;
 
         for(i=0; i<self.allItems.length; i++){
-          //リンク先
+          //リンク先（vul.html?id=... で脆弱性詳細ページへ）
           self.allItems[i]["linkUrl"] = localizeProductUrl(
-            "/security/products/vulnerabilities/adv?id=" + self.allItems[i].id
+            "/security/products/vulnerabilities/vul.html?id=" + self.allItems[i].id
           );
-          //最終更新日
-          tempLastUpdate = self.allItems[i]["updatedAt"];
-          let days = tempLastUpdate.split('+');
-          let tempLastDate = tempLastUpdate.substr( 0, 10 );
-          let tempLastTime = "+" + days[1];
-          
-          self.allItems[i]["lastUpdate"] = tempLastDate + tempLastTime;
 
-          //発行日
-          tempFirstEdition = self.allItems[i]["publishedAt"];
-          let days2 = tempFirstEdition.split('+');
-          let tempFirstDate = tempFirstEdition.substr( 0, 10 );
-          let tempFirstTime = "+" + days[1];
-          self.allItems[i]["firstEdition"] = tempFirstDate + tempFirstTime;
-        }
-
-        //オプションの配列の順序をソート
-        let tempLastUpDateAr =[];
-        let tempFirstDateAr =[];
-
-        for(i=0; i<self.allItems.length; i++){
-          //最終発行日
-          tempLastUpdate = self.allItems[i]["updatedAt"];
-          let tempLastUpMonth = tempLastUpdate.substr( 0, 7 );
-          if (tempLastUpDateAr.indexOf(tempLastUpMonth) == -1) {
-            tempLastUpDateAr.push(tempLastUpMonth);
+          // v2 / v1 共通: updatedAt・publishedAt が存在すれば lastUpdate / firstEdition を生成
+          var rawUpdatedAt = self.allItems[i]["updatedAt"] || "";
+          if (rawUpdatedAt) {
+            let days = rawUpdatedAt.split('+');
+            self.allItems[i]["lastUpdate"] = rawUpdatedAt.substr(0, 10) + (days[1] ? "+" + days[1] : "");
+          } else {
+            self.allItems[i]["lastUpdate"] = "";
           }
-          //発行日
-          tempFirstEdition = self.allItems[i]["publishedAt"];
-          let tempFirstMonth = tempFirstEdition.substr( 0, 7 );
-          if (tempFirstDateAr.indexOf(tempFirstMonth) == -1) {
-            tempFirstDateAr.push(tempFirstMonth);
+
+          var rawPublishedAt = self.allItems[i]["publishedAt"] || "";
+          if (rawPublishedAt) {
+            let days2 = rawPublishedAt.split('+');
+            self.allItems[i]["firstEdition"] = rawPublishedAt.substr(0, 10) + (days2[1] ? "+" + days2[1] : "");
+          } else {
+            self.allItems[i]["firstEdition"] = "";
           }
         }
-        tempLastUpDateAr.sort();
-        tempLastUpDateAr.reverse();
-        tempFirstDateAr.sort();
-        tempFirstDateAr.reverse();
-        for(i=0; i<tempLastUpDateAr.length; i++){
-          let tempLastUpdateMonthObj = {} 
-          tempLastUpdateMonthObj["text"] = tempLastUpDateAr[i];
-          tempLastUpdateMonthObj["value"] = tempLastUpDateAr[i];
-          self.optionsLastUpDay.push(tempLastUpdateMonthObj);
-        }
-        for(i=0; i<tempFirstDateAr.length; i++){
-          let tempFirstMonthObj = {} 
-          tempFirstMonthObj["text"] = tempFirstDateAr[i];
-          tempFirstMonthObj["value"] = tempFirstDateAr[i];
-          self.optionsInitialDay.push(tempFirstMonthObj);
+
+        {
+          //オプションの配列の順序をソート（v1 / v2 共通）
+          let tempLastUpDateAr =[];
+          let tempFirstDateAr =[];
+
+          for(i=0; i<self.allItems.length; i++){
+            //最終発行日
+            var tempLastUpdate2 = self.allItems[i]["updatedAt"] || "";
+            if (tempLastUpdate2) {
+              let tempLastUpMonth = tempLastUpdate2.substr( 0, 7 );
+              if (tempLastUpDateAr.indexOf(tempLastUpMonth) == -1) {
+                tempLastUpDateAr.push(tempLastUpMonth);
+              }
+            }
+            //発行日
+            var tempFirstEdition2 = self.allItems[i]["publishedAt"] || "";
+            if (tempFirstEdition2) {
+              let tempFirstMonth = tempFirstEdition2.substr( 0, 7 );
+              if (tempFirstDateAr.indexOf(tempFirstMonth) == -1) {
+                tempFirstDateAr.push(tempFirstMonth);
+              }
+            }
+          }
+          tempLastUpDateAr.sort();
+          tempLastUpDateAr.reverse();
+          tempFirstDateAr.sort();
+          tempFirstDateAr.reverse();
+          for(i=0; i<tempLastUpDateAr.length; i++){
+            let tempLastUpdateMonthObj = {}
+            tempLastUpdateMonthObj["text"] = tempLastUpDateAr[i];
+            tempLastUpdateMonthObj["value"] = tempLastUpDateAr[i];
+            self.optionsLastUpDay.push(tempLastUpdateMonthObj);
+          }
+          for(i=0; i<tempFirstDateAr.length; i++){
+            let tempFirstMonthObj = {}
+            tempFirstMonthObj["text"] = tempFirstDateAr[i];
+            tempFirstMonthObj["value"] = tempFirstDateAr[i];
+            self.optionsInitialDay.push(tempFirstMonthObj);
+          }
         }
 
         //絞り込み検索
         self.sortItems();
 
-        //modelが存在するかどうかチェック
-        for(let i=0; i<self.searchResult.length; i++){
-          if(self.searchResult[i].model !=""){
-            self.isModel = true;
+        // modelが存在するかどうかチェック（v1 のみ model フィールドを持つ）
+        if (!isV2) {
+          for(let i=0; i<self.searchResult.length; i++){
+            if(self.searchResult[i].model !=""){
+              self.isModel = true;
+            }
           }
         }
 
-        //0件かどうか？
+        //現在に必要な10件の配列itemsを作成
+        self.makeItemAr();
+
+        //0件かどうか？（makeItemAr() で totalNum がセットされた後に判定）
         if(self.totalNum == 0){
           self.loadingText = "一致するデータが見つかりません。";
         }else{
           self.loadingText = "読込中";
         }
-
-        //現在に必要な10件の配列itemsを作成
-        self.makeItemAr();
 
         //ページング処理
         self.makeHashStr(self.pageCurrent);
@@ -615,9 +637,14 @@ var app = new Vue({
         self.makePaging();
       })
       .catch(function (error) {
-        self.isError = true;
-        location.href = '/security/products/vulnerabilities/';
-        return false;
+        // ローカル環境ではリダイレクトせずエラー表示のみ
+        if (isLocal) {
+          console.error("データ読み込みエラー:", error);
+          self.loadingText = "データを読み込めませんでした。";
+        } else {
+          self.isError = true;
+          location.href = '/security/products/vulnerabilities/';
+        }
     });
   }
 });
