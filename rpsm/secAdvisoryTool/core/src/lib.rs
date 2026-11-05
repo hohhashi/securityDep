@@ -303,7 +303,11 @@ fn generate_pdfs(output_dir: &Path, id: &str, json_paths: &[PathBuf]) -> Vec<Pat
 
         match pdf::render_url_to_pdf(&url, &pdf_path, 4000) {
             Ok(()) => {
-                pdf_paths.push(pdf_path);
+                // Windows の \ を / に統一して返す
+                let normalized = PathBuf::from(
+                    pdf_path.to_string_lossy().replace('\\', "/")
+                );
+                pdf_paths.push(normalized);
             }
             Err(e) => {
                 eprintln!("警告: PDF 生成に失敗しました ({}): {}", lang, e);

@@ -155,10 +155,13 @@ img { max-width: 100%; height: auto; }
 .li__left {
   background: #f0f0f0;
   padding: 8px 10px;
-  min-width: 110px;
+  width: 130px;
+  min-width: 130px;
+  max-width: 130px;
   font-weight: normal;
   color: #555;
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 .li__right {
   padding: 8px 10px;
@@ -667,7 +670,7 @@ a.vul2-contact-tile {
                             <template v-if="item.status !=''">
                               <li>
                                 <div class="li__left">全体的調査・対応状況</div>
-                                <div class="li__right">{{item.status}}</div>
+                                <div class="li__right">{{statusLabel(item.status)}}</div>
                               </li>
                             </template>
                           </ul>
@@ -941,10 +944,19 @@ a.vul2-contact-tile {
         loadError: null,
         notFound: false,
         qid: id,
+        lang: lang,
       };
     },
     methods: {
       formatDate: function(iso) { return formatDateJa(iso); },
+      statusLabel: function(status) {
+        if (this.lang === 'ja') {
+          if (status === 'confirmed')     return '調査済';
+          if (status === 'investigating') return '調査中';
+          if (status === 'not-affected')  return '影響なし';
+        }
+        return status;
+      },
     },
     mounted: function () {
       var self = this;

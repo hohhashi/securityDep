@@ -112,6 +112,11 @@ enum LangFilter {
     Both,
 }
 
+/// パスの区切り文字を / に統一して文字列で返す（Windows の \ 対策）。
+fn normalize_path(p: &std::path::Path) -> String {
+    p.to_string_lossy().replace('\\', "/")
+}
+
 /// 出力先ディレクトリを決定する。
 /// 1. --output オプション
 /// 2. secAdvisoryTool.toml の output_dir
@@ -139,20 +144,23 @@ fn main() {
                 }
                 Ok(r) => {
                     println!("ID   : {}", r.id);
-                    // JSON と PDF をまとめて「出力」として表示する
-                    let all_outputs: Vec<_> = r.paths.iter().chain(r.pdf_paths.iter()).collect();
-                    for (i, p) in all_outputs.iter().enumerate() {
+                    // JSON ファイルを表示（先頭に「出力 :」）
+                    for (i, p) in r.paths.iter().enumerate() {
                         if i == 0 {
-                            println!("出力 : {}", p.display());
+                            println!("出力 : {}", normalize_path(p));
                         } else {
-                            println!("       {}", p.display());
+                            println!("       {}", normalize_path(p));
                         }
                     }
+                    // PDF ファイルも「出力 :」ラベル付きで表示
+                    for p in &r.pdf_paths {
+                        println!("出力 : {}", normalize_path(p));
+                    }
                     for p in &r.list_paths {
-                        println!("更新 : {}", p.display());
+                        println!("更新 : {}", normalize_path(p));
                     }
                     for p in &r.prod_paths {
-                        println!("更新 : {}", p.display());
+                        println!("更新 : {}", normalize_path(p));
                     }
                 }
                 Err(e) => {
@@ -166,7 +174,7 @@ fn main() {
             let dest_path = dest.as_deref();
             match run_export_products(&out, dest_path) {
                 Ok(p) => {
-                    println!("出力 : {}", p.display());
+                    println!("出力 : {}", normalize_path(&p));
                 }
                 Err(e) => {
                     eprintln!("エラー: {}", e);
@@ -180,7 +188,7 @@ fn main() {
                 Ok(r) => {
                     println!("処理件数: {} 件", r.row_count);
                     for p in &r.list_paths {
-                        println!("更新 : {}", p.display());
+                        println!("更新 : {}", normalize_path(p));
                     }
                 }
                 Err(e) => {
@@ -197,20 +205,23 @@ fn main() {
                 }
                 Ok(r) => {
                     println!("ID   : {}", r.id);
-                    // JSON と PDF をまとめて「出力」として表示する
-                    let all_outputs: Vec<_> = r.paths.iter().chain(r.pdf_paths.iter()).collect();
-                    for (i, p) in all_outputs.iter().enumerate() {
+                    // JSON ファイルを表示（先頭に「出力 :」）
+                    for (i, p) in r.paths.iter().enumerate() {
                         if i == 0 {
-                            println!("出力 : {}", p.display());
+                            println!("出力 : {}", normalize_path(p));
                         } else {
-                            println!("       {}", p.display());
+                            println!("       {}", normalize_path(p));
                         }
                     }
+                    // PDF ファイルも「出力 :」ラベル付きで表示
+                    for p in &r.pdf_paths {
+                        println!("出力 : {}", normalize_path(p));
+                    }
                     for p in &r.list_paths {
-                        println!("更新 : {}", p.display());
+                        println!("更新 : {}", normalize_path(p));
                     }
                     for p in &r.prod_paths {
-                        println!("更新 : {}", p.display());
+                        println!("更新 : {}", normalize_path(p));
                     }
                 }
                 Err(e) => {
@@ -243,13 +254,13 @@ fn main() {
                 }
                 Ok(r) => {
                     for p in &r.deleted {
-                        println!("削除 : {}", p.display());
+                        println!("削除 : {}", normalize_path(p));
                     }
                     for p in &r.updated_lists {
-                        println!("更新 : {}", p.display());
+                        println!("更新 : {}", normalize_path(p));
                     }
                     for p in &r.updated_prodinfo {
-                        println!("更新 : {}", p.display());
+                        println!("更新 : {}", normalize_path(p));
                     }
                     if make_gap {
                         println!("欠番 : {} を欠番として記録しました（再利用されません）", r.id);

@@ -402,7 +402,9 @@ pub fn read_advisory(excel_path: &Path, id: &str) -> Result<AdvisoryOutput, Exce
 
     let cvss     = vul_opt(&info, "CVSSv3スコア（基本値）").unwrap_or_default();
     let severity = cvss_to_severity(&cvss);
-    let status   = map_status(vul_opt(&info, "全体的調査・対応状況").unwrap_or_default().as_str());
+    let status_raw = vul_opt(&info, "全体的調査・対応状況").unwrap_or_default();
+    let status_ja  = map_status_ja(status_raw.as_str());
+    let status_en  = map_status_en(status_raw.as_str());
     let published_at = to_iso(vul_opt(&info, "公開日時").unwrap_or_default().as_str());
 
     // 更新日時は更新履歴の最新行から取得
@@ -437,7 +439,7 @@ pub fn read_advisory(excel_path: &Path, id: &str) -> Result<AdvisoryOutput, Exce
             cvss: cvss.clone(),
             severity: severity.clone(),
             jvn: jvn_list.clone(),
-            status: status.clone(),
+            status: status_ja.clone(),
             impact:             wrap_p(&vul_opt(&info, "影響(日)").unwrap_or_default()),
             caution:            wrap_p(&vul_opt(&info, "注意事項(日)").unwrap_or_default()),
             interim_measure:    wrap_p(&vul_opt(&info, "暫定対応策(日)").unwrap_or_default()),
@@ -489,7 +491,7 @@ pub fn read_advisory(excel_path: &Path, id: &str) -> Result<AdvisoryOutput, Exce
             cvss: cvss.clone(),
             severity: severity.clone(),
             jvn: jvn_list.clone(),
-            status: status.clone(),
+            status: status_en.clone(),
             impact:             wrap_p(&vul_opt(&info, "影響(英)").unwrap_or_default()),
             caution:            wrap_p(&vul_opt(&info, "注意事項(英)").unwrap_or_default()),
             interim_measure:    wrap_p(&vul_opt(&info, "暫定対応策(英)").unwrap_or_default()),
@@ -524,11 +526,22 @@ fn cvss_to_severity(cvss: &str) -> String {
     }
 }
 
-fn map_status(s: &str) -> String {
+/// ja JSON 用: 日本語表示値をそのまま使う
+fn map_status_ja(s: &str) -> String {
     match s.trim() {
-        "調査済" => "confirmed".to_string(),
-        "調査中" => "investigating".to_string(),
-        "影響なし" => "not-affected".to_string(),
+        "調査済"  | "confirmed"     => "調査済".to_string(),
+        "調査中"  | "investigating" => "調査中".to_string(),
+        "影響なし" | "not-affected"  => "影響なし".to_string(),
+        other => other.to_string(),
+    }
+}
+
+/// en JSON 用: 英語キー値を使う
+fn map_status_en(s: &str) -> String {
+    match s.trim() {
+        "調査済"  | "confirmed"     => "confirmed".to_string(),
+        "調査中"  | "investigating" => "investigating".to_string(),
+        "影響なし" | "not-affected"  => "not-affected".to_string(),
         other => other.to_string(),
     }
 }
