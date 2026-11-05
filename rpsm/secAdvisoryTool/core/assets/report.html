@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>脆弱性情報リスト</title>
+<link rel="stylesheet" href="/report.css">
+<script src="/vue.global.prod.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>脆弱性ごとの情報リスト</h1>
+    <div class="meta">出力日時: {{ generatedAt }} ／ 件数: {{ items.length }}件</div>
+
+    <div v-if="error" class="error-box">JSONの読み込みに失敗しました: {{ error }}</div>
+
+    <table v-else>
+      <thead>
+        <tr>
+          <th style="width: 32%;">タイトル</th>
+          <th style="width: 8%;">深刻度</th>
+          <th style="width: 10%;">脆弱性情報ID</th>
+          <th style="width: 20%;">CVE ID</th>
+          <th style="width: 12%;">JVN登録番号</th>
+          <th style="width: 18%;">最終更新日（公開日）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in items" :key="item.id">
+          <td>
+            <span v-if="item.importance === 'Important'" class="important-mark">[重要]</span>{{ item.title }}
+          </td>
+          <td>
+            <span v-if="item.severity" :class="'severity severity-' + item.severity.toLowerCase()">{{ item.severity }}</span>
+          </td>
+          <td>{{ item.id }}</td>
+          <td>
+            <span v-if="!item.cve || item.cve.length === 0" class="empty">-</span>
+            <span v-for="c in item.cve" :key="c.id" class="cve-item">{{ c.id }}</span>
+          </td>
+          <td>
+            <span v-if="!item.jvn || item.jvn.length === 0" class="empty">-</span>
+            <span v-for="j in item.jvn" :key="j.id" class="jvn-item">{{ j.id }}</span>
+          </td>
+          <td>{{ item.updatedAt }}<br>（{{ item.publishedAt }}）</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="/report.js"></script>
+</body>
+</html>

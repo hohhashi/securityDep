@@ -1,0 +1,18 @@
+[package]
+name = "secadvisory-core"
+version = "0.2.0"
+edition = "2021"
+
+[lib]
+name = "secadvisory_core"
+path = "src/lib.rs"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+calamine = { version = "0.29", features = ["dates"] }
+thiserror = "1"
+toml = "0.8"
+rust_xlsxwriter = "0.102.0"
+tiny_http = "0.12"
+chrono = "0.4"

@@ -1,0 +1,1038 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>脆弱性情報詳細</title>
+<script src="/vue.global.prod.js"></script>
+<style>
+/* ================================================================
+   PDF 専用スタイル - vul.html と同一のレイアウト・外観を再現
+   ================================================================ */
+
+/* --- リセット・基本 --- */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  font-family: "Meiryo", "Yu Gothic", "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+a { color: #cf142b !important; font-weight: bold !important; }
+img { max-width: 100%; height: auto; }
+
+/* --- ページヘッダー（PDF専用：サイトヘッダーの代わり） --- */
+.pdf-page-header {
+  background: #fff;
+  border-bottom: 2px solid #cf142b;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pdf-page-header .ricoh-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #cf142b;
+  letter-spacing: 0.05em;
+}
+.pdf-page-header .pdf-label {
+  font-size: 11px;
+  color: #666;
+  margin-left: auto;
+}
+
+/* --- メインコンテナ --- */
+.c-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --- パンくず --- */
+.pdf-breadcrumb {
+  font-size: 11px;
+  color: #666;
+  padding: 8px 24px;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 0;
+}
+
+/* --- h1 タイトルブロック --- */
+.c-h1-b {
+  background: #fff;
+  padding: 0;
+}
+.c-h1-b__text {
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1.4;
+  margin: 0;
+  padding: 24px 0 16px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.c-margin-b { margin-bottom: 0; }
+.c-margin-b__inner { }
+
+/* 重要アイコン */
+.icon_important img { width: 36px; height: auto; vertical-align: middle; }
+.ic_important--inline { display: inline-block; }
+.ic_important--inline img { width: 20px; height: auto; vertical-align: middle; }
+.attentionForTitle {
+  font-size: 11px;
+  color: #666;
+  margin-top: 4px;
+  padding: 4px 0;
+}
+
+/* --- セクション --- */
+.fxb-section { }
+.c-section { }
+.f-child { }
+
+/* --- 日付エリア（cp-NewsDate） --- */
+.cp-NewsDate {
+  padding: 12px 0;
+}
+.clm1 { }
+.clm {
+  margin-bottom: 0;
+}
+.cp-NewsDate dl { margin: 0; padding: 0; }
+.cp-NewsDate dt { display: none; }
+.cp-NewsDate dd {
+  margin: 0 0 2px 0;
+  font-size: 13px;
+  color: #333;
+}
+
+/* --- sct_bg01 セクション背景 --- */
+.sct_bg01 {
+  background: #fff;
+  padding: 16px 0;
+}
+.cnt_max {
+  max-width: 100%;
+}
+
+/* --- lead_wrap: 本文左 + 右サイドバー --- */
+.lead_wrap {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.lead__left {
+  flex: 1;
+  min-width: 0;
+}
+.lead__right {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+/* --- 右サイドバーの ul/li（脆弱性情報IDなど） --- */
+.lead__right > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #c9c9c9;
+  border-radius: 2px;
+}
+.lead__right > ul > li {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 12px;
+}
+.lead__right > ul > li:last-child {
+  border-bottom: none;
+}
+.li__left {
+  background: #f0f0f0;
+  padding: 8px 10px;
+  min-width: 110px;
+  font-weight: normal;
+  color: #555;
+  flex-shrink: 0;
+}
+.li__right {
+  padding: 8px 10px;
+  word-break: break-all;
+  flex: 1;
+}
+
+/* CVSSスコア 重要度バッジ（vul.html と同一） */
+.fc__critical { color: #c00; font-weight: bold; }
+.fc__high     { color: #e07000; font-weight: bold; }
+.fc__medium   { color: #b8900a; }
+.fc__low      { color: #333; }
+.fc__         { }
+
+/* 重要度ラベル（バッジ）スタイル */
+.c-label {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: bold;
+  color: #fff;
+  vertical-align: middle;
+  margin-left: 6px;
+  text-transform: uppercase;
+}
+.c-label--critical { background: #c00; }
+.c-label--high     { background: #e07000; }
+.c-label--medium   { background: #1565c0; }
+.c-label--low      { background: #555; }
+.c-label--none     { background: #888; }
+
+/* CVE / JVN リンク */
+.cveList { display: inline; }
+.cweWrap { display: block; margin-bottom: 2px; }
+.cweid   { margin-left: 4px; }
+.jvnid   { display: block; margin-bottom: 2px; }
+
+/* --- 本文左エリア（v1/v2 explanation） --- */
+.lead { margin-bottom: 8px; }
+.lead p { margin: 0 0 8px; }
+
+/* --- 表（c-table） --- */
+.c-table {
+  overflow-x: auto;
+}
+.c-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.c-table th,
+.c-table td {
+  border: 1px solid #aaa;
+  padding: 8px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+.c-table thead th {
+  background: #d0d0d0;
+  font-weight: normal;
+  text-align: center;
+}
+.c-table__col--w20p { width: 20%; }
+.al_c { text-align: center !important; }
+.al_l { text-align: left !important; }
+
+/* --- hd05 見出し（表1タイトル等） --- */
+.hd05 {
+  font-size: 15px;
+  font-weight: bold;
+  border-left: 4px solid #cf142b;
+  padding: 2px 0 2px 10px;
+  margin: 20px 0 10px;
+}
+
+/* --- お問い合わせ --- */
+.vul_contactTitle {
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+.marginBottom24px { margin-bottom: 24px; }
+.clm1 { }
+
+/* URL ボックス */
+.bg_f3 {
+  background: #f5f5f5;
+}
+.pd8  { padding: 8px; }
+.mb16 { margin-bottom: 16px; }
+.block__authenticityGuarantee {
+  display: block;
+  word-break: break-all;
+  font-size: 12px;
+}
+
+/* 謝辞・更新履歴 */
+.lead__right .update-history { font-size: 12px; }
+
+/* ---- v2 追加スタイル（vul.html inline CSS そのまま） ---- */
+
+.vul2-cveList {
+  list-style: none;
+  margin-top: 4px !important;
+  margin-bottom: 14px !important;
+  padding-left: 1em !important;
+}
+.vul2-cveList li {
+  position: relative;
+  padding-left: 0.8em !important;
+  margin-bottom: 4px !important;
+  font-size: inherit !important;
+  color: #333 !important;
+}
+.vul2-cveList li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+}
+.vul2-cveList a {
+  color: #333 !important;
+  font-weight: normal !important;
+  text-decoration: none !important;
+  pointer-events: none !important;
+  cursor: default !important;
+}
+/* お問合せタイルは赤リンクにしない */
+a.vul2-contact-tile {
+  color: #333 !important;
+  font-weight: normal !important;
+}
+.vul2-cveList a::before,
+.vul2-cveList a::after {
+  content: none !important;
+  display: none !important;
+}
+
+.vul2-cell,
+.vul2-cell *:not(a):not(a *) {
+  font-size: inherit !important;
+  color: #333 !important;
+}
+.vul2-cell a {
+  color: unset;
+  font-size: inherit !important;
+}
+.vul2-sub-text {
+  margin-top: 10px !important;
+  margin-left: 1em !important;
+  padding-left: 0 !important;
+  font-size: 12px !important;
+  color: #666 !important;
+}
+
+.vul2-detail-section {
+  margin-bottom: 14px;
+}
+.vul2-detail-section:last-child {
+  margin-bottom: 0;
+}
+.vul2-detail-title {
+  font-weight: bold !important;
+  margin-bottom: 6px !important;
+  padding-left: 1em;
+  position: relative;
+}
+.vul2-detail-title::before {
+  content: "・";
+  position: absolute;
+  left: 0;
+}
+
+.vul2-group-label {
+  font-size: 12px !important;
+  color: #666 !important;
+  margin: 8px 0 4px !important;
+}
+
+.vul2-prod-name {
+  font-weight: normal !important;
+  font-size: inherit !important;
+  color: #333 !important;
+  vertical-align: middle !important;
+  text-align: left !important;
+  background-color: #d0d0d0 !important;
+}
+#vulinfoApp td.vul2-prod-name {
+  vertical-align: middle !important;
+  text-align: left !important;
+}
+
+.vul2-versionTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4px;
+  margin-bottom: 6px;
+  table-layout: fixed;
+}
+.vul2-version-indent {
+  padding-left: 1em;
+}
+.vul2-versionTable th,
+.vul2-versionTable td {
+  border: 1px solid #999 !important;
+  padding: 6px 8px !important;
+  text-align: left !important;
+  vertical-align: middle !important;
+  word-break: break-word !important;
+  background: none !important;
+  color: #333 !important;
+}
+.vul2-versionTable th {
+  background: #d0d0d0 !important;
+  font-weight: normal !important;
+  white-space: nowrap;
+  width: 30%;
+  text-align: center !important;
+}
+.vul2-versionGroupCell {
+  background: #f8f8f8 !important;
+  color: #666 !important;
+}
+.vul2-versionCheck { margin-top: 6px; }
+
+.vul2-links {
+  list-style: none;
+  margin: 4px 0 0 0;
+  padding: 0;
+}
+.vul2-links li { margin-bottom: 2px; }
+
+.vul2-contact-tile::before,
+.vul2-contact-tile::after {
+  content: none !important;
+  display: none !important;
+}
+.vul2-contact-tile {
+  display: grid !important;
+  grid-template-columns: 80px 1fr 36px !important;
+  align-items: center !important;
+  margin-top: 12px !important;
+  border: 1px solid #c9c9c9 !important;
+  border-radius: 4px !important;
+  background: #fff !important;
+  text-decoration: none !important;
+  color: #333 !important;
+  max-width: 320px !important;
+}
+.vul2-contact-tile__icon {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 4px !important;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+.vul2-contact-tile__icon img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+.vul2-contact-tile__text {
+  padding: 15px !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  color: #333 !important;
+}
+.vul2-contact-tile__arrow {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding-right: 8px !important;
+}
+
+#vulinfoApp table:not(.vul2-versionTable) th,
+#vulinfoApp table:not(.vul2-versionTable) td {
+  border: 1px solid #888 !important;
+}
+#vulinfoApp table:not(.vul2-versionTable) {
+  border-collapse: collapse !important;
+}
+
+.vul2-notes {
+  list-style: none !important;
+  margin: 0 !important;
+  margin-top: 0 !important;
+  padding: 0 !important;
+  padding-left: 1em !important;
+}
+.vul2-notes li {
+  list-style: none !important;
+  position: relative !important;
+  padding-left: 1.2em !important;
+  margin-bottom: 2px !important;
+}
+.vul2-notes li::before {
+  content: "○" !important;
+  position: absolute !important;
+  left: 0 !important;
+  font-size: 0.8em !important;
+  line-height: 1.8 !important;
+}
+
+/* c-link-a: 外部リンクの装飾 */
+.c-link-a--blank img { display: none !important; }
+/* vul2-sub-text 内のリンクに > プレフィックス（vul.html と同一） */
+.vul2-sub-text a::before { content: "> "; }
+
+/* --- 出力日時 --- */
+.pdf-generated-at {
+  font-size: 11px;
+  color: #888;
+  text-align: right;
+  padding: 4px 0 8px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 0;
+}
+
+/* --- エラー表示 --- */
+.error-box {
+  color: #c00;
+  padding: 12px;
+  border: 1px solid #c00;
+  margin: 20px 0;
+}
+.not-found-box {
+  color: #666;
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+/* ---- PDF 印刷設定 ---- */
+@page {
+  size: A4;
+  margin: 15mm 12mm 18mm;
+}
+@media print {
+  body { font-size: 11pt; }
+  .c-link-a--blank img { display: none !important; }
+  .vul2-contact-tile { page-break-inside: avoid; }
+  .c-table table { page-break-inside: auto; }
+  .c-table tr { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- PDF専用ヘッダー -->
+<div class="pdf-page-header">
+  <span class="ricoh-name">RICOH</span>
+  <span style="font-size:13px; color:#333;">セキュリティ &gt; プロダクトセキュリティ &gt; 脆弱性情報</span>
+  <span class="pdf-label" id="generatedAt"></span>
+</div>
+
+<!-- Vue.js 2 アプリ（vul.html と同じ #vulinfoApp 構造） -->
+<div class="c-container" id="vulinfoApp" v-cloak>
+
+  <!-- エラー / 未発見 -->
+  <div v-if="loadError" class="error-box">読み込みに失敗しました: {{ loadError }}</div>
+  <div v-else-if="notFound" class="not-found-box">
+    指定されたデータが見つかりませんでした（ID: {{ qid }}）。
+  </div>
+
+  <template v-else-if="item">
+    <!-- タイトル -->
+    <div class="c-h1-b" id="pagetitle">
+      <div class="c-margin-b">
+        <div class="c-margin-b__inner">
+          <h1 class="c-h1-b__text">
+            <span class="icon_important" v-if="item.importance==='Important'">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="18" cy="18" r="18" fill="#cf142b"/>
+                <text x="18" y="24" text-anchor="middle" font-size="18" font-weight="bold" fill="#fff" font-family="sans-serif">!</text>
+              </svg>
+            </span>
+            <span class="vulTitle">{{item.title}}</span>
+          </h1>
+          <div class="attentionForTitle" v-if="item.importance==='Important'">
+            ※タイトルの前に付いた <strong>!</strong> は、リコーの製品・サービスにとって重要なお知らせを示しています。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 本体 -->
+    <div class="fxb-section">
+      <section class="c-section" id="section01">
+        <div class="f-child">
+          <div class="c-margin-b">
+            <div class="c-margin-b__inner">
+              <div class="c-text-a">
+
+                <!-- 日時 -->
+                <div class="cp-NewsDate cnt_max">
+                  <div class="clm1">
+                    <div class="clm">
+                      <dl>
+                        <dt class="dsp_n"></dt>
+                        <dd v-if="item.version !='1.00E' && item.version !='1.00J'">
+                          <strong>最終更新日時: {{item.lastUpdate}}</strong>
+                        </dd>
+                        <dd>
+                          <strong>公開日時: {{item.firstEdition}}</strong>
+                        </dd>
+                        <dd>{{item.company}}</dd>
+                      </dl>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 本文 + 右サイドバー -->
+                <div class="sct_bg01">
+                  <div class="cnt_max">
+                    <div class="clm">
+                      <div class="lead_wrap">
+
+                        <!-- 左：本文 -->
+                        <!-- v1 -->
+                        <div class="lead__left" v-if="item.docVersion !== '2.0'" v-html="item.explanation">
+                        </div>
+                        <!-- v2 -->
+                        <div class="lead__left" v-if="item.docVersion === '2.0'">
+                          <div class="lead">
+                            <template v-if="item.status === 'urgent'">
+                              <p>弊社製品・サービスに影響する脆弱性が確認されました。お客様においては早急な対応をお願いします。</p>
+                            </template>
+                            <template v-else-if="item.status === 'investigating'">
+                              <p>弊社製品・サービスへの影響について調査中です。</p>
+                            </template>
+                            <template v-else-if="item.status === 'confirmed'">
+                              <p>日頃より弊社製品をご愛用いただき、誠にありがとうございます。このたび、弊社が開発・製造し、日本国内にて販売する表1に記載の製品・サービスにおいて、以下の脆弱性による影響が確認されました。</p>
+                            </template>
+                            <ul v-if="item.cveList && item.cveList.length > 0" class="vul2-cveList">
+                              <li v-for="cveItem in item.cveList">
+                                {{cveItem.id}}<template v-if="cveItem.label">: {{cveItem.label}}</template>
+                              </li>
+                            </ul>
+                          </div>
+                          <div v-if="item.impact"            v-html="item.impact"></div>
+                          <div v-if="item.caution"           v-html="item.caution"></div>
+                          <div v-if="item.interimMeasure"    v-html="item.interimMeasure"></div>
+                          <div v-if="item.permanentMeasure"  v-html="item.permanentMeasure"></div>
+                          <div v-if="item.investigatingNote" v-html="item.investigatingNote"></div>
+                        </div>
+
+                        <!-- 右：情報サイドバー -->
+                        <div class="lead__right">
+                          <ul>
+                            <li>
+                              <div class="li__left">脆弱性情報ID</div>
+                              <div class="li__right">{{item.id}}</div>
+                            </li>
+                            <li>
+                              <div class="li__left">バージョン</div>
+                              <div class="li__right">{{item.version}}</div>
+                            </li>
+                            <li>
+                              <div class="li__left">CVE ID(CWE ID)</div>
+                              <div class="li__right">
+                                <span v-for="cveItem in item.cve" class="cweWrap">
+                                  <template v-if="cveItem.url !=''">
+                                    <a class="cveList c-link-a c-link-a--blank icon-hidden" target="_blank" v-bind:href="cveItem.url">
+                                      <span class="c-link-a__text">{{cveItem.id}}</span>
+                                    </a>
+                                  </template>
+                                  <template v-else>{{cveItem.id}}</template>
+                                  <template v-if="cveItem.cwe.length > 0">（
+                                    <template v-for="cweItem in cveItem.cwe">
+                                      <template v-if="cweItem.url !=''">
+                                        <span class="cweid">
+                                          <a target="_blank" v-bind:href="cweItem.url" class="c-link-a c-link-a--blank">
+                                            <span class="c-link-a__text">{{cweItem.id}}</span>
+                                          </a>
+                                        </span>
+                                      </template>
+                                      <template v-else>
+                                        <span class="cweid">{{cweItem.id}}</span>
+                                      </template>
+                                    </template>）</template>
+                                  <template v-else>(N/A)</template>
+                                </span>
+                              </div>
+                            </li>
+                            <li v-if="item.jvn.length>0">
+                              <div class="li__left">JVN登録番号</div>
+                              <div class="li__right">
+                                <span v-for="jvnItem in item.jvn" class="jvnid">
+                                  <template v-if="jvnItem.url !=''">
+                                    <a target="_blank" v-bind:href="jvnItem.url" class="c-link-a c-link-a--blank">
+                                      <span class="c-link-a__text">{{jvnItem.id}}</span>
+                                    </a>
+                                  </template>
+                                  <template v-else>{{jvnItem.id}}</template>
+                                </span>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="li__left">CVSSv3スコア（基本値）</div>
+                              <div class="li__right">{{item.cvss}}
+                                <span v-if="item.severity!=''" v-bind:class="'c-label c-label--'+item.severity">{{item.severity.toUpperCase()}}</span>
+                              </div>
+                            </li>
+                            <template v-if="item.status !=''">
+                              <li>
+                                <div class="li__left">全体的調査・対応状況</div>
+                                <div class="li__right">{{item.status}}</div>
+                              </li>
+                            </template>
+                          </ul>
+                        </div>
+                        <!-- /lead__right -->
+
+                      </div><!-- /lead_wrap -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 表1：事業分野テーブル + 製品テーブル -->
+                <div class="sct_bg01">
+                  <div class="cnt_max">
+                    <!-- 事業分野（v2のbusinessFields） -->
+                    <template v-if="item.businessFields && (item.businessFields.length > 0 || item.list1Title !='')">
+                      <div class="clm">
+                        <h2 class="hd05" v-if="item.list1Title !=''">{{item.list1Title}}</h2>
+                        <div class="c-table c-table--scrollX">
+                          <table data-sp-table-width="640">
+                            <colgroup>
+                              <col class="c-table__col--w20p">
+                              <col class="c-table__col--w20p">
+                              <col class="c-table__col--w20p">
+                              <col>
+                            </colgroup>
+                            <thead>
+                              <tr>
+                                <th style="width:20%;" class="al_c">事業分野</th>
+                                <th style="width:20%;" class="al_c">製品カテゴリー</th>
+                                <th style="width:20%;" class="al_c">サブカテゴリー</th>
+                                <th>影響・調査状況</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <template v-for="(bField, bFieldIndex) in item.businessFields">
+                                <template v-for="(category, categoryIndex) in bField.categories">
+                                  <template v-for="(subcategory, subcategoryIndex) in category.subCategories">
+                                    <tr>
+                                      <td class="al_l" v-if="categoryIndex==0 && subcategoryIndex==0" v-bind:rowspan="bField.count">{{bField.name}}</td>
+                                      <td class="al_l" v-if="subcategory.name!='' && subcategoryIndex==0" v-bind:rowspan="category.count">{{category.name}}</td>
+                                      <td class="al_l" v-if="subcategory.name==''" colspan="2">{{category.name}}</td>
+                                      <td class="al_l" v-if="subcategory.name!=''">{{subcategory.name}}</td>
+                                      <td class="al_l">{{subcategory.status}}</td>
+                                    </tr>
+                                  </template>
+                                </template>
+                              </template>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </template>
+
+                    <!-- 製品テーブル -->
+                    <template v-if="item.products && (item.products.length > 0 || item.list2Title !='')">
+                      <div class="clm">
+                        <h2 class="hd05" v-if="item.list2Title !=''">{{item.list2Title}}</h2>
+                        <template v-if="item.products.length > 0">
+                          <div class="c-table c-table--scrollX">
+                            <table data-sp-table-width="640">
+                              <!-- v1 製品テーブル -->
+                              <template v-if="item.docVersion !== '2.0'">
+                                <colgroup>
+                                  <col class="c-table__col--w20p">
+                                  <col>
+                                </colgroup>
+                                <thead>
+                                  <tr>
+                                    <th style="width:20%;" class="al_c">製品・サービス</th>
+                                    <th>詳細情報ページ</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <template v-for="product in item.products">
+                                    <tr>
+                                      <th class="al_l">{{product.name}}</th>
+                                      <td class="al_l" v-html="product.id"></td>
+                                    </tr>
+                                  </template>
+                                </tbody>
+                              </template>
+                              <!-- v2 製品テーブル -->
+                              <template v-if="item.docVersion === '2.0'">
+                                <colgroup>
+                                  <col style="width:28%">
+                                  <col>
+                                </colgroup>
+                                <thead>
+                                  <tr>
+                                    <th class="al_c">製品・サービス</th>
+                                    <th class="al_c">詳細</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <template v-for="product in item.products">
+                                    <tr>
+                                      <td class="al_l vul2-prod-name">{{product.name}}</td>
+                                      <td class="al_l vul2-cell">
+                                        <div class="vul2-detail-section">
+                                          <div class="vul2-detail-title">対象バージョン</div>
+                                          <div class="vul2-version-indent">
+                                            <template v-for="vg in product.versions">
+                                              <p v-if="vg.group" class="vul2-group-label">{{vg.group}}</p>
+                                              <table class="vul2-versionTable">
+                                                <thead><tr><th>構成要素</th><th>バージョン</th></tr></thead>
+                                                <tbody>
+                                                  <tr v-for="row in vg.rows">
+                                                    <td class="vul2-component">{{row.component}}</td>
+                                                    <td>{{row.version}}</td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </template>
+                                          </div>
+                                          <p v-if="product.versionCheck" class="vul2-sub-text">
+                                            <a :href="product.versionCheck.url" target="_blank">{{product.versionCheck.text}}</a>
+                                          </p>
+                                        </div>
+                                        <div class="vul2-detail-section" v-if="product.countermeasure">
+                                          <div class="vul2-detail-title">対処方法</div>
+                                          <div class="vul2-version-indent" v-html="product.countermeasure.text"></div>
+                                          <template v-if="product.countermeasure.links && product.countermeasure.links.length > 0">
+                                            <p v-for="lnk in product.countermeasure.links" class="vul2-sub-text">
+                                              <a :href="lnk.url" target="_blank">{{lnk.text}}</a>
+                                            </p>
+                                          </template>
+                                        </div>
+                                        <div class="vul2-detail-section" v-if="product.notes && product.notes.length > 0">
+                                          <div class="vul2-detail-title">特記事項</div>
+                                          <ul class="vul2-notes">
+                                            <li v-for="note in product.notes">{{note.text}}</li>
+                                          </ul>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </template>
+                                </tbody>
+                              </template>
+                            </table>
+                          </div>
+                        </template>
+                        <template v-else-if="item.list2Title !=''">データがありません。</template>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+
+                <!-- お問い合わせ / 謝辞 / 更新履歴 / URL -->
+                <div class="sct_bg01">
+                  <div class="cnt_max">
+                    <hr>
+                    <div class="clm1 marginBottom24px">
+                      <div class="clm">
+                        <div>
+                          <strong class="vul_contactTitle">本件に関するお問合せ先</strong>
+                          <div v-if="item.docVersion !== '2.0'" v-html="item.contact"></div>
+                          <div v-if="item.docVersion === '2.0' && item.contact">
+                            <div v-if="item.contact.text" v-html="item.contact.text"></div>
+                            <template v-if="item.contact.links && item.contact.links.length > 0">
+                              <a :href="item.contact.links[0].url" target="_blank" class="vul2-contact-tile">
+                                <div class="vul2-contact-tile__icon">
+                                  <!-- imageUrl があれば画像を試みる。読み込み失敗時はSVGにフォールバック -->
+                                  <template v-if="item.contact.links[0].imageUrl">
+                                    <img :src="item.contact.links[0].imageUrl" alt=""
+                                      style="width:100%;height:100%;object-fit:cover;"
+                                      @error="$event.target.style.display='none'; $event.target.nextElementSibling.style.display='flex'">
+                                    <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;background:#f0f4f8;">
+                                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="24" height="24" rx="4" fill="#1565c0"/>
+                                        <path d="M4 8h16M4 12h10M4 16h8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                                      </svg>
+                                    </div>
+                                  </template>
+                                  <template v-else>
+                                    <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f0f4f8;">
+                                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="24" height="24" rx="4" fill="#1565c0"/>
+                                        <path d="M4 8h16M4 12h10M4 16h8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+                                      </svg>
+                                    </div>
+                                  </template>
+                                </div>
+                                <div class="vul2-contact-tile__text">{{item.contact.links[0].text}}</div>
+                                <div class="vul2-contact-tile__arrow">
+                                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 4l8 8-8 8" stroke="#cf142b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                </div>
+                              </a>
+                            </template>
+                          </div>
+                          <br>
+                          <template v-if="item.thanks !=''">
+                            <strong>謝辞:</strong>
+                            <br>
+                            <div v-html="item.thanks"></div>
+                            <br>
+                          </template>
+                          <strong v-if="item.history && item.history.length > 0">更新履歴:</strong>
+                          <br>
+                          <template v-for="historyItem in item.history">
+                            <span>{{(historyItem.updatedAt || historyItem.date) ? formatDate(historyItem.updatedAt || historyItem.date) + ' ' : ''}}{{historyItem.version}}{{historyItem.changes ? ' ' + historyItem.changes : ''}}</span><br>
+                          </template>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="clm" v-if="item.url !='' || item.authenticityGuarantee !=''">
+                      <div class="bg_f3 pd8 mb16">
+                        <p>
+                          <template v-if="item.url != ''">
+                            <span class="block__authenticityGuarantee">
+                              <strong>本ページのURL:</strong>
+                              <br>{{item.url}}</span>
+                          </template>
+                          <template v-if="item.authenticityGuarantee != ''">
+                            <span class="block__authenticityGuarantee">{{item.authenticityGuarantee}}</span>
+                          </template>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div><!-- /c-text-a -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </template>
+
+</div><!-- /#vulinfoApp -->
+
+<script>
+(function () {
+  'use strict';
+
+  // 出力日時をヘッダーに表示
+  var now = new Date();
+  var pad = function(n) { return String(n).padStart(2, '0'); };
+  var generatedStr = now.getFullYear() + '年' + pad(now.getMonth()+1) + '月' + pad(now.getDate()) + '日 '
+    + now.getHours() + '時' + pad(now.getMinutes()) + '分 出力';
+  var el = document.getElementById('generatedAt');
+  if (el) el.textContent = generatedStr;
+
+  // ISO8601 → 日本語表示に変換（例: "2026-05-11T12:00:00+09:00" → "2026年05月11日"）
+  function formatDateJa(iso) {
+    if (!iso) return '';
+    var m = iso.match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!m) return iso;
+    return m[1] + '年' + m[2] + '月' + m[3] + '日';
+  }
+
+  // URLパラメータ解析
+  function getParam(name) {
+    var q = location.search.substring(1);
+    for (var pair of q.split('&')) {
+      var kv = pair.split('=');
+      if (decodeURIComponent(kv[0]) === name) return decodeURIComponent(kv[1] || '');
+    }
+    return '';
+  }
+
+  var lang = getParam('lang') || 'ja';
+  var id   = getParam('id');
+
+  // Vue 3 createApp
+  Vue.createApp({
+    data: function() {
+      return {
+        item: null,
+        loadError: null,
+        notFound: false,
+        qid: id,
+      };
+    },
+    methods: {
+      formatDate: function(iso) { return formatDateJa(iso); },
+    },
+    mounted: function () {
+      var self = this;
+      if (!id) {
+        self.loadError = 'id パラメータがありません。';
+        return;
+      }
+      fetch('/vulinfo.json?lang=' + encodeURIComponent(lang) + '&id=' + encodeURIComponent(id))
+        .then(function (r) {
+          if (r.status === 404) { self.notFound = true; return null; }
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function (data) {
+          if (!data) return;
+          // 後方互換: docVersion がなければ "1.0" 扱い
+          if (!data.docVersion) data.docVersion = '1.0';
+          if (!data.cveList) data.cveList = [];
+          if (!data.jvn) data.jvn = [];
+          if (!data.history) data.history = [];
+          if (data.thanks === undefined) data.thanks = '';
+          if (data.url === undefined) data.url = '';
+          if (data.authenticityGuarantee === undefined) data.authenticityGuarantee = '';
+          if (data.status === undefined) data.status = '';
+
+          // --- productStatus の正規化（v2 JSON スキーマ対応） ---
+          // productStatus 配下の businessFields / list2Title / products を
+          // トップレベルに展開する
+          var ps = data.productStatus || {};
+          if (!data.businessFields) {
+            data.businessFields = ps.businessFields || [];
+          }
+          if (!data.list1Title) {
+            data.list1Title = ps.list1Title || '';
+          }
+          if (!data.list2Title) {
+            data.list2Title = ps.list2Title || '';
+          }
+          if (!data.products) {
+            data.products = ps.products || [];
+          }
+
+          // --- cve フィールドの正規化 ---
+          // v2 JSONは top-level に cve がなく cveList のみ持つ。
+          // サイドバー表示用に cveList → cve（同じ構造）へコピーする。
+          // また既存の cve 配列でも cwe が undefined の場合を補完する。
+          if (!data.cve || data.cve.length === 0) {
+            data.cve = data.cveList.map(function(c) {
+              return { id: c.id, url: c.url || '', cwe: c.cwe || [] };
+            });
+          } else {
+            // cwe フィールドが欠落している場合を補完
+            data.cve = data.cve.map(function(c) {
+              return { id: c.id, url: c.url || '', cwe: c.cwe || [] };
+            });
+          }
+
+          // --- contact の正規化 ---
+          // v2 JSON: contact = { text, links: [{text, url}], imageUrl }
+          // links が未定義の場合に備えて空配列を補完
+          if (data.contact) {
+            if (!data.contact.links) data.contact.links = [];
+          }
+
+          // --- severity を小文字に正規化（CSSクラス fc__medium に合わせる） ---
+          if (data.severity) {
+            data.severity = data.severity.toLowerCase();
+          }
+
+          // --- 日付を日本語表示に変換 ---
+          // publishedAt / updatedAt (v2) または firstEdition / lastUpdate (v1) を
+          // "YYYY年MM月DD日" 形式に正規化する。
+          // v2: publishedAt / updatedAt が ISO8601 文字列
+          // v1: firstEdition / lastUpdate が "(YYYY-MM-DD...)" 等の文字列の場合もある
+          var fe = formatDateJa(data.publishedAt) || formatDateJa(data.firstEdition) || data.firstEdition || '';
+          var lu = formatDateJa(data.updatedAt)   || formatDateJa(data.lastUpdate)   || data.lastUpdate   || '';
+          data.firstEdition = fe;
+          data.lastUpdate   = lu;
+
+          self.item = data;
+          document.title = data.title || '脆弱性情報詳細';
+        })
+        .catch(function (e) {
+          self.loadError = String(e);
+        });
+    },
+  }).mount('#vulinfoApp');
+})();
+</script>
+</body>
+</html>

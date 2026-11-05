@@ -1,0 +1,16 @@
+# secAdvisoryTool 設定ファイル
+#
+# このファイルを「secAdvisoryTool.toml」にリネームして使用してください。
+# 配置場所:
+#   - カレントディレクトリ、または
+#   - secAdvisoryTool.exe と同じディレクトリ
+
+# JSON ファイルの出力先ルートディレクトリ
+# --output オプションで上書き可能
+output_dir = "C:/path/to/vuls.ricoh.com"
+
+# 設定例（Windows パス）:
+# output_dir = "C:/Users/r00456463/Desktop/RPSM改善/vuls.ricoh.com"
+#
+# 設定例（相対パス）:
+# output_dir = "../vuls.ricoh.com"

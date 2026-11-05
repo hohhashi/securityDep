@@ -1,0 +1,106 @@
+body {
+  font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+  margin: 24px;
+  color: #222;
+  font-size: 13px;
+}
+
+h1 {
+  font-size: 18px;
+  border-bottom: 2px solid #333;
+  padding-bottom: 8px;
+}
+
+.meta {
+  color: #666;
+  font-size: 11px;
+  margin-bottom: 16px;
+}
+
+.id-badge {
+  display: inline-block;
+  font-family: monospace;
+  background: #eef2f7;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-bottom: 12px;
+}
+
+dl.detail-fields {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  row-gap: 6px;
+  column-gap: 12px;
+  margin: 16px 0;
+}
+dl.detail-fields dt {
+  font-weight: bold;
+  color: #555;
+}
+dl.detail-fields dd {
+  margin: 0;
+}
+
+.severity {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 11px;
+}
+.severity-critical { background: #b00020; }
+.severity-high      { background: #d9534f; }
+.severity-medium    { background: #e08a00; }
+.severity-low       { background: #6c757d; }
+
+.important-mark {
+  color: #b00020;
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.cve-item, .jvn-item {
+  display: block;
+  white-space: nowrap;
+}
+
+.empty {
+  color: #888;
+}
+
+.error-box, .not-found-box {
+  border: 1px solid #b00020;
+  background: #fdecea;
+  color: #b00020;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+table.children-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 20px;
+}
+table.children-table th, table.children-table td {
+  border: 1px solid #ccc;
+  padding: 6px 8px;
+  text-align: left;
+  vertical-align: top;
+  font-size: 12px;
+}
+table.children-table th {
+  background: #eef2f7;
+}
+
+h2.section-title {
+  font-size: 14px;
+  margin-top: 24px;
+  border-left: 4px solid #1d4f91;
+  padding-left: 8px;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 14mm;
+}
