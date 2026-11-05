@@ -255,9 +255,18 @@ var app = new Vue({
             }
           }
 
-          // v2 では contact は {text, link: {text, url, imageUrl?}} オブジェクト
-          // テンプレート側で item.contact.text / item.contact.link を参照
-          // imageUrl は省略可。指定するとリンクが画像カード表示になり、リンク切れ時はテキストリンクにフォールバック
+          // v2 では contact は {text, links: [{text, url}], imageUrl} オブジェクト
+          // テンプレート側で item.contact.text / item.contact.link を参照するため
+          // links[] → link（単数）に変換する
+          if (d.contact) {
+            var clinks = d.contact.links || [];
+            var cl0 = clinks[0] || {};
+            d.contact.link = {
+              text:     cl0.text     || "",
+              url:      cl0.url      || "",
+              imageUrl: cl0.imageUrl || d.contact.imageUrl || ""
+            };
+          }
 
           // isLocal のとき versionCheck.url / countermeasure.links[].url をローカライズ
           if (isLocal) {
@@ -319,9 +328,13 @@ var app = new Vue({
           // v1: contact は HTML 文字列のまま
         }
 
-        // history の date フィールド
+        // history の date フィールド（ISO8601 → "YYYY年MM月DD日" に変換）
         for (var hi = 0; hi < d.history.length; hi++) {
-          d.history[hi]["date"] = d.history[hi]["updatedAt"];
+          var rawDate = d.history[hi]["updatedAt"] || d.history[hi]["date"] || "";
+          var parsedDate = rawDate ? new Date(Date.parse(rawDate)) : null;
+          d.history[hi]["date"] = parsedDate && !isNaN(parsedDate)
+            ? dayjs(parsedDate).format('YYYY年MM月DD日')
+            : rawDate;
         }
 
         // 本ページのURL のホスト名を動作中のホストに置き換え（ローカルは .html も補完）
