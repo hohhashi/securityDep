@@ -396,136 +396,9 @@ var app = new Vue({
       }, 600);
     };
 
-    let isLocal = (document.location.hostname == "127.0.0.1"
-        || document.location.hostname == "stg-prv-wrc.scms.jp.ricoh.com"
-        || document.location.hostname == "stg-prv-jrc.scms.jp.ricoh.com");
-    function localizeProductUrl(url) {
-      if (!isLocal) return url;
-      return url
-        .replace(/\/vul(\?|$)/, "/vul.html$1")
-        .replace(/\/adv(\?|$)/, "/adv.html$1")
-        .replace(/\/product(\?|$)/, "/product.html$1")
-        .replace(/\/list_products(\?|$)/, "/list_products.html$1");
-    }
     //データロード
-    var PRODUCT_IDB_NAME = "vulinfoFolderHandleDB";
-    var PRODUCT_IDB_STORE = "handles";
-    var PRODUCT_IDB_KEY = "vulsRicohRoot";
-    function openProductHandleDB() {
-      return new Promise(function (resolve, reject) {
-        var req = indexedDB.open(PRODUCT_IDB_NAME, 1);
-        req.onupgradeneeded = function () {
-          req.result.createObjectStore(PRODUCT_IDB_STORE);
-        };
-        req.onsuccess = function () { resolve(req.result); };
-        req.onerror = function () { reject(req.error); };
-      });
-    }
-    function saveProductRootHandle(handle) {
-      return openProductHandleDB().then(function (db) {
-        return new Promise(function (resolve, reject) {
-          var tx = db.transaction(PRODUCT_IDB_STORE, "readwrite");
-          tx.objectStore(PRODUCT_IDB_STORE).put(handle, PRODUCT_IDB_KEY);
-          tx.oncomplete = function () { resolve(); };
-          tx.onerror = function () { reject(tx.error); };
-        });
-      });
-    }
-    function loadSavedProductRootHandle() {
-      return openProductHandleDB().then(function (db) {
-        return new Promise(function (resolve, reject) {
-          var tx = db.transaction(PRODUCT_IDB_STORE, "readonly");
-          var req = tx.objectStore(PRODUCT_IDB_STORE).get(PRODUCT_IDB_KEY);
-          req.onsuccess = function () { resolve(req.result || null); };
-          req.onerror = function () { reject(req.error); };
-        });
-      });
-    }
-    function waitForUserClickToSelectFolderProduct(message) {
-      return new Promise(function (resolve, reject) {
-        var btn = document.createElement("button");
-        btn.textContent = message;
-        btn.style.position = "fixed";
-        btn.style.top = "10px";
-        btn.style.left = "10px";
-        btn.style.zIndex = "9999";
-        btn.style.padding = "10px 16px";
-        btn.style.fontSize = "14px";
-        btn.onclick = function () {
-          btn.remove();
-          resolve();
-        };
-        document.body.appendChild(btn);
-      });
-    }
-    function pickAndSaveFolderProduct() {
-      return waitForUserClickToSelectFolderProduct("ローカルのvuls.ricoh.comフォルダを選択")
-        .then(function () {
-          return window.showDirectoryPicker({ id: "vulsRicohRoot", mode: "read" });
-        })
-        .then(function (handle) {
-          window.__vulsRicohRootHandle = handle;
-          return saveProductRootHandle(handle).then(function () { return handle; });
-        });
-    }
-    function getVulsRicohRootHandleProduct() {
-      if (window.__vulsRicohRootHandle) {
-        return Promise.resolve(window.__vulsRicohRootHandle);
-      }
-      if (!window.showDirectoryPicker) {
-        return Promise.reject(new Error("File System Access API is not supported in this browser"));
-      }
-      return loadSavedProductRootHandle()
-        .catch(function () { return null; })
-        .then(function (savedHandle) {
-          if (!savedHandle) {
-            return pickAndSaveFolderProduct();
-          }
-          return savedHandle.queryPermission({ mode: "read" })
-            .then(function (status) {
-              if (status === "granted") {
-                window.__vulsRicohRootHandle = savedHandle;
-                return savedHandle;
-              }
-              return waitForUserClickToSelectFolderProduct("vuls.ricoh.comフォルダへのアクセスを許可")
-                .then(function () {
-                  return savedHandle.requestPermission({ mode: "read" });
-                })
-                .then(function (result) {
-                  if (result === "granted") {
-                    window.__vulsRicohRootHandle = savedHandle;
-                    return savedHandle;
-                  }
-                  return pickAndSaveFolderProduct();
-                });
-            })
-            .catch(function () {
-              return pickAndSaveFolderProduct();
-            });
-        });
-    }
-    function loadProductDataViaFolderHandle() {
-      return getVulsRicohRootHandleProduct()
-        .then(function (rootHandle) {
-          return rootHandle.getDirectoryHandle("ja");
-        })
-        .then(function (jaHandle) {
-          return jaHandle.getDirectoryHandle("prodinfo");
-        })
-        .then(function (prodinfoHandle) {
-          return prodinfoHandle.getFileHandle(self.jsonid + ".json");
-        })
-        .then(function (fileHandle) {
-          return fileHandle.getFile();
-        })
-        .then(function (file) {
-          return file.text();
-        })
-        .then(function (text) {
-          return { data: JSON.parse(text) };
-        });
-    }
-    (isLocal ? loadProductDataViaFolderHandle() : axios.get(fileName))
+    axios
+      .get(fileName)
       .then(function(response) {
         self.item = response.data;
         console.log(fileName);
@@ -535,9 +408,7 @@ var app = new Vue({
 
         for(i=0; i<self.allItems.length; i++){
           //リンク先
-          self.allItems[i]["linkUrl"] = localizeProductUrl(
-            "/security/products/vulnerabilities/adv?id=" + self.allItems[i].id
-          );
+          self.allItems[i]["linkUrl"] = "/security/products/vulnerabilities/adv?id=" +  self.allItems[i].id;
           //最終更新日
           tempLastUpdate = self.allItems[i]["updatedAt"];
           let days = tempLastUpdate.split('+');

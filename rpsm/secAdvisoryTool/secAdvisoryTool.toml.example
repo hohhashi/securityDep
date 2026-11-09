@@ -14,3 +14,238 @@ output_dir = "C:/path/to/vuls.ricoh.com"
 #
 # 設定例（相対パス）:
 # output_dir = "../vuls.ricoh.com"
+
+# ================================================================
+# 製品カテゴリマスタ
+# sync-products / export-products のドロップダウン生成に使用
+# カテゴリ・サブカテゴリを追加・変更した場合はここを編集してください
+# ================================================================
+
+# ---- 日本語 (ja) ----
+
+[[product_categories]]
+lang = "ja"
+area = "オフィスプロダクツ"
+
+  [[product_categories.categories]]
+  name = "デジタル複合機"
+  sub_categories = [
+    "デジタルフルカラー複合機",
+    "デジタルモノクロ複合機",
+    "デジタル広幅複合機",
+    "再生機（リコンディショニング機）",
+  ]
+
+  [[product_categories.categories]]
+  name = "プリンター"
+  sub_categories = [
+    "カラーレーザープリンター",
+    "モノクロレーザープリンター",
+    "プリンター複合機",
+    "ジェルジェットプリンター",
+    "ハンディープリンター",
+  ]
+
+  [[product_categories.categories]]
+  name = "複合機・プリンター拡張機能"
+  sub_categories = ["認証管理", "入力管理", "出力管理", "管理サポート"]
+
+  [[product_categories.categories]]
+  name = "ソフトウェア"
+  sub_categories = ["ドキュメント管理", "出力管理", "機器・ログ管理", "ユーティリティ"]
+
+  [[product_categories.categories]]
+  name = "ファクシミリ"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "デジタル印刷機"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "プロジェクター"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "テレビ会議・Web会議システム"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "インタラクティブホワイトボード"
+  sub_categories = []
+
+[[product_categories]]
+lang = "ja"
+area = "ビジネスサービス"
+
+  [[product_categories.categories]]
+  name = "コミュニケーション"
+  sub_categories = [
+    "RICOH eWhiteboard（大型電子ペーパー）",
+    "デジタルサイネージ",
+    "リモートコンシェルジュ（遠隔接客）",
+    "RICOHスマート予約サービス（会議室予約管理）",
+  ]
+
+[[product_categories]]
+lang = "ja"
+area = "商用・産業プリンティング"
+
+  [[product_categories.categories]]
+  name = "オンデマンドプリンター"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "高速連続用紙インクジェット・プリンティング"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "基幹プリンティング"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "ガーメントプリンター"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "ソフトウェア"
+  sub_categories = [
+    "RICOH Clickable Paper",
+    "RICOH TotalFlow Web to Print Service",
+    "RICOH FusionPro VDP CREATOR/FusionPro Expression",
+    "RICOH InfoPrint® Font Collection",
+  ]
+
+# ---- 英語 (en) ----
+
+[[product_categories]]
+lang = "en"
+area = "Office Products"
+
+  [[product_categories.categories]]
+  name = "Multifunction Printers/Copiers"
+  sub_categories = ["Black & White MFP", "Color MFP", "Wide Format MFP"]
+
+  [[product_categories.categories]]
+  name = "Printers"
+  sub_categories = [
+    "Black & White Laser Printers",
+    "Color Laser Printers",
+    "Gel Jet Printers",
+  ]
+
+  [[product_categories.categories]]
+  name = "FAX"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Digital Duplicators"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Projectors"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Video Conferencing"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Interactive Whiteboards"
+  sub_categories = []
+
+[[product_categories]]
+lang = "en"
+area = "Remote Communication Gates"
+
+  [[product_categories.categories]]
+  name = "Remote Communication Gate A2"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Remote Communication Gate A"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Remote Communication Gate Type N/L/BN1/BM1"
+  sub_categories = []
+
+[[product_categories]]
+lang = "en"
+area = "Software & Solutions"
+
+  [[product_categories.categories]]
+  name = "Card Authentication Package Series"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Device Manager NX Accounting"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Device Manager NX Lite"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Docuware"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "GlobalScan NX"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Enhanced Locked Print Series"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Printer Driver Packager NX"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "@Remote Connector NX"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Ricoh Smart Integration (RSI) Platform and its applications"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "RICOH Print Management Cloud"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "RICOH Streamline NX V2"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "RICOH Streamline NX V3"
+  sub_categories = []
+
+[[product_categories]]
+lang = "en"
+area = "Commercial & Industrial Printing"
+
+  [[product_categories.categories]]
+  name = "Cut sheet Printers"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Wide Format Printers"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Continuous Feed"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Garment Printer"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Digital Painting"
+  sub_categories = []
+
+  [[product_categories.categories]]
+  name = "Commercial & Industrial Printing Software"
+  sub_categories = []

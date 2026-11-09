@@ -427,135 +427,10 @@ var app = new Vue({
     let date = String(nowdate.getDate());
     let random = String(Math.floor( Math.random() * 11 ));
     let dateParam = year+mon+date+random;
-    let fileName;
-    let isLocal = (document.location.hostname == "127.0.0.1"
-        || document.location.hostname == "stg-prv-wrc.scms.jp.ricoh.com"
-        || document.location.hostname == "stg-prv-jrc.scms.jp.ricoh.com");
-    fileName = "https://vuls.ricoh.com/ja/vulinfolist.json?" + dateParam;
-    function localizeVulUrl(url) {
-      if (!isLocal) return url;
-      return url
-        .replace(/\/vul(\?|$)/, "/vul.html$1")
-        .replace(/\/adv(\?|$)/, "/adv.html$1")
-        .replace(/\/product(\?|$)/, "/product.html$1")
-        .replace(/\/list_products(\?|$)/, "/list_products.html$1");
-    }
-    //データロード
-    var VULINFO_IDB_NAME = "vulinfoFolderHandleDB";
-    var VULINFO_IDB_STORE = "handles";
-    var VULINFO_IDB_KEY = "vulsRicohRoot";
-    function openVulinfoHandleDB() {
-      return new Promise(function (resolve, reject) {
-        var req = indexedDB.open(VULINFO_IDB_NAME, 1);
-        req.onupgradeneeded = function () {
-          req.result.createObjectStore(VULINFO_IDB_STORE);
-        };
-        req.onsuccess = function () { resolve(req.result); };
-        req.onerror = function () { reject(req.error); };
-      });
-    }
-    function saveVulinfoRootHandle(handle) {
-      return openVulinfoHandleDB().then(function (db) {
-        return new Promise(function (resolve, reject) {
-          var tx = db.transaction(VULINFO_IDB_STORE, "readwrite");
-          tx.objectStore(VULINFO_IDB_STORE).put(handle, VULINFO_IDB_KEY);
-          tx.oncomplete = function () { resolve(); };
-          tx.onerror = function () { reject(tx.error); };
-        });
-      });
-    }
-    function loadSavedVulinfoRootHandle() {
-      return openVulinfoHandleDB().then(function (db) {
-        return new Promise(function (resolve, reject) {
-          var tx = db.transaction(VULINFO_IDB_STORE, "readonly");
-          var req = tx.objectStore(VULINFO_IDB_STORE).get(VULINFO_IDB_KEY);
-          req.onsuccess = function () { resolve(req.result || null); };
-          req.onerror = function () { reject(req.error); };
-        });
-      });
-    }
-    function waitForUserClickToSelectFolder(message) {
-      return new Promise(function (resolve, reject) {
-        var btn = document.createElement("button");
-        btn.textContent = message;
-        btn.style.position = "fixed";
-        btn.style.top = "10px";
-        btn.style.left = "10px";
-        btn.style.zIndex = "9999";
-        btn.style.padding = "10px 16px";
-        btn.style.fontSize = "14px";
-        btn.onclick = function () {
-          btn.remove();
-          resolve();
-        };
-        document.body.appendChild(btn);
-      });
-    }
-    function pickAndSaveFolder() {
-      return waitForUserClickToSelectFolder("ローカルのvuls.ricoh.comフォルダを選択")
-        .then(function () {
-          return window.showDirectoryPicker({ id: "vulsRicohRoot", mode: "read" });
-        })
-        .then(function (handle) {
-          window.__vulsRicohRootHandle = handle;
-          return saveVulinfoRootHandle(handle).then(function () { return handle; });
-        });
-    }
-    function getVulsRicohRootHandle() {
-      if (window.__vulsRicohRootHandle) {
-        return Promise.resolve(window.__vulsRicohRootHandle);
-      }
-      if (!window.showDirectoryPicker) {
-        return Promise.reject(new Error("File System Access API is not supported in this browser"));
-      }
-      return loadSavedVulinfoRootHandle()
-        .catch(function () { return null; })
-        .then(function (savedHandle) {
-          if (!savedHandle) {
-            return pickAndSaveFolder();
-          }
-          return savedHandle.queryPermission({ mode: "read" })
-            .then(function (status) {
-              if (status === "granted") {
-                window.__vulsRicohRootHandle = savedHandle;
-                return savedHandle;
-              }
-              return waitForUserClickToSelectFolder("vuls.ricoh.comフォルダへのアクセスを許可")
-                .then(function () {
-                  return savedHandle.requestPermission({ mode: "read" });
-                })
-                .then(function (result) {
-                  if (result === "granted") {
-                    window.__vulsRicohRootHandle = savedHandle;
-                    return savedHandle;
-                  }
-                  return pickAndSaveFolder();
-                });
-            })
-            .catch(function () {
-              return pickAndSaveFolder();
-            });
-        });
-    }
-    function loadVulListDataViaFolderHandle() {
-      return getVulsRicohRootHandle()
-        .then(function (rootHandle) {
-          return rootHandle.getDirectoryHandle("ja");
-        })
-        .then(function (jaHandle) {
-          return jaHandle.getFileHandle("vulinfolist.json");
-        })
-        .then(function (fileHandle) {
-          return fileHandle.getFile();
-        })
-        .then(function (file) {
-          return file.text();
-        })
-        .then(function (text) {
-          return { data: JSON.parse(text) };
-        });
-    }
-    (isLocal ? loadVulListDataViaFolderHandle() : axios.get(fileName))
+    let fileName = "https://vuls.ricoh.com/ja/vulinfolist.json?"+dateParam;
+    //let fileName = "/-/Media/Ricoh/Sites/jp_ricoh/security/products/vulnerabilities/data/vulinfolist.json?"+dateParam;
+    axios
+      .get(fileName)
       .then(function(response) {
         let tempData = response.data;
         //表示用データ作成
@@ -572,9 +447,7 @@ var app = new Vue({
           let tempFirstTime = tempFirstEdition.substring(tempFirstEdition.length - 6);
           self.allItems[i]["firstEdition"] = tempFirstDate + tempFirstTime;
           //リンクURL
-          self.allItems[i]["linkUrl"] = localizeVulUrl(
-            "/security/products/vulnerabilities/vul?id=" + self.allItems[i].id
-          );
+          self.allItems[i]["linkUrl"] = "/security/products/vulnerabilities/vul?id=" + self.allItems[i].id;
           //self.allItems[i]["linkUrl"] = "vul?id=" + self.allItems[i].id;
         }
         //オプションの配列の順序をソート

@@ -3,7 +3,7 @@
 use std::path::PathBuf;
 
 use clap::{Parser, Subcommand, ValueEnum};
-use secadvisory_core::{config, run_create, run_delete, run_export_products, run_sync_products, run_update};
+use secadvisory_core::{config, run_create, run_delete, run_export_products, run_sync_products, run_update, run_update_template};
 
 #[derive(Parser)]
 #[command(name = "secAdvisoryTool")]
@@ -53,7 +53,7 @@ enum Commands {
         #[arg(long, short = 'o')]
         output: Option<PathBuf>,
     },
-    /// prodinfolist.json の内容を Excel ファイルに出力する。
+    /// prodinfolist.json の内容を Excel ファイル（製品リスト_export.xlsx）に出力する。
     ExportProducts {
         /// JSON ファイルが置かれているルートディレクトリ
         /// （省略時は secAdvisoryTool.toml の output_dir、それも未設定の場合はカレントディレクトリ）
@@ -61,19 +61,31 @@ enum Commands {
         output: Option<PathBuf>,
 
         /// 出力先 Excel ファイルのパス
-        /// （省略時は {output_dir}/採番済機種リスト_export.xlsx）
+        /// （省略時は {output_dir}/製品リスト_export.xlsx）
         #[arg(long, short = 'd')]
         dest: Option<PathBuf>,
     },
-    /// 採番済機種リスト(日)/(英) を読み込み、prodinfolist.json と prodinfo/ を更新する。
+    /// 製品リスト(日)/(英) を読み込み、prodinfolist.json を完全置換する。
+    /// 入力ファイルは export-products で出力した Excel（不要行を削除したもの）。
     SyncProducts {
-        /// 採番済機種リストを含む Excel ファイルのパス
+        /// 製品リストを含む Excel ファイルのパス（export-products 出力を加工したもの）
         #[arg(long, short = 's')]
         source: PathBuf,
 
         /// JSON ファイルの出力先ルートディレクトリ
         #[arg(long, short = 'o')]
         output: Option<PathBuf>,
+    },
+    /// アドバイザリ入力シート_v2.xlsx に事業・カテゴリ・サブカテゴリの連動プルダウンを埋め込む。
+    /// リストは secAdvisoryTool.toml の product_categories から生成する。
+    UpdateTemplate {
+        /// 元のアドバイザリ入力シート_v2.xlsx のパス
+        #[arg(long, short = 's')]
+        source: PathBuf,
+
+        /// 出力先 xlsx のパス（省略時は source を上書き）
+        #[arg(long, short = 'd')]
+        dest: Option<PathBuf>,
     },
     /// アドバイザリの ID と脆弱性名の一覧を表示する。
     List {
@@ -169,6 +181,17 @@ fn main() {
                 }
             }
         }
+        Commands::UpdateTemplate { source, dest } => {
+            match run_update_template(source, dest.as_deref()) {
+                Ok(p) => {
+                    println!("出力 : {}", normalize_path(&p));
+                }
+                Err(e) => {
+                    eprintln!("エラー: {}", e);
+                    std::process::exit(1);
+                }
+            }
+        }
         Commands::ExportProducts { output, dest } => {
             let out = resolve_output(output.as_ref());
             let dest_path = dest.as_deref();
@@ -232,20 +255,7 @@ fn main() {
         }
         Commands::Delete { target, output } => {
             let out = resolve_output(output.as_ref());
-            // 欠番にするか対話プロンプトで確認する
-            let make_gap = {
-                use std::io::{self, Write};
-                println!("削除後、この ID を欠番にしますか？");
-                println!("  y = 欠番にする（以後この番号はスキップされる）");
-                println!("  N = 欠番にしない（次回の採番でこの番号が再利用される）[デフォルト]");
-                print!("選択 (y/N): ");
-                io::stdout().flush().ok();
-                let mut line = String::new();
-                io::stdin().read_line(&mut line).ok();
-                line.trim().eq_ignore_ascii_case("y")
-            };
-            println!("→ {}", if make_gap { "欠番にする" } else { "欠番にしない（番号を再利用）" });
-            match run_delete(target, &out, make_gap) {
+            match run_delete(target, &out) {
                 Ok(r) if r.deleted.is_empty() && r.updated_lists.is_empty() && r.updated_prodinfo.is_empty() => {
                     eprintln!(
                         "警告: ID '{}' に対応するファイルが見つかりませんでした。",
@@ -261,11 +271,6 @@ fn main() {
                     }
                     for p in &r.updated_prodinfo {
                         println!("更新 : {}", normalize_path(p));
-                    }
-                    if make_gap {
-                        println!("欠番 : {} を欠番として記録しました（再利用されません）", r.id);
-                    } else {
-                        println!("採番 : {} は次回の create で再利用されます", r.id);
                     }
                 }
                 Err(e) => {

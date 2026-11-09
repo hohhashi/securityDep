@@ -1,7 +1,7 @@
 @echo off
 if exist ".vscode" rmdir /s /q ".vscode"
 if exist "www.ricoh.com" rmdir /s /q "www.ricoh.com"
-rem HAR?????Å˜?Å ????curl?R?}???h????
+rem HAR?????ÔøΩÔøΩ?ÔøΩÔøΩ????curl?R?}???h????
 rem www.ricoh.com - 2026/11/04
 rem URL???p?X??????????????t?H???_???????????????
 rem ???s: download_vuln_list.bat
@@ -13,7 +13,7 @@ if not exist "www.ricoh.com\-\Media\Ricoh\Common\cmn_v3\img" mkdir "www.ricoh.co
 curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_v3\img\icon_anchor_top.svg" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://www.ricoh.com/-/Media/Ricoh/Common/cmn_v3/img/icon_anchor_top.svg"
 
 if not exist "www.ricoh.com\products\security" mkdir "www.ricoh.com\products\security"
-curl -L -o "www.ricoh.com\products\security\vulnerabilities" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://www.ricoh.com/products/security/vulnerabilities"
+curl -L -o "www.ricoh.com\products\security\vulnerabilities.html" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://www.ricoh.com/products/security/vulnerabilities"
 
 if not exist "www.ricoh.com\layouts\system" mkdir "www.ricoh.com\layouts\system"
 curl -L -o "www.ricoh.com\layouts\system\VisitorIdentification.js" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://www.ricoh.com/layouts/system/VisitorIdentification.js"

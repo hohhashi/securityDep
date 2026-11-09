@@ -178,18 +178,20 @@ pub struct ProdAdvisoryEntry {
     pub updated_at: String,
 }
 
-// ---- 採番済機種リスト 1 行分 ----
+// ---- 製品リスト 1 行分 ----
 
-/// 採番済機種リスト(日)/(英) の 1 行分。
+/// 製品リスト(日)/(英) の 1 行分。
+/// prod_id は prodinfolist.json 側のみで管理する。
+/// Excel（テンプレート・export-products 出力とも）には prod_id 列を持たない。
+/// 製品の同一性は (lang, area, category, sub_category, product_name) の複合キーで判定する。
 #[derive(Debug, Clone)]
 pub struct ProductListRow {
-    pub prod_id: String,
-    pub lang: String,       // "日本語" or "英語"
-    pub area: String,       // 事業
-    pub category: String,   // カテゴリ
+    pub lang: String,         // "日本語" or "英語"
+    pub area: String,         // 事業
+    pub category: String,     // カテゴリ
     pub sub_category: String, // サブカテゴリ
     pub product_name: String, // 製品・サービス名
-    pub dev_name: String,   // 開発名
+    pub dev_name: String,     // 補足（開発名など）: 参考情報のみ、処理には使わない
 }
 
 /// `{lang}/vulinfolist.json` の1件分のエントリ。

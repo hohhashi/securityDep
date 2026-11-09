@@ -402,9 +402,7 @@ pub fn read_advisory(excel_path: &Path, id: &str) -> Result<AdvisoryOutput, Exce
 
     let cvss     = vul_opt(&info, "CVSSv3スコア（基本値）").unwrap_or_default();
     let severity = cvss_to_severity(&cvss);
-    let status_raw = vul_opt(&info, "全体的調査・対応状況").unwrap_or_default();
-    let status_ja  = map_status_ja(status_raw.as_str());
-    let status_en  = map_status_en(status_raw.as_str());
+    let status   = map_status(vul_opt(&info, "全体的調査・対応状況").unwrap_or_default().as_str());
     let published_at = to_iso(vul_opt(&info, "公開日時").unwrap_or_default().as_str());
 
     // 更新日時は更新履歴の最新行から取得
@@ -439,7 +437,7 @@ pub fn read_advisory(excel_path: &Path, id: &str) -> Result<AdvisoryOutput, Exce
             cvss: cvss.clone(),
             severity: severity.clone(),
             jvn: jvn_list.clone(),
-            status: status_ja.clone(),
+            status: status.clone(),
             impact:             wrap_p(&vul_opt(&info, "影響(日)").unwrap_or_default()),
             caution:            wrap_p(&vul_opt(&info, "注意事項(日)").unwrap_or_default()),
             interim_measure:    wrap_p(&vul_opt(&info, "暫定対応策(日)").unwrap_or_default()),
@@ -491,7 +489,7 @@ pub fn read_advisory(excel_path: &Path, id: &str) -> Result<AdvisoryOutput, Exce
             cvss: cvss.clone(),
             severity: severity.clone(),
             jvn: jvn_list.clone(),
-            status: status_en.clone(),
+            status: status.clone(),
             impact:             wrap_p(&vul_opt(&info, "影響(英)").unwrap_or_default()),
             caution:            wrap_p(&vul_opt(&info, "注意事項(英)").unwrap_or_default()),
             interim_measure:    wrap_p(&vul_opt(&info, "暫定対応策(英)").unwrap_or_default()),
@@ -526,22 +524,11 @@ fn cvss_to_severity(cvss: &str) -> String {
     }
 }
 
-/// ja JSON 用: 日本語表示値をそのまま使う
-fn map_status_ja(s: &str) -> String {
+fn map_status(s: &str) -> String {
     match s.trim() {
-        "調査済"  | "confirmed"     => "調査済".to_string(),
-        "調査中"  | "investigating" => "調査中".to_string(),
-        "影響なし" | "not-affected"  => "影響なし".to_string(),
-        other => other.to_string(),
-    }
-}
-
-/// en JSON 用: 英語キー値を使う
-fn map_status_en(s: &str) -> String {
-    match s.trim() {
-        "調査済"  | "confirmed"     => "confirmed".to_string(),
-        "調査中"  | "investigating" => "investigating".to_string(),
-        "影響なし" | "not-affected"  => "not-affected".to_string(),
+        "調査済" => "confirmed".to_string(),
+        "調査中" => "investigating".to_string(),
+        "影響なし" => "not-affected".to_string(),
         other => other.to_string(),
     }
 }
@@ -558,14 +545,18 @@ pub fn read_published_year(excel_path: &Path) -> Result<String, ExcelError> {
     }
 }
 
-/// 採番済機種リスト(日) / 採番済機種リスト(英) を読み取り、ProductListRow の Vec を返す。
+/// 製品リスト(日) / 製品リスト(英) を読み取り、ProductListRow の Vec を返す。
 ///
-/// 列構成: A=prod_id  B=言語  C=事業  D=カテゴリ  E=サブカテゴリ  F=製品・サービス名  G=開発名
-/// どちらのシートも同じ列構成。存在しないシートはスキップする。
+/// 列構成（テンプレート・export-products 出力とも同じ）:
+///   A=言語  B=事業  C=カテゴリ  D=サブカテゴリ  E=製品・サービス名  F=補足（参考・非表示）
+///
+/// prod_id 列は存在しない。製品の同一性は複合キーで管理する。
+/// ヘッダー行は A列が "言語" / "Language" なのでスキップ。
+/// 存在しないシートはスキップする。
 pub fn read_product_list(excel_path: &Path) -> Result<Vec<ProductListRow>, ExcelError> {
     let mut rows: Vec<ProductListRow> = Vec::new();
 
-    for sheet_name in &["採番済機種リスト(日)", "採番済機種リスト(英)"] {
+    for sheet_name in &["製品リスト(日)", "製品リスト(英)"] {
         let sheet_rows = match read_raw_sheet(excel_path, sheet_name) {
             Ok(r) => r,
             Err(ExcelError::TableNotFound(_)) => continue, // シートが無ければスキップ
@@ -573,24 +564,22 @@ pub fn read_product_list(excel_path: &Path) -> Result<Vec<ProductListRow>, Excel
         };
 
         for row in sheet_rows {
-            let prod_id = row.get(0).cloned().unwrap_or_default();
-            if prod_id.is_empty() || prod_id.starts_with('（') || prod_id.starts_with('(') {
+            // A列(インデックス0)で言語を判定。ヘッダー行はスキップ
+            let lang_cell = row.get(0).cloned().unwrap_or_default();
+            if lang_cell == "言語" || lang_cell == "Language" || lang_cell.is_empty() {
                 continue;
             }
-            // "prod" + 6桁以上の数字 でなければヘッダーや説明行 → スキップ
-            // 例: "prod000020", "prod900029" はOK、"prod_id" はスキップ
-            let id_body = prod_id.trim_start_matches("prod");
-            if !id_body.chars().all(|c| c.is_ascii_digit()) || id_body.len() < 6 {
+            let product_name = row.get(4).cloned().unwrap_or_default();
+            if product_name.is_empty() {
                 continue;
             }
             rows.push(ProductListRow {
-                prod_id,
-                lang:         row.get(1).cloned().unwrap_or_default(),
-                area:         row.get(2).cloned().unwrap_or_default(),
-                category:     row.get(3).cloned().unwrap_or_default(),
-                sub_category: row.get(4).cloned().unwrap_or_default(),
-                product_name: row.get(5).cloned().unwrap_or_default(),
-                dev_name:     row.get(6).cloned().unwrap_or_default(),
+                lang:         lang_cell,
+                area:         row.get(1).cloned().unwrap_or_default(),
+                category:     row.get(2).cloned().unwrap_or_default(),
+                sub_category: row.get(3).cloned().unwrap_or_default(),
+                product_name,
+                dev_name:     row.get(5).cloned().unwrap_or_default(),
             });
         }
     }
@@ -598,20 +587,30 @@ pub fn read_product_list(excel_path: &Path) -> Result<Vec<ProductListRow>, Excel
     Ok(rows)
 }
 
-/// TblAdvisory{ja|en} の各行から製品名を読み取り、
-/// 採番済機種リストから prod_id を引いた結果を返す。
+
+/// TblAdvisoryJa / TblAdvisoryEn それぞれの製品名一覧を返す。
 ///
-/// 返り値: Vec<(prod_id, product_name)>
-/// 採番済機種リストに存在しない製品名があった場合は prod_id が空文字になる
-/// （呼び出し側でバリデーションエラーにする）。
-fn read_product_ids_from_table(
+/// 返り値: (ja_names, en_names) — 各要素は Vec<String>（製品・サービス名）。
+/// prod_id の解決は呼び出し側が prodinfolist.json を参照して行う。
+pub fn read_advisory_product_names(
+    excel_path: &Path,
+) -> Result<(Vec<String>, Vec<String>), ExcelError> {
+    let ja_names = read_product_names_from_table(excel_path, "TblAdvisoryJa")?;
+    let en_names = read_product_names_from_table(excel_path, "TblAdvisoryEn")?;
+    Ok((ja_names, en_names))
+}
+
+/// TblAdvisory* テーブルから製品名のみ抽出する。
+fn read_product_names_from_table(
     excel_path: &Path,
     tbl_name: &str,
-    name_to_id: &HashMap<String, String>,
-) -> Result<Vec<(String, String)>, ExcelError> {
-    let adv_rows = read_table_rows(excel_path, tbl_name)?;
+) -> Result<Vec<String>, ExcelError> {
+    let adv_rows = match read_table_rows(excel_path, tbl_name) {
+        Ok(r) => r,
+        Err(ExcelError::TableNotFound(_)) => return Ok(Vec::new()),
+        Err(e) => return Err(e),
+    };
     let mut result = Vec::new();
-
     for row in &adv_rows {
         let no_str = get(row, "No.");
         if no_str.is_empty() || no_str.starts_with('(') || no_str.starts_with('（') {
@@ -619,57 +618,11 @@ fn read_product_ids_from_table(
         }
         let no: u32 = no_str.parse().unwrap_or(0);
         if no == 0 { continue; }
-
         let product_name = get(row, "製品・サービス名");
         if product_name.is_empty() { continue; }
-
-        // 1. 採番済機種リストから製品名→prod_id を引く
-        let mut prod_id = name_to_id.get(&product_name).cloned().unwrap_or_default();
-
-        // 2. 見つからない場合はバージョン確認URLの ?id=ricoh-prodXXXXXX から抽出する
-        //    例: https://...?id=ricoh-prod000263 → "prod000263"
-        if prod_id.is_empty() {
-            let check_url = get(row, "バージョン確認方法URL");
-            if !check_url.is_empty() {
-                if let Some(id_part) = check_url.split("?id=ricoh-").nth(1) {
-                    let extracted = id_part.split('&').next().unwrap_or("").trim().to_string();
-                    if extracted.starts_with("prod") {
-                        prod_id = extracted;
-                    }
-                }
-            }
-        }
-
-        result.push((prod_id, product_name));
+        result.push(product_name);
     }
-
     Ok(result)
-}
-
-/// TblAdvisoryJa / TblAdvisoryEn それぞれの製品リストを返す。
-///
-/// 返り値: (ja_pairs, en_pairs)
-/// 各要素は Vec<(prod_id, product_name)>。
-/// prod_id が空文字の場合は採番済機種リストに存在しない（バリデーションエラー対象）。
-pub fn read_advisory_product_ids(
-    excel_path: &Path,
-) -> Result<(Vec<(String, String)>, Vec<(String, String)>), ExcelError> {
-    let all_products = read_product_list(excel_path)?;
-
-    // 言語別に 製品名→prod_id マップを作成
-    let ja_map: HashMap<String, String> = all_products.iter()
-        .filter(|r| !r.lang.contains("英語"))
-        .map(|r| (r.product_name.clone(), r.prod_id.clone()))
-        .collect();
-    let en_map: HashMap<String, String> = all_products.iter()
-        .filter(|r| r.lang.contains("英語"))
-        .map(|r| (r.product_name.clone(), r.prod_id.clone()))
-        .collect();
-
-    let ja_pairs = read_product_ids_from_table(excel_path, "TblAdvisoryJa", &ja_map)?;
-    let en_pairs = read_product_ids_from_table(excel_path, "TblAdvisoryEn", &en_map)?;
-
-    Ok((ja_pairs, en_pairs))
 }
 
 // ---- シート直接読み取り（テーブルなしシート用） ----
