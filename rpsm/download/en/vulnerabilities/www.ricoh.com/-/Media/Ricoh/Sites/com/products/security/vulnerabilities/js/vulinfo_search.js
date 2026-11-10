@@ -2,7 +2,7 @@
 
 if (document.location.protocol == "file:") {
   alert(
-    "ファイル直アクセスだと動きません。サーバーを起動してアクセスしてください"
+    "Direct file access is not supported. Please start a server and access via HTTP."
   );
 }
 
@@ -26,6 +26,7 @@ var app = new Vue({
     filterByKeyword:"",
     filterBySeverity:"",
     filterByCVE:"",
+    filterByJVN:"",
     filterByInitialDate:"",
     filterByLastUpDate:"",
     items: [], //表示用データ
@@ -72,6 +73,7 @@ var app = new Vue({
       self.filterByKeyword = prm["keyword"];
       self.filterBySeverity = prm["severity"];
       self.filterByCVE = prm["cve"];
+      self.filterByJVN = prm["jvn"];
       self.filterByInitialDate = prm["publish"];
       self.filterByLastUpDate = prm["update"];
     },
@@ -109,6 +111,9 @@ var app = new Vue({
       }
       if(self.filterByCVE!=""){
         self.hashNotIncludePage += "&cve=" + self.filterByCVE;
+      }
+      if(self.filterByJVN!=""){
+        self.hashNotIncludePage += "&jvn=" + self.filterByJVN;
       }
       if(self.filterByInitialDate!=""){
         self.hashNotIncludePage += "&publish=" + self.filterByInitialDate;
@@ -182,6 +187,7 @@ var app = new Vue({
       }else{
         tempArray_severity = tempArray_keyword;
       }
+
       //CVE
       let tempArray_cve =[];
       if(self.filterByCVE!=""){
@@ -197,11 +203,28 @@ var app = new Vue({
       }else{
         tempArray_cve = tempArray_severity;
       }
+
+      //JVN
+      let tempArray_jvn =[];
+      if(self.filterByJVN!=""){
+        for (let i = 0; i < tempArray_cve.length; i++) {
+          let tempItem = tempArray_cve[i];
+          for (let s = 0; s < tempItem["jvn"].length; s++) {
+            if(tempItem["jvn"][s]["id"].includes(self.filterByJVN)){
+              tempArray_jvn.push(tempItem);
+              break;
+            }
+          }
+        }
+      }else{
+        tempArray_jvn = tempArray_cve;
+      }
+
       //PUBLISH
       let tempArray_publish =[];
       if(self.filterByInitialDate!=""){
-        for (let i = 0; i < tempArray_cve.length; i++) {
-          let tempItem = tempArray_cve[i];
+        for (let i = 0; i < tempArray_jvn.length; i++) {
+          let tempItem = tempArray_jvn[i];
           let tempUnixConditionBefore = new Date(Date.parse(self.filterByInitialDate+"-01"));
           tempUnixConditionBefore = tempUnixConditionBefore.getTime();
           let tempUnixConditionAfter = new Date(Date.parse(self.filterByInitialDate+"-01"));
@@ -218,9 +241,8 @@ var app = new Vue({
           }
         }
       }else{
-        tempArray_publish = tempArray_cve;
+        tempArray_publish = tempArray_jvn;
       }
-
 
       //UPDATE
       let tempArray_update =[];
@@ -329,7 +351,7 @@ var app = new Vue({
   mounted: function() {
     const self = this;
     self.checkHash();
-    
+
     let offsetVar = $("#vulinfoApp").offset();
     let scrollPost = offsetVar.top;
     //Hash監視
@@ -362,10 +384,135 @@ var app = new Vue({
     let date = String(nowdate.getDate());
     let random = String(Math.floor( Math.random() * 11 ));
     let dateParam = year+mon+date+random;
-    let fileName = "https://vuls.ricoh.com/en/vulinfolist.json?"+dateParam;
-    //let fileName = "/-/Media/Ricoh/Sites/com/products/security/vulnerabilities/data/vulinfolist.json?"+dateParam;
-    axios
-      .get(fileName)
+    let fileName;
+    let isLocal = (document.location.hostname == "127.0.0.1"
+        || document.location.hostname == "stg-prv-wrc.scms.jp.ricoh.com"
+        || document.location.hostname == "stg-prv-jrc.scms.jp.ricoh.com");
+    fileName = "https://vuls.ricoh.com/en/vulinfolist.json?" + dateParam;
+    function localizeVulUrl(url) {
+      if (!isLocal) return url;
+      return url
+        .replace(/\/vul(\?|$)/, "/vul.html$1")
+        .replace(/\/adv(\?|$)/, "/adv.html$1")
+        .replace(/\/product(\?|$)/, "/product.html$1")
+        .replace(/\/list_products(\?|$)/, "/list_products.html$1");
+    }
+    //データロード
+    var VULINFO_IDB_NAME = "vulinfoFolderHandleDB";
+    var VULINFO_IDB_STORE = "handles";
+    var VULINFO_IDB_KEY = "vulsRicohRoot";
+    function openVulinfoHandleDB() {
+      return new Promise(function (resolve, reject) {
+        var req = indexedDB.open(VULINFO_IDB_NAME, 1);
+        req.onupgradeneeded = function () {
+          req.result.createObjectStore(VULINFO_IDB_STORE);
+        };
+        req.onsuccess = function () { resolve(req.result); };
+        req.onerror = function () { reject(req.error); };
+      });
+    }
+    function saveVulinfoRootHandle(handle) {
+      return openVulinfoHandleDB().then(function (db) {
+        return new Promise(function (resolve, reject) {
+          var tx = db.transaction(VULINFO_IDB_STORE, "readwrite");
+          tx.objectStore(VULINFO_IDB_STORE).put(handle, VULINFO_IDB_KEY);
+          tx.oncomplete = function () { resolve(); };
+          tx.onerror = function () { reject(tx.error); };
+        });
+      });
+    }
+    function loadSavedVulinfoRootHandle() {
+      return openVulinfoHandleDB().then(function (db) {
+        return new Promise(function (resolve, reject) {
+          var tx = db.transaction(VULINFO_IDB_STORE, "readonly");
+          var req = tx.objectStore(VULINFO_IDB_STORE).get(VULINFO_IDB_KEY);
+          req.onsuccess = function () { resolve(req.result || null); };
+          req.onerror = function () { reject(req.error); };
+        });
+      });
+    }
+    function waitForUserClickToSelectFolder(message) {
+      return new Promise(function (resolve, reject) {
+        var btn = document.createElement("button");
+        btn.textContent = message;
+        btn.style.position = "fixed";
+        btn.style.top = "10px";
+        btn.style.left = "10px";
+        btn.style.zIndex = "9999";
+        btn.style.padding = "10px 16px";
+        btn.style.fontSize = "14px";
+        btn.onclick = function () {
+          btn.remove();
+          resolve();
+        };
+        document.body.appendChild(btn);
+      });
+    }
+    function pickAndSaveFolder() {
+      return waitForUserClickToSelectFolder("Select local vuls.ricoh.com folder")
+        .then(function () {
+          return window.showDirectoryPicker({ id: "vulsRicohRoot", mode: "read" });
+        })
+        .then(function (handle) {
+          window.__vulsRicohRootHandle = handle;
+          return saveVulinfoRootHandle(handle).then(function () { return handle; });
+        });
+    }
+    function getVulsRicohRootHandle() {
+      if (window.__vulsRicohRootHandle) {
+        return Promise.resolve(window.__vulsRicohRootHandle);
+      }
+      if (!window.showDirectoryPicker) {
+        return Promise.reject(new Error("File System Access API is not supported in this browser"));
+      }
+      return loadSavedVulinfoRootHandle()
+        .catch(function () { return null; })
+        .then(function (savedHandle) {
+          if (!savedHandle) {
+            return pickAndSaveFolder();
+          }
+          return savedHandle.queryPermission({ mode: "read" })
+            .then(function (status) {
+              if (status === "granted") {
+                window.__vulsRicohRootHandle = savedHandle;
+                return savedHandle;
+              }
+              return waitForUserClickToSelectFolder("Allow access to vuls.ricoh.com folder")
+                .then(function () {
+                  return savedHandle.requestPermission({ mode: "read" });
+                })
+                .then(function (result) {
+                  if (result === "granted") {
+                    window.__vulsRicohRootHandle = savedHandle;
+                    return savedHandle;
+                  }
+                  return pickAndSaveFolder();
+                });
+            })
+            .catch(function () {
+              return pickAndSaveFolder();
+            });
+        });
+    }
+    function loadVulListDataViaFolderHandle() {
+      return getVulsRicohRootHandle()
+        .then(function (rootHandle) {
+          return rootHandle.getDirectoryHandle("en");
+        })
+        .then(function (enHandle) {
+          return enHandle.getFileHandle("vulinfolist.json");
+        })
+        .then(function (fileHandle) {
+          return fileHandle.getFile();
+        })
+        .then(function (file) {
+          return file.text();
+        })
+        .then(function (text) {
+          return { data: JSON.parse(text) };
+        });
+    }
+    (isLocal ? loadVulListDataViaFolderHandle() : axios.get(fileName))
       .then(function(response) {
         let tempData = response.data;
         //表示用データ作成
@@ -382,12 +529,14 @@ var app = new Vue({
           let tempFirstTime = tempFirstEdition.substring(tempFirstEdition.length - 6);
           self.allItems[i]["firstEdition"] = tempFirstDate + tempFirstTime;
           //リンクURL
-          self.allItems[i]["linkUrl"] = "/products/security/vulnerabilities/vul?id=" + self.allItems[i].id;
+          self.allItems[i]["linkUrl"] = localizeVulUrl(
+            "/products/security/vulnerabilities/vul?id=" + self.allItems[i].id
+          );
         }
         //オプションの配列の順序をソート
         let tempLastUpDateAr =[];
         let tempFirstDateAr =[];
-        
+
         for(i=0; i<self.allItems.length; i++){
           //最終発行日
           tempLastUpdate = self.allItems[i]["updatedAt"];
@@ -408,13 +557,13 @@ var app = new Vue({
         tempFirstDateAr.sort();
         tempFirstDateAr.reverse();
         for(i=0; i<tempLastUpDateAr.length; i++){
-          let tempLastUpdateMonthObj = {} 
+          let tempLastUpdateMonthObj = {}
           tempLastUpdateMonthObj["text"] = tempLastUpDateAr[i];
           tempLastUpdateMonthObj["value"] = tempLastUpDateAr[i];
           self.optionsLastUpDay.push(tempLastUpdateMonthObj);
         }
         for(i=0; i<tempFirstDateAr.length; i++){
-          let tempFirstMonthObj = {} 
+          let tempFirstMonthObj = {}
           tempFirstMonthObj["text"] = tempFirstDateAr[i];
           tempFirstMonthObj["value"] = tempFirstDateAr[i];
           self.optionsInitialDay.push(tempFirstMonthObj);
@@ -457,6 +606,7 @@ function getParam() {
     var filterKeyword = "";
     var filterSeveritye = "";
     var filterCve = "";
+    var filterJvn = "";
     var filterFday = "";
     var filterLday = "";
     // 用意した配列にハッシュを格納
@@ -475,6 +625,8 @@ function getParam() {
         filterSeveritye = paramItem[1];
       } else if (paramItem[0] == "cve") {
         filterCve = paramItem[1];
+      } else if (paramItem[0] == "jvn") {
+        filterJvn = paramItem[1];
       } else if (paramItem[0] == "publish") {
         filterFday = paramItem[1];
       } else if (paramItem[0] == "update") {
@@ -488,6 +640,7 @@ function getParam() {
     prm["keyword"] = filterKeyword;
     prm["severity"] = filterSeveritye;
     prm["cve"] = filterCve;
+    prm["jvn"] = filterJvn;
     prm["publish"] = filterFday;
     prm["update"] = filterLday;
   } else {
@@ -498,6 +651,7 @@ function getParam() {
     prm["keyword"] = "";
     prm["severity"] = "";
     prm["cve"] = "";
+    prm["jvn"] = "";
     prm["publish"] = "";
     prm["update"] = "";
   }
