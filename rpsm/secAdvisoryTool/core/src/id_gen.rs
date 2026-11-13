@@ -7,6 +7,9 @@
 //!   `{output_dir}/ja/vulinfo/{YYYY}/ricoh-{YYYY}-*.json`
 //!   `{output_dir}/en/vulinfo/{YYYY}/ricoh-{YYYY}-*.json`
 //! ja / en のどちらかが存在すれば十分（両方重複カウントしない）。
+//!
+//! 欠番管理:
+//!   `{output_dir}/deleted_ids.txt` に記録された ID は採番でスキップされる。
 
 use std::collections::HashSet;
 use std::path::Path;
@@ -14,11 +17,25 @@ use std::path::Path;
 /// `{output_dir}` 配下から使用済みの番号をすべて収集して返す。
 ///
 /// 収集元:
+///   0. `deleted_ids.txt` に記録された欠番 ID
 ///   1. `ja/vulinfolist.json` / `en/vulinfolist.json` に記載された ID
 ///   2. `ja/vulinfo/{year}/` / `en/vulinfo/{year}/` のファイル名
 fn collect_used_nums(output_dir: &Path, year: &str) -> HashSet<u32> {
     let mut nums = HashSet::new();
     let prefix = format!("ricoh-{}-", year);
+
+    // 0. 欠番リスト（deleted_ids.txt）をスキップ対象に追加
+    let gap_path = output_dir.join("deleted_ids.txt");
+    if let Ok(text) = std::fs::read_to_string(&gap_path) {
+        for line in text.lines() {
+            let line = line.trim();
+            if let Some(num_str) = line.strip_prefix(&prefix) {
+                if let Ok(n) = num_str.parse::<u32>() {
+                    nums.insert(n);
+                }
+            }
+        }
+    }
 
     // 1. vulinfolist.json から ID を収集（既存データが最も確実）
     for lang in &["ja", "en"] {
@@ -67,11 +84,10 @@ fn collect_used_nums(output_dir: &Path, year: &str) -> HashSet<u32> {
 /// - `output_dir` : JSON ファイルの出力先ルートディレクトリ
 ///
 /// 現存するファイルの最大番号 + 1 を採番する。
-/// 欠番は管理しない（削除された番号は自然に再利用される）。
+/// `deleted_ids.txt` に記録された欠番はスキップされる。
 /// 戻り値: `ricoh-YYYY-NNNNNN` 形式の文字列
 pub fn next_id(output_dir: &Path, year: &str) -> String {
     let used = collect_used_nums(output_dir, year);
     let next_num = used.iter().copied().max().unwrap_or(0) + 1;
     format!("ricoh-{}-{:06}", year, next_num)
 }
-

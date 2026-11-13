@@ -138,14 +138,15 @@ fn to_iso(s: &str) -> String {
 
 // ---- CVE / JVN ----
 
-fn read_cve_list(path: &Path) -> Result<Vec<CveItem>, ExcelError> {
+fn read_cve_list(path: &Path, lang: Lang) -> Result<Vec<CveItem>, ExcelError> {
     let rows = read_table_rows(path, "TblCveList")?;
+    let label_col = if lang.has_en() && !lang.has_ja() { "ラベル(英)" } else { "ラベル(日)" };
     let mut items = Vec::new();
     for row in &rows {
         let id = get(row, "CVE ID");
         if id.is_empty() || id.starts_with('（') || id.starts_with('(') { continue; }
         let cwe_id  = get(row, "CWE ID");
-        let label   = get(row, "ラベル(日)");
+        let label   = get(row, label_col);
         let cwe = if cwe_id.is_empty() {
             vec![]
         } else {
@@ -179,23 +180,52 @@ fn read_jvn_list(path: &Path) -> Result<Vec<JvnItem>, ExcelError> {
 
 // ---- 更新履歴 ----
 
-fn read_history(path: &Path, company: &str, suffix: &str) -> Result<Vec<HistoryItem>, ExcelError> {
+/// TblVulHistory を読み、`lang` に対応する行だけ返す。
+///
+/// 「言語」列の値で行をフィルタリングする:
+///   - "日本語" → ja 出力にのみ含める
+///   - "英語"   → en 出力にのみ含める
+///   - 空欄     → 両方に含める（後方互換）
+///
+/// 変更内容は ja なら「変更内容(日)」、en なら「変更内容(英)」列を参照し、
+/// 該当列が空の場合は「変更内容(日)」にフォールバックする。
+fn read_history(path: &Path, company: &str, suffix: &str, lang: Lang) -> Result<Vec<HistoryItem>, ExcelError> {
     let rows = read_table_rows(path, "TblVulHistory")?;
+    let changes_col = if lang.has_en() && !lang.has_ja() { "変更内容(英)" } else { "変更内容(日)" };
     let mut items = Vec::new();
     for row in &rows {
         let ver = get(row, "バージョン");
         if ver.is_empty() || ver.starts_with('（') || ver.starts_with('(') { continue; }
+
+        // 言語列によるフィルタリング
+        let row_lang = get(row, "言語");
+        let include = match row_lang.trim() {
+            "日本語" => lang.has_ja(),
+            "英語"   => lang.has_en(),
+            _        => true, // 空欄は両言語に含める
+        };
+        if !include { continue; }
+
         // バージョン文字列の末尾に suffix (J/E) を付与
         let version = if ver.ends_with('J') || ver.ends_with('E') {
             ver
         } else {
             format!("{}{}", ver, suffix)
         };
+
+        // 変更内容: 指定列が空なら「変更内容(日)」にフォールバック
+        let changes_val = get(row, changes_col);
+        let changes = if changes_val.is_empty() && changes_col == "変更内容(英)" {
+            get(row, "変更内容(日)")
+        } else {
+            changes_val
+        };
+
         items.push(HistoryItem {
             updated_at: to_iso(&get(row, "更新日時")),
             version,
             company: company.to_string(),
-            changes: get(row, "変更内容"),
+            changes,
         });
     }
     Ok(items)
@@ -394,7 +424,6 @@ pub struct AdvisoryOutput {
 
 pub fn read_advisory(excel_path: &Path, id: &str) -> Result<AdvisoryOutput, ExcelError> {
     let info     = read_vul_info(excel_path)?;
-    let cve_list = read_cve_list(excel_path)?;
     let jvn_list = read_jvn_list(excel_path)?;
 
     let lang_str = vul_get(&info, "言語")?;
@@ -405,10 +434,14 @@ pub fn read_advisory(excel_path: &Path, id: &str) -> Result<AdvisoryOutput, Exce
     let status   = map_status(vul_opt(&info, "全体的調査・対応状況").unwrap_or_default().as_str());
     let published_at = to_iso(vul_opt(&info, "公開日時").unwrap_or_default().as_str());
 
+    // 言語ごとに CVE ラベル列を切り替えて読む
+    let cve_list_ja = if lang.has_ja() { read_cve_list(excel_path, Lang::Ja)? } else { vec![] };
+    let cve_list_en = if lang.has_en() { read_cve_list(excel_path, Lang::En)? } else { vec![] };
+
     // 更新日時は更新履歴の最新行から取得
     let ja_doc = if lang.has_ja() {
         let company_ja = vul_opt(&info, "発行元会社名(日)").unwrap_or_default();
-        let history_ja = read_history(excel_path, &company_ja, "J")?;
+        let history_ja = read_history(excel_path, &company_ja, "J", Lang::Ja)?;
         let updated_at = history_ja.first().map(|h| h.updated_at.clone()).unwrap_or_else(|| published_at.clone());
         let version_ja = history_ja.first().map(|h| h.version.clone()).unwrap_or_default();
         let products_ja = build_products(excel_path, "TblAdvisoryJa", "TblVersionJa", "TblNotesJa")?;
@@ -433,7 +466,7 @@ pub fn read_advisory(excel_path: &Path, id: &str) -> Result<AdvisoryOutput, Exce
             published_at: published_at.clone(),
             updated_at,
             version: version_ja,
-            cve_list: cve_list.clone(),
+            cve_list: cve_list_ja.clone(),
             cvss: cvss.clone(),
             severity: severity.clone(),
             jvn: jvn_list.clone(),
@@ -460,7 +493,7 @@ pub fn read_advisory(excel_path: &Path, id: &str) -> Result<AdvisoryOutput, Exce
 
     let en_doc = if lang.has_en() {
         let company_en = vul_opt(&info, "発行元会社名(英)").unwrap_or_default();
-        let history_en = read_history(excel_path, &company_en, "E")?;
+        let history_en = read_history(excel_path, &company_en, "E", Lang::En)?;
         let updated_at = history_en.first().map(|h| h.updated_at.clone()).unwrap_or_else(|| published_at.clone());
         let version_en = history_en.first().map(|h| h.version.clone()).unwrap_or_default();
         let products_en = build_products(excel_path, "TblAdvisoryEn", "TblVersionEn", "TblNotesEn")?;
@@ -485,7 +518,7 @@ pub fn read_advisory(excel_path: &Path, id: &str) -> Result<AdvisoryOutput, Exce
             published_at: published_at.clone(),
             updated_at,
             version: version_en,
-            cve_list: cve_list.clone(),
+            cve_list: cve_list_en,
             cvss: cvss.clone(),
             severity: severity.clone(),
             jvn: jvn_list.clone(),

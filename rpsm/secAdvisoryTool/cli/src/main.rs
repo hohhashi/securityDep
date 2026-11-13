@@ -255,6 +255,22 @@ fn main() {
         }
         Commands::Delete { target, output } => {
             let out = resolve_output(output.as_ref());
+
+            // 欠番にするか確認
+            print!(
+                "削除後、この ID を欠番にしますか？\n\
+                 y = 欠番にする（以後この番号はスキップされる）\n\
+                 N = 欠番にしない（次回の採番でこの番号が再利用される）[デフォルト]\n\
+                 選択 (y/N): "
+            );
+            {
+                use std::io::Write;
+                let _ = std::io::stdout().flush();
+            }
+            let mut input = String::new();
+            std::io::stdin().read_line(&mut input).unwrap_or(0);
+            let keep_gap = input.trim().eq_ignore_ascii_case("y");
+
             match run_delete(target, &out) {
                 Ok(r) if r.deleted.is_empty() && r.updated_lists.is_empty() && r.updated_prodinfo.is_empty() => {
                     eprintln!(
@@ -271,6 +287,23 @@ fn main() {
                     }
                     for p in &r.updated_prodinfo {
                         println!("更新 : {}", normalize_path(p));
+                    }
+                    if keep_gap {
+                        // 欠番リストに追記
+                        let gap_path = out.join("deleted_ids.txt");
+                        let line = format!("{}\n", r.id);
+                        use std::io::Write;
+                        match std::fs::OpenOptions::new().create(true).append(true).open(&gap_path) {
+                            Ok(mut f) => {
+                                let _ = f.write_all(line.as_bytes());
+                                println!("採番 : {} は欠番として保持されます（次回の create でスキップされます）", r.id);
+                            }
+                            Err(e) => {
+                                eprintln!("警告: 欠番リストへの書き込みに失敗しました: {}", e);
+                            }
+                        }
+                    } else {
+                        println!("採番 : {} は次回の create で再利用されます", r.id);
                     }
                 }
                 Err(e) => {
