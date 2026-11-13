@@ -25,7 +25,31 @@ var app = new Vue({
   el: "#vulinfoApp",
   data: {
     jsondata: "",
-    item: "",
+    item: {
+      importance: "",
+      version: "",
+      jvn: [],
+      severity: "",
+      status: "",
+      businessFields: [],
+      list1Title: "",
+      products: [],
+      list2Title: "",
+      thanks: "",
+      history: [],
+      url: "",
+      authenticityGuarantee: "",
+      // v2 fields
+      docVersion: "",
+      cveList: [],
+      cve: [],
+      impact: null,
+      caution: null,
+      interimMeasure: null,
+      permanentMeasure: null,
+      investigatingNote: null,
+      contact: null
+    },
     isError:false
   },
   methods: {
@@ -33,7 +57,7 @@ var app = new Vue({
   mounted: function() {
     var self = this;
     CheckParam.Init();
-    
+
     if(isError){
       location.href = '/security/products/vulnerabilities/';
       return false;
@@ -46,42 +70,283 @@ var app = new Vue({
       let random = String(Math.floor( Math.random() * 11 ));
       let dateParam = year+mon+date+random;
 
-      let fileName = "https://vuls.ricoh.com/ja/vulinfo/"+gID.substr( 6, 4 )+"/"+gID+".json?"+dateParam;
-      //let fileName = "/-/Media/Ricoh/Sites/jp_ricoh/security/products/vulnerabilities/data/vulinfo/"+gID.substr( 6, 4 )+"/"+gID+".json?"+dateParam;
+      let fileName;
+      let isLocal = (document.location.hostname == "127.0.0.1"
+          || document.location.hostname == "stg-prv-jrc.scms.jp.ricoh.com"
+          || document.location.hostname == "stg-prv-wrc.scms.jp.ricoh.com");
+      fileName = "https://vuls.ricoh.com/ja/vulinfo/" + gID.substr(6, 4) + "/" + gID + ".json?" + dateParam;
+      function localizeVulUrl(url) {
+        if (!isLocal) return url;
+        // vuls.ricoh.com 以外の外部URLはそのまま返す
+        if (!/^https?:\/\/vuls\.ricoh\.com(\/|$)/.test(url)) return url;
+        return url
+          .replace(/^https?:\/\/[^\/]+/, "")
+          .replace(/^\/vul(\?|$)/, "/vul.html$1")
+          .replace(/^\/adv(\?|$)/, "/adv.html$1")
+          .replace(/^\/product(\?|$)/, "/product.html$1")
+          .replace(/^\/list_products(\?|$)/, "/list_products.html$1");
+      }
       //データロード
-      axios
-      .get(fileName)
+      var VULINFO_IDB_NAME = "vulinfoFolderHandleDB";
+      var VULINFO_IDB_STORE = "handles";
+      var VULINFO_IDB_KEY = "vulsRicohRoot";
+      function openVulinfoHandleDB() {
+        return new Promise(function (resolve, reject) {
+          var req = indexedDB.open(VULINFO_IDB_NAME, 1);
+          req.onupgradeneeded = function () {
+            req.result.createObjectStore(VULINFO_IDB_STORE);
+          };
+          req.onsuccess = function () { resolve(req.result); };
+          req.onerror = function () { reject(req.error); };
+        });
+      }
+      function saveVulinfoRootHandle(handle) {
+        return openVulinfoHandleDB().then(function (db) {
+          return new Promise(function (resolve, reject) {
+            var tx = db.transaction(VULINFO_IDB_STORE, "readwrite");
+            tx.objectStore(VULINFO_IDB_STORE).put(handle, VULINFO_IDB_KEY);
+            tx.oncomplete = function () { resolve(); };
+            tx.onerror = function () { reject(tx.error); };
+          });
+        });
+      }
+      function loadSavedVulinfoRootHandle() {
+        return openVulinfoHandleDB().then(function (db) {
+          return new Promise(function (resolve, reject) {
+            var tx = db.transaction(VULINFO_IDB_STORE, "readonly");
+            var req = tx.objectStore(VULINFO_IDB_STORE).get(VULINFO_IDB_KEY);
+            req.onsuccess = function () { resolve(req.result || null); };
+            req.onerror = function () { reject(req.error); };
+          });
+        });
+      }
+      function waitForUserClickToSelectFolder(message) {
+        return new Promise(function (resolve, reject) {
+          var btn = document.createElement("button");
+          btn.textContent = message;
+          btn.style.position = "fixed";
+          btn.style.top = "10px";
+          btn.style.left = "10px";
+          btn.style.zIndex = "9999";
+          btn.style.padding = "10px 16px";
+          btn.style.fontSize = "14px";
+          btn.onclick = function () {
+            btn.remove();
+            resolve();
+          };
+          document.body.appendChild(btn);
+        });
+      }
+      function pickAndSaveFolder() {
+        return waitForUserClickToSelectFolder("ローカルのvuls.ricoh.comフォルダを選択")
+          .then(function () {
+            return window.showDirectoryPicker({ id: "vulsRicohRoot", mode: "read" });
+          })
+          .then(function (handle) {
+            window.__vulsRicohRootHandle = handle;
+            return saveVulinfoRootHandle(handle).then(function () { return handle; });
+          });
+      }
+      function getVulsRicohRootHandle() {
+        if (window.__vulsRicohRootHandle) {
+          return Promise.resolve(window.__vulsRicohRootHandle);
+        }
+        if (!window.showDirectoryPicker) {
+          return Promise.reject(new Error("File System Access API is not supported in this browser"));
+        }
+        return loadSavedVulinfoRootHandle()
+          .catch(function () { return null; })
+          .then(function (savedHandle) {
+            if (!savedHandle) {
+              return pickAndSaveFolder();
+            }
+            return savedHandle.queryPermission({ mode: "read" })
+              .then(function (status) {
+                if (status === "granted") {
+                  window.__vulsRicohRootHandle = savedHandle;
+                  return savedHandle;
+                }
+                return waitForUserClickToSelectFolder("vuls.ricoh.comフォルダへのアクセスを許可")
+                  .then(function () {
+                    return savedHandle.requestPermission({ mode: "read" });
+                  })
+                  .then(function (result) {
+                    if (result === "granted") {
+                      window.__vulsRicohRootHandle = savedHandle;
+                      return savedHandle;
+                    }
+                    return pickAndSaveFolder();
+                  });
+              })
+              .catch(function () {
+                return pickAndSaveFolder();
+              });
+          });
+      }
+      function loadVulDataViaFolderHandle() {
+        var yearDir = gID.substr(6, 4);
+        var jsonName = gID + ".json";
+        return getVulsRicohRootHandle()
+          .then(function (rootHandle) {
+            return rootHandle.getDirectoryHandle("ja");
+          })
+          .then(function (jaHandle) {
+            return jaHandle.getDirectoryHandle("vulinfo");
+          })
+          .then(function (vulinfoHandle) {
+            return vulinfoHandle.getDirectoryHandle(yearDir);
+          })
+          .then(function (yearHandle) {
+            return yearHandle.getFileHandle(jsonName);
+          })
+          .then(function (fileHandle) {
+            return fileHandle.getFile();
+          })
+          .then(function (file) {
+            return file.text();
+          })
+          .then(function (text) {
+            return { data: JSON.parse(text) };
+          });
+      }
+      (isLocal ? loadVulDataViaFolderHandle() : axios.get(fileName))
       .then(function(response) {
-        self.item = response.data;
+        var d = response.data;
+
+        // docVersion の正規化（なければ "1.0" 扱い）
+        d["docVersion"] = d["docVersion"] || "1.0";
+        var isV2 = (d["docVersion"] === "2.0");
+
         //表示用データ作成
         //最終更新日
-        tempLastUpdate = self.item["updatedAt"];
-        let tempLastUpdateTS = Date.parse(tempLastUpdate);
-        let tempLastUpdateDT = new Date(tempLastUpdateTS);
-        self.item["lastUpdate"] = dayjs(tempLastUpdateDT).format('YYYY年MM月DD日 H時mm分');
+        var tempLastUpdate = d["updatedAt"];
+        var tempLastUpdateDT = new Date(Date.parse(tempLastUpdate));
+        d["lastUpdate"] = dayjs(tempLastUpdateDT).format('YYYY年MM月DD日 H時mm分');
         //発行日
-        tempFirstEdition = self.item["publishedAt"];
-        let tempFirstEditionTS = Date.parse(tempFirstEdition);
-        let tempFirstEditionDT = new Date(tempFirstEditionTS);
-        self.item["firstEdition"] = dayjs(tempFirstEditionDT).format('YYYY年MM月DD日 H時mm分');
-        //
-        self.item["businessFields"] = self.item.productStatus.businessFields;
-        for(let i=0; i<self.item["businessFields"].length; i++){
-          self.item["businessFields"][i]["count"]=0;
-          let categories = self.item["businessFields"][i]["categories"];
-          for(let s=0; s<categories.length; s++){
-            self.item["businessFields"][i]["categories"][s]["count"]=0;
-            let subcategories = categories[s]["subCategories"];
-            for(let l=0; l<subcategories.length; l++){
-              self.item["businessFields"][i]["count"]++;
-              self.item["businessFields"][i]["categories"][s]["count"]++;
+        var tempFirstEdition = d["publishedAt"];
+        var tempFirstEditionDT = new Date(Date.parse(tempFirstEdition));
+        d["firstEdition"] = dayjs(tempFirstEditionDT).format('YYYY年MM月DD日 H時mm分');
+
+        // --- v2 固有処理 ---
+        if (isV2) {
+          // cveList をそのまま使う（テンプレート側で cveList を参照）
+          d["cveList"] = d["cveList"] || [];
+          // 旧テンプレート用 cve フィールドも互換のため生成
+          d["cve"] = d["cveList"].map(function(c) {
+            return { id: c.id, url: c.url || "", cwe: c.cwe || [] };
+          });
+          // productStatus から製品リストを取り出す
+          d["businessFields"] = (d.productStatus && d.productStatus.businessFields) ? d.productStatus.businessFields : [];
+          d["list1Title"]     = (d.productStatus && d.productStatus.list1Title) ? d.productStatus.list1Title : "";
+          d["list2Title"]     = (d.productStatus && d.productStatus.list2Title) ? d.productStatus.list2Title : "";
+          d["products"]       = (d.productStatus && d.productStatus.products) ? d.productStatus.products : [];
+
+          // businessFields のカウント
+          for (var i = 0; i < d["businessFields"].length; i++) {
+            d["businessFields"][i]["count"] = 0;
+            var categories = d["businessFields"][i]["categories"];
+            for (var s = 0; s < categories.length; s++) {
+              d["businessFields"][i]["categories"][s]["count"] = 0;
+              var subcategories = categories[s]["subCategories"];
+              for (var l = 0; l < subcategories.length; l++) {
+                d["businessFields"][i]["count"]++;
+                d["businessFields"][i]["categories"][s]["count"]++;
+              }
             }
           }
+
+          // v2 では contact は {text, links: [{text, url}], imageUrl} オブジェクト
+          // テンプレート側で item.contact.text / item.contact.link を参照するため
+          // links[] → link（単数）に変換する
+          if (d.contact) {
+            var clinks = d.contact.links || [];
+            var cl0 = clinks[0] || {};
+            d.contact.link = {
+              text:     cl0.text     || "",
+              url:      cl0.url      || "",
+              imageUrl: cl0.imageUrl || d.contact.imageUrl || ""
+            };
+          }
+
+          // isLocal のとき versionCheck.url / countermeasure.links[].url をローカライズ
+          if (isLocal) {
+            for (var pi = 0; pi < d["products"].length; pi++) {
+              var prod = d["products"][pi];
+              if (prod.versionCheck && prod.versionCheck.url) {
+                prod.versionCheck.url = localizeVulUrl(prod.versionCheck.url);
+              }
+              if (prod.countermeasure && prod.countermeasure.links) {
+                for (var li = 0; li < prod.countermeasure.links.length; li++) {
+                  prod.countermeasure.links[li].url = localizeVulUrl(prod.countermeasure.links[li].url);
+                }
+              }
+            }
+            // contact link のローカライズ
+            if (d.contact && d.contact.link && d.contact.link.url) {
+              d.contact.link.url = localizeVulUrl(d.contact.link.url);
+            }
+          }
+
+        // --- v1 処理（従来通り） ---
+        } else {
+          d["businessFields"] = d.productStatus ? d.productStatus.businessFields : (d["businessFields"] || []);
+          for (var i = 0; i < d["businessFields"].length; i++) {
+            d["businessFields"][i]["count"] = 0;
+            var categories = d["businessFields"][i]["categories"];
+            for (var s = 0; s < categories.length; s++) {
+              d["businessFields"][i]["categories"][s]["count"] = 0;
+              var subcategories = categories[s]["subCategories"];
+              for (var l = 0; l < subcategories.length; l++) {
+                d["businessFields"][i]["count"]++;
+                d["businessFields"][i]["categories"][s]["count"]++;
+              }
+            }
+          }
+          d["products"] = d.productStatus ? d.productStatus.products : (d["products"] || []);
+          // v1: products[].id はHTMLリンク文字列 → ローカライズ
+          if (isLocal) {
+            for (var pi = 0; pi < d["products"].length; pi++) {
+              var prod = d["products"][pi];
+              if (typeof prod.id === "string") {
+                prod.id = prod.id.replace(/href='([^']*)'/g,
+                  function(m, url){ return "href='" + localizeVulUrl(url) + "'"; }
+                );
+                prod.id = prod.id.replace(/href="([^"]*)"/g,
+                  function(m, url){ return 'href="' + localizeVulUrl(url) + '"'; }
+                );
+                prod.id = prod.id.replace(/>https?:\/\/[^<]*<\/a>/g,
+                  function(m){
+                    var text = m.slice(1, -4);
+                    return '>' + document.location.origin + localizeVulUrl(text) + '</a>';
+                  }
+                );
+              }
+            }
+          }
+          // v1: cve フィールドをそのまま使う
+          d["cve"] = d["cve"] || [];
+          // v1: contact は HTML 文字列のまま
         }
-        self.item["products"] = self.item.productStatus.products;
-        for(i=0; i<self.item.history.length; i++){
-          self.item.history[i]["date"] = self.item.history[i]["updatedAt"];//最終更新日
+
+        // history の date フィールド（ISO8601 → "YYYY年MM月DD日" に変換）
+        for (var hi = 0; hi < d.history.length; hi++) {
+          var rawDate = d.history[hi]["updatedAt"] || d.history[hi]["date"] || "";
+          var parsedDate = rawDate ? new Date(Date.parse(rawDate)) : null;
+          d.history[hi]["date"] = parsedDate && !isNaN(parsedDate)
+            ? dayjs(parsedDate).format('YYYY年MM月DD日')
+            : rawDate;
         }
+
+        // 本ページのURL のホスト名を動作中のホストに置き換え（ローカルは .html も補完）
+        if (d.url) {
+          d.url = d.url.replace(/^https?:\/\/[^\/]+/, window.location.origin);
+          if (isLocal) {
+            d.url = d.url.replace(/\/vul(\?|$)/, "/vul.html$1");
+          }
+        }
+
+        // 全処理が終わってから Vue に渡す → reactivity が一度だけ発火
+        self.item = d;
       })
       .catch(function (error) {
           self.isError = true;

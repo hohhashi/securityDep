@@ -161,7 +161,8 @@ if not exist "www.ricoh.com\layouts\system" mkdir "www.ricoh.com\layouts\system"
 curl -L -o "www.ricoh.com\layouts\system\VisitorIdentificationCSS.aspx" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://www.ricoh.com/layouts/system/VisitorIdentificationCSS.aspx?tstamp=1794274200614"
 
 if not exist "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js" mkdir "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js"
-curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase.html" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
+curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
+curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase.js" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
 
 if not exist "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\img\icon" mkdir "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\img\icon"
 curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\img\icon\search.svg" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/img/icon/search.svg"
@@ -237,4 +238,5 @@ rem [SKIP-POST] https://px.ads.linkedin.com/wa/?medium=fetch&fmt=g
 rem [SKIP-POST] https://bzr.openai.com/v1/sdk/events?pid=U1dXKkeAPqeBGzmWasp9NE&st=oaiq-web&sv=0.1.100&t=1794274202598&ec=2
 rem [SKIP-POST] https://px.ads.linkedin.com/wa/?medium=fetch&fmt=g
 
-echo Done.
+echo done
+pause

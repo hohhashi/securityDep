@@ -1,0 +1,602 @@
+#vulinfoApp .cnt_max {
+    max-width: initial;
+}
+#vulinfoApp table.nml th, #vulinfoApp table.nml td{
+  font-size: 16px;
+  font-feature-settings: "palt";
+}
+
+
+.sct_bg01{
+  overflow: hidden;
+  zoom:1;
+}
+.wrap__select{
+  width: 100%;
+}
+.wrap__select .selector{
+  width:100%;
+}
+#sortBox{
+  width: 100%;
+  padding-top: 32px;
+  padding-bottom: 72px;
+}
+#sortBoxInner{
+  width:calc(100% - 42px);
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-between;
+  align-items: flex-start;
+  border: 1px solid #dedede;
+  border-top: none;
+  padding:20px;
+  background-color: #f8f8f8;
+  overflow: hidden;
+}
+#sortBoxInner input.nml[type=text] {
+    padding: 8px 24px;
+    font-size: 16px;
+    line-height: 32px;
+}
+#sortBoxInner .wrap__select select{
+    width: 100%;
+    font-size: 16px;
+    line-height: 32px;
+    border-radius: 4px;
+    padding: 8px 24px;
+    border: 1px solid #C9C9C9;
+    box-sizing: border-box;
+    font-feature-settings: "palt";
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    background: 0 0;
+    background-repeat: no-repeat;
+    background-position: center right 10px;
+    background-size: 15px;
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23cf142b" d="M3,7C2.5,7.5,2.5,8.3,3,8.8c0,0,0,0,0,0l8.3,8.3c0.4,0.4,1,0.4,1.4,0c0,0,0,0,0,0L21,8.8c0.5-0.5,0.5-1.3,0-1.8c-0.5-0.5-1.3-0.5-1.8,0L12,14.2L4.7,7C4.3,6.5,3.5,6.5,3,7z"/></svg>');
+    background-color: #fff;
+}
+.w100{
+  margin-bottom: 8px;
+}
+.wrap__select .button{
+  margin-left: auto;
+  margin-right: auto;
+  display:block
+}
+.current__number{
+  padding-bottom: 8px;
+}
+.padTop80px{
+  padding-top: 80px;
+}
+.hd05{
+  padding-bottom: 8px;
+}
+.button.act01{
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.06em;
+}
+.searchBox__wrap{
+  display: flex;
+  justify-content: space-between;
+}
+.searchBox__byProduct{
+}
+.searchBox__byProduct .dtl input.nml[type=text]{
+  width: 500px;
+  padding: 14px 8px;
+}
+.searchBox__byProduct .dtl .button.act01{
+  width: 80px;
+}
+.searchBox__vul{
+  text-align: right;
+}
+.searchBox__vul .dtl input{
+  width: 240px;
+  padding: 16px 16px 15px;
+}
+.button.act01{
+  padding: 16px 16px 15px;
+}
+table.nml thead th,
+table.nml tbody td{
+  padding: 8px 6px;
+}
+table.nml thead th{
+  vertical-align: middle;
+}
+.cveList{
+  display: block;
+}
+.cveList a, .cveList a:link, .cveList a:visited{
+  color: #cf142b;
+}
+.c-container .cveList a:hover{
+  text-decoration: underline;
+}
+#vulWrap_cover {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    opacity: 0;
+    display: none;
+    z-index: 9999;
+}
+.searchTab{
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #dedede;
+  border-left: 1px solid #dedede;
+  border-right: 1px solid #dedede;
+  max-width: 1008px;
+  margin: 32px auto 32px;
+  border-radius: 2px;
+}
+.searchTab li{
+  width: 50%;
+  padding: 0;
+  margin: 0;
+  background: #f3f3f3;
+}
+.searchTab li a{
+  line-height: 1.5em;
+  text-align: center;
+  display: block;
+  padding: 16px;
+}
+.searchTab li:first-child{
+  border-right: 1px solid #dedede;
+}
+.searchTab li.act{
+  background: #fff;
+}
+.hd03 + .nml_scrollAddWrap{
+  margin-top: 8px;
+}
+#sortBox summary{
+  display: block;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 20px;
+  font-weight: bold;
+  white-space: nowrap;
+  padding-right: 50px;
+  padding-bottom: 8px;
+  border: 1px solid #dedede;
+  padding: 20px;
+  background-color: #f8f8f8;
+  position: relative;
+  cursor: pointer;
+  text-align: left;
+  box-sizing: border-box;
+}
+@media (max-width: 640px){
+  #sortBox summary{
+    font-size: 16px;
+    padding-right: 40px;
+    white-space: inherit;
+    text-align: left;
+  }
+}
+#sortBox summary::after{
+  content:"";
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background-color: #ccc;
+  top:50%;
+  right: 15px;
+  background-color: #cf142b;
+  -webkit-mask-image: url(data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23000000" d="M6.99813,21.015a1.24936,1.24936,0,0,0,1.77,0l8.31-8.31a.99587.99587,0,0,0,0-1.41l-8.31-8.31a1.25158,1.25158,0,0,0-1.77,1.77l7.24,7.25-7.25,7.25A1.24639,1.24639,0,0,0,6.99813,21.015Z"/></svg>);
+  mask-image: url(data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23000000" d="M6.99813,21.015a1.24936,1.24936,0,0,0,1.77,0l8.31-8.31a.99587.99587,0,0,0,0-1.41l-8.31-8.31a1.25158,1.25158,0,0,0-1.77,1.77l7.24,7.25-7.25,7.25A1.24639,1.24639,0,0,0,6.99813,21.015Z"/></svg>);
+}
+
+#sortBox button.isOpen + #sortBoxInner{
+  display: block;
+}
+#sortBox button.isOpen::after{
+  transform: rotate(0deg);
+}
+.searchAttention{
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 220px;
+}
+@media (max-width: 640px){
+  .searchAttention{
+    padding-left: 0;
+  }
+}
+@media (max-width: 640px){
+  .c-section:not(.c-section--relation){
+    padding-top: 0;
+  }
+  #vulinfoApp .clm{
+    padding: 0;
+  }
+  #sortBox{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #sortBoxInner{
+    width: calc(100% - 42px);
+  }
+  .nml_scrollAddWrap{
+    overflow: hidden;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling : touch
+  }
+  .nml_scrollAddWrap .nml{
+    min-width: 1007px;
+  }
+  .searchTab{
+    width: calc(100% - 16px);
+  }
+  .searchTab li{
+    font-size: 14px;
+  }
+  .searchTab li{
+    display: flex;
+    align-items: center;
+  }
+}
+.fc__CRITICAL,
+.fc__Critical{
+  background-color: #c20e0e;
+  font-size: 12px;
+  display: inline-block;
+  border-radius: 2px;
+  padding: 4px 4px;
+  color: #fff;
+  text-transform: capitalize;
+  width: 70px;
+  text-align: center;
+}
+.fc__HIGH,
+.fc__High{
+  background-color: #c25100;
+  font-size: 12px;
+  display: inline-block;
+  border-radius: 2px;
+  padding: 4px 4px;
+  color: #fff;
+  text-transform: capitalize;
+  width: 70px;
+  text-align: center;
+}
+.fc__MEDIUM,
+.fc__Medium{
+  background-color: #1400c6;
+  font-size: 12px;
+  display: inline-block;
+  border-radius: 2px;
+  padding: 4px 4px;
+  color: #fff;
+  text-transform: capitalize;
+  width: 70px;
+  text-align: center;
+}
+.fc__LOW,
+.fc__Low{
+  background-color: #087a00;
+  font-size: 12px;
+  display: inline-block;
+  border-radius: 2px;
+  padding: 4px 4px;
+  color: #fff;
+  text-transform: capitalize;
+  width: 70px;
+  text-align: center;
+}
+.fc__NONE,
+.fc__None{
+  background-color: #D5E0E6;
+  font-size: 12px;
+  display: inline-block;
+  border-radius: 2px;
+  padding: 4px 4px;
+  color: #000;
+  text-transform: capitalize;
+  width: 70px;
+  text-align: center;
+}
+.ic_important{
+  display: block;
+  width: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#vulinfoApp .ic_important img{
+  width: 20px;
+  height: auto;
+  margin-right: 5px;
+  transform: translateY(3px);
+  vertical-align: middle;
+}
+.attentionForTableWrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+}
+
+
+@media (max-width: 640px){
+  .attentionForTableWrap{
+  display: block;
+  }
+}
+.attentionForTableWrap h2:not([class]){
+  text-align: left;
+  font-size: 18px;
+}
+@media (max-width: 640px){
+  .attentionForTableWrap h2:not([class]){
+    font-size: 16px;
+    padding-bottom: 8px;
+  }
+}
+.attentionForTable{
+  text-align: right;
+  font-size: 12px;
+  padding-bottom: 8px;
+  font-feature-settings: "palt";
+  letter-spacing: 0.06em;
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 640px){
+  .attentionForTable{
+    text-align: left;
+  }
+}
+#vulinfoApp .c-table table{
+  border-left: none;
+}
+#vulinfoApp .c-table th,
+#vulinfoApp .c-table td{
+  vertical-align: top;
+  border-left: none;
+  border-right: none;
+}
+#vulinfoApp .c-table th{
+  background-color: #dedede;
+  color: #333;
+  vertical-align: middle;
+}
+.ic_important--inline{
+  display: inline-block;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+#vulinfoApp .ic_important--inline img{
+  width: 15px;
+  height: auto;
+  transform: translateY(3px);
+  vertical-align: middle;
+}
+.td_title{
+  display: flex;
+  justify-content: flex-start;
+  font-feature-settings: "palt";
+  letter-spacing: 0.04em;
+}
+.td_title a, .td_title a:link{
+  text-align: left;
+  font-weight: 700;
+  color: #cf142b;
+  position: relative;
+  margin-left:20px;
+  width: calc(100% - 60px);
+}
+.c-container .td_title a:hover{
+  text-decoration: underline;
+}
+.td_title a:visited{
+  color: #cf142b;
+}
+#vulinfoApp .td_title a img{
+  position: absolute;
+  top: 4px;
+  left: -20px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+
+.box__notfound{
+  padding: 50px 0;
+}
+.nml_scrollAddWrap{
+  padding-bottom: 16px;
+}
+.paging_nv .pg_nv_prev{
+  width: 260px;
+}
+.paging_nv .pg_nv_follow{
+  width: 260px;
+}
+@media (max-width: 640px){
+  .paging_nv .pg_nv_prev{
+    width: 127px;
+  }
+  .paging_nv .pg_nv_follow{
+    width: 127px;
+  }
+}
+#vulinfoApp table.nml{
+  border-left: none;
+}
+#vulinfoApp table.nml thead th,
+#vulinfoApp table.nml tbody td{
+  padding-top: 18px;
+  padding-bottom: 18px;
+  line-height: 24px;
+  border-left: none;
+  border-right: none;
+}
+.c-accordion-b{
+  margin-bottom: 72px;
+}
+.cell_cveid{
+  line-height: 24px;
+}
+.pg_nv_first .c-button-a__text{
+  transform: scale(0,0);
+}
+.pg_nv_last .c-button-a__text{
+  transform: scale(0,0);
+}
+.pg_nv_lst{
+  padding: 0;
+}
+.c-button-a--small{
+  height: 40px;
+}
+#pager{
+  margin-bottom: 72px;
+}
+
+/* 通常の色（任意） */
+#vulinfoApp .c-select-b {
+  color: inherit;
+  border: 1px solid #c9c9c9;
+}
+@media (max-width: 640px){
+  #vulinfoApp .c-select-b {
+    font-size: 16px;
+  }
+}
+
+
+#vulinfoApp .c-accordion-b button{
+  font-size: 18px;
+}
+@media (max-width: 640px){
+  #vulinfoApp .c-accordion-b button{
+    font-size: 20px;
+  }
+}
+/* 先頭のプレースホルダ option が選択されている時だけグレーに */
+#vulinfoApp .c-select-b:has(option[disabled][value=""]:checked) {
+  color: #757575;
+}
+
+#vulinfoApp input.nml[type=text]{
+  padding-top: 18px;
+  padding-bottom: 18px;
+  padding-left: 24px;
+}
+@media (max-width: 640px){
+  #vulinfoApp input.nml[type=text]{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+  }
+}
+.c-productVulSearchFormGroup{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media (max-width: 640px){
+  .c-productVulSearchFormGroup{
+    display: block;
+  }
+}
+.c-productVulSearchFormGroup label{
+  width: 220px;
+  font-weight: bold;
+}
+@media (max-width: 640px){
+  .c-productVulSearchFormGroup label{
+    width: 100%;
+    display: block;
+    padding-bottom: 4px;
+  }
+}
+.c-productVulSearchFormGroup input.nml[type=text],
+.c-productVulSearchFormGroup .c-select-b{
+  width: calc(100% - 220px);
+  box-sizing: border-box;
+}
+@media (max-width: 640px){
+  .c-productVulSearchFormGroup input.nml[type=text],
+  .c-productVulSearchFormGroup .c-select-b{
+    width: 100%;
+  }
+}
+.c-productVulSearchFormGroup + .c-productVulSearchFormGroup{
+  margin-top: 12px;
+}
+
+#vulinfoApp .button.act01.js-btSearch{
+  min-width: 200px;
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 12px;
+}
+@media (max-width: 640px){
+  .js-btSearch{
+    width: 100%;
+  }
+}
+
+.hd03_isRss{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.rss_icon{
+  display: inline-block;
+  margin-left: 20px;
+}
+@media (max-width: 640px){
+  .rss_icon{
+    transform: translateY(3px);
+  }
+}
+#vulinfoApp .rss_icon a,
+#vulinfoApp .rss_icon a:visited{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  color: #cf142b;
+}
+#vulinfoApp .rss_icon a:hover{
+  text-decoration: underline;
+}
+#vulinfoApp .rss_icon a img{
+  width: 24px;
+  height: 24px;
+  margin-right: 6px;
+}
+
+/**ページング**/
+@media (max-width: 640px){
+  #vulinfoApp .paging_nv .pg_nv_lst li.act a:before{
+    display: inline-block;
+    position: relative;
+    width: auto;
+  }
+  #vulinfoApp .c-button-a--white .c-button-a__text{
+    display: inline-block;
+  }
+}

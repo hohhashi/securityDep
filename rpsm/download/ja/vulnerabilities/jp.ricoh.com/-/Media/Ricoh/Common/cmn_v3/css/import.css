@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+/*************************************************
+CSS
+/cmn_v1/css/import2021.css より作成
+
+14.10.01
+update:22.02.18
+update:24.01.25
+update:2024.05.28
+*************************************************/
+
+@import "sc_reset.css";
+@import "reset.css";
+@import url("print.css") print;
+@import "./gl_header.css";
+@import "./gl_footer.css";
+/* @import "./search.css"; */
+@import "option.css";
+@import "common.css";
+@import "sc_common.css";
+@import "/-/Media/Ricoh/Common/modal-for-video/magnific-popup.css";
+@import "/-/Media/Ricoh/Common/cookie-management/css/common.css";

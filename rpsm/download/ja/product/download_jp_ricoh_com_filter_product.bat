@@ -1,8 +1,8 @@
 @echo off
 rem download_jp_ricoh_com_filter_product.bat
-rem product ページのリソースをダウンロードする
+rem product page resources download
 
-rem .vscode と jp.ricoh.com を削除して再作成
+rem delete and recreate .vscode and jp.ricoh.com
 if exist .vscode rmdir /s /q .vscode
 if exist jp.ricoh.com rmdir /s /q jp.ricoh.com
 
@@ -136,7 +136,8 @@ mkdir "jp.ricoh.com\-\Media\Ricoh\Common\cookie-management\css"
 curl -L -o "jp.ricoh.com\-\Media\Ricoh\Common\cookie-management\css\common.css" "https://jp.ricoh.com/-/Media/Ricoh/Common/cookie-management/css/common.css"
 
 mkdir "jp.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js"
-curl -L -o "jp.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase.html" "https://jp.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
+curl -L -o "jp.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase" "https://jp.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
+curl -L -o "jp.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase.js" "https://jp.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
 
 mkdir "jp.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\img\icon"
 curl -L -o "jp.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\img\icon\search.svg" "https://jp.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/img/icon/search.svg"
@@ -153,5 +154,5 @@ curl -L -o "jp.ricoh.com\-\media\ScAssets\System\Images\favicon.ico" "https://jp
 mkdir "jp.ricoh.com\layouts\system"
 curl -L -o "jp.ricoh.com\layouts\system\VisitorIdentificationCSS.aspx" "https://jp.ricoh.com/layouts/system/VisitorIdentificationCSS.aspx"
 
-echo 完了
+echo done
 pause

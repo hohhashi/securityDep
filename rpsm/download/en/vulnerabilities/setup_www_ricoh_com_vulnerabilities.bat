@@ -7,8 +7,14 @@ if not exist "%~dp0patch_www_ricoh_com_vulnerabilities.py" (
     exit /b 1
 )
 
-if not exist "%~dp0vulinfo_search.js" (
-    echo ERROR: vulinfo_search.js not found.
+if not exist "%~dp0vulinfo_search.patch.js" (
+    echo ERROR: vulinfo_search.patch.js not found.
+    pause
+    exit /b 1
+)
+
+if not exist "%~dp0template.patch.js" (
+    echo ERROR: template.patch.js not found.
     pause
     exit /b 1
 )

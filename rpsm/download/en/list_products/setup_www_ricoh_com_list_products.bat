@@ -10,6 +10,20 @@ if not exist "%~dp0patch_www_ricoh_com_list_products.py" (
     exit /b 1
 )
 
+if not exist "%~dp0list_products.patch.js" (
+    echo ERROR: list_products.patch.js not found.
+    echo        place it in the same folder as this bat file
+    pause
+    exit /b 1
+)
+
+if not exist "%~dp0template.patch.js" (
+    echo ERROR: template.patch.js not found.
+    echo        place it in the same folder as this bat file
+    pause
+    exit /b 1
+)
+
 rem cd /d to the folder of this bat file
 cd /d "%~dp0"
 

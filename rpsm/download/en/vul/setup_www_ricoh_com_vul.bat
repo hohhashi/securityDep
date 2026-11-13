@@ -10,6 +10,20 @@ if not exist "%~dp0patch_www_ricoh_com_vul.py" (
     exit /b 1
 )
 
+if not exist "%~dp0vul.patch.js" (
+    echo ERROR: vul.patch.js not found.
+    echo        Place it in the same folder as this bat file
+    pause
+    exit /b 1
+)
+
+if not exist "%~dp0template.patch.js" (
+    echo ERROR: template.patch.js not found.
+    echo        Place it in the same folder as this bat file
+    pause
+    exit /b 1
+)
+
 rem Move to the folder containing this bat file
 cd /d "%~dp0"
 

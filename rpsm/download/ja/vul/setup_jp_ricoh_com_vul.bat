@@ -1,33 +1,24 @@
 @echo off
 echo === setup_jp_ricoh_com_vul ===
 echo.
-
-rem batファイルと同じフォルダにpyファイルがあることを確認
 if not exist "%~dp0patch_jp_ricoh_com_vul.py" (
-    echo ERROR: patch_jp_ricoh_com_vul.py が見つかりません
-    echo        このbatファイルと同じフォルダに置いてください
+    echo ERROR: patch_jp_ricoh_com_vul.py not found
     pause
     exit /b 1
 )
-
-rem cd /d で bat のあるフォルダに移動
 cd /d "%~dp0"
-
-rem py (Windows Python Launcher) を優先して使用
 py --version >nul 2>&1
 if not errorlevel 1 (
     py patch_jp_ricoh_com_vul.py
     goto :check
 )
-echo ERROR: py が見つかりません
-echo        https://www.python.org/ から Python をインストールしてください
+echo ERROR: py not found
 pause
 exit /b 1
-
 :check
 if errorlevel 1 (
     echo.
-    echo ERROR: スクリプトがエラーで終了しました
+    echo ERROR: script finished with error
     pause
     exit /b 1
 )

@@ -422,10 +422,133 @@ var app = new Vue({
     let random = String(Math.floor( Math.random() * 11 ));
     let dateParam = year+mon+date+random;
     let fileName = "https://vuls.ricoh.com/ja/prodinfolist.json?"+dateParam;
-    //let fileName = "/-/Media/Ricoh/Sites/jp_ricoh/security/products/vulnerabilities/data/prodinfolist.json?"+dateParam;
+    let isLocal = (document.location.hostname == "127.0.0.1"
+        || document.location.hostname == "stg-prv-wrc.scms.jp.ricoh.com"
+        || document.location.hostname == "stg-prv-jrc.scms.jp.ricoh.com");
+    function localizeProductUrl(url) {
+      if (!isLocal) return url;
+      return url
+        .replace(/\/vul(\?|$)/, "/vul.html$1")
+        .replace(/\/adv(\?|$)/, "/adv.html$1")
+        .replace(/\/product(\?|$)/, "/product.html$1")
+        .replace(/\/list_products(\?|$)/, "/list_products.html$1");
+    }
     //データロード
-    axios
-      .get(fileName)
+    var LIST_PRODUCTS_IDB_NAME = "vulinfoFolderHandleDB";
+    var LIST_PRODUCTS_IDB_STORE = "handles";
+    var LIST_PRODUCTS_IDB_KEY = "vulsRicohRoot";
+    function openListProductsHandleDB() {
+      return new Promise(function (resolve, reject) {
+        var req = indexedDB.open(LIST_PRODUCTS_IDB_NAME, 1);
+        req.onupgradeneeded = function () {
+          req.result.createObjectStore(LIST_PRODUCTS_IDB_STORE);
+        };
+        req.onsuccess = function () { resolve(req.result); };
+        req.onerror = function () { reject(req.error); };
+      });
+    }
+    function saveListProductsRootHandle(handle) {
+      return openListProductsHandleDB().then(function (db) {
+        return new Promise(function (resolve, reject) {
+          var tx = db.transaction(LIST_PRODUCTS_IDB_STORE, "readwrite");
+          tx.objectStore(LIST_PRODUCTS_IDB_STORE).put(handle, LIST_PRODUCTS_IDB_KEY);
+          tx.oncomplete = function () { resolve(); };
+          tx.onerror = function () { reject(tx.error); };
+        });
+      });
+    }
+    function loadSavedListProductsRootHandle() {
+      return openListProductsHandleDB().then(function (db) {
+        return new Promise(function (resolve, reject) {
+          var tx = db.transaction(LIST_PRODUCTS_IDB_STORE, "readonly");
+          var req = tx.objectStore(LIST_PRODUCTS_IDB_STORE).get(LIST_PRODUCTS_IDB_KEY);
+          req.onsuccess = function () { resolve(req.result || null); };
+          req.onerror = function () { reject(req.error); };
+        });
+      });
+    }
+    function waitForUserClickToSelectFolderListProducts(message) {
+      return new Promise(function (resolve, reject) {
+        var btn = document.createElement("button");
+        btn.textContent = message;
+        btn.style.position = "fixed";
+        btn.style.top = "10px";
+        btn.style.left = "10px";
+        btn.style.zIndex = "9999";
+        btn.style.padding = "10px 16px";
+        btn.style.fontSize = "14px";
+        btn.onclick = function () {
+          btn.remove();
+          resolve();
+        };
+        document.body.appendChild(btn);
+      });
+    }
+    function pickAndSaveFolderListProducts() {
+      return waitForUserClickToSelectFolderListProducts("ローカルのvuls.ricoh.comフォルダを選択")
+        .then(function () {
+          return window.showDirectoryPicker({ id: "vulsRicohRoot", mode: "read" });
+        })
+        .then(function (handle) {
+          window.__vulsRicohRootHandle = handle;
+          return saveListProductsRootHandle(handle).then(function () { return handle; });
+        });
+    }
+    function getVulsRicohRootHandleListProducts() {
+      if (window.__vulsRicohRootHandle) {
+        return Promise.resolve(window.__vulsRicohRootHandle);
+      }
+      if (!window.showDirectoryPicker) {
+        return Promise.reject(new Error("File System Access API is not supported in this browser"));
+      }
+      return loadSavedListProductsRootHandle()
+        .catch(function () { return null; })
+        .then(function (savedHandle) {
+          if (!savedHandle) {
+            return pickAndSaveFolderListProducts();
+          }
+          return savedHandle.queryPermission({ mode: "read" })
+            .then(function (status) {
+              if (status === "granted") {
+                window.__vulsRicohRootHandle = savedHandle;
+                return savedHandle;
+              }
+              return waitForUserClickToSelectFolderListProducts("vuls.ricoh.comフォルダへのアクセスを許可")
+                .then(function () {
+                  return savedHandle.requestPermission({ mode: "read" });
+                })
+                .then(function (result) {
+                  if (result === "granted") {
+                    window.__vulsRicohRootHandle = savedHandle;
+                    return savedHandle;
+                  }
+                  return pickAndSaveFolderListProducts();
+                });
+            })
+            .catch(function () {
+              return pickAndSaveFolderListProducts();
+            });
+        });
+    }
+    function loadListProductsDataViaFolderHandle() {
+      return getVulsRicohRootHandleListProducts()
+        .then(function (rootHandle) {
+          return rootHandle.getDirectoryHandle("ja");
+        })
+        .then(function (jaHandle) {
+          return jaHandle.getFileHandle("prodinfolist.json");
+        })
+        .then(function (fileHandle) {
+          return fileHandle.getFile();
+        })
+        .then(function (file) {
+          return file.text();
+        })
+        .then(function (text) {
+          return { data: JSON.parse(text) };
+        });
+    }
+    (isLocal ? loadListProductsDataViaFolderHandle() : axios.get(fileName))
       .then(function(response) {
         let tempData = response.data;
         //表示用データ作成
@@ -448,6 +571,10 @@ var app = new Vue({
                 item["category"] = categoryProduct.name;
                 item["product"] = product.name;
                 item["id"] = product.id;
+                // 製品ごとの脆弱性一覧ページへのリンク
+                item["linkUrl"] = product.id
+                  ? localizeProductUrl("/security/products/vulnerabilities/product.html?id=" + product.id)
+                  : "";
                 if(temp[count] == undefined){
                   temp[count] = item;
                 }

@@ -1,10 +1,6 @@
 @echo off
 if exist ".vscode" rmdir /s /q ".vscode"
 if exist "www.ricoh.com" rmdir /s /q "www.ricoh.com"
-rem HAR?????��?��????curl?R?}???h????
-rem www.ricoh.com - 2026/11/04
-rem URL???p?X??????????????t?H???_???????????????
-rem ???s: download_vuln_list.bat
 
 set UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36
 set REF=https://www.ricoh.com/
@@ -152,6 +148,7 @@ curl -L -o "www.ricoh.com\vuls.ricoh.com\en\vulinfolist.json" -H "User-Agent: %U
 
 if not exist "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js" mkdir "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js"
 curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
+curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase.js" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
 
 if not exist "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\img\icon" mkdir "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\img\icon"
 curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\img\icon\search.svg" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/img/icon/search.svg"
@@ -159,4 +156,5 @@ curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\img\icon\sear
 if not exist "www.ricoh.com\-\media\ScAssets\System\Images" mkdir "www.ricoh.com\-\media\ScAssets\System\Images"
 curl -L -o "www.ricoh.com\-\media\ScAssets\System\Images\favicon.ico" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://www.ricoh.com/-/media/ScAssets/System/Images/favicon.ico?rev=88442a4d923a4ee98543f6eb4b4a7286&sc_lang=ja-JP"
 
-echo ????
+echo done
+pause

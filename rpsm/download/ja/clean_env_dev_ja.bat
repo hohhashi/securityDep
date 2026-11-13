@@ -2,17 +2,17 @@
 rem ===============================================
 rem clean_env_dev_ja.bat
 rem
-rem 各ページフォルダ (adv, list_products, product,
-rem vul, vulnerabilities) の jp.ricoh.com フォルダと
-rem .vscode フォルダ、および
-rem env_dev フォルダを削除してクリーンな状態に戻します。
+rem Deletes jp.ricoh.com folders and .vscode folders
+rem under each page folder (adv, list_products, product,
+rem vul, vulnerabilities), plus env_dev and .vscode,
+rem returning the workspace to a clean state.
 rem ===============================================
 
 set BASE=%~dp0
 
 echo ======================================
-echo  クリーン処理を開始します
-echo  削除対象:
+echo  Clean start
+echo  Targets:
 echo    adv\jp.ricoh.com
 echo    adv\.vscode
 echo    list_products\jp.ricoh.com
@@ -27,9 +27,9 @@ echo    env_dev
 echo    .vscode
 echo ======================================
 echo.
-set /p CONFIRM=本当に削除しますか？ (y/N): 
+set /p CONFIRM=Delete all of the above? (y/N):
 if /i not "%CONFIRM%"=="y" (
-    echo キャンセルしました。
+    echo Cancelled.
     pause
     exit /b 0
 )
@@ -44,12 +44,12 @@ call :clean_dir "%BASE%vul\jp.ricoh.com"             "vul\jp.ricoh.com"
 call :clean_dir "%BASE%vul\.vscode"                  "vul\.vscode"
 call :clean_dir "%BASE%vulnerabilities\jp.ricoh.com" "vulnerabilities\jp.ricoh.com"
 call :clean_dir "%BASE%vulnerabilities\.vscode"      "vulnerabilities\.vscode"
-call :clean_dir "%BASE%env_dev"                       "env_dev"
-call :clean_dir "%BASE%.vscode"                       ".vscode"
+call :clean_dir "%BASE%env_dev"                      "env_dev"
+call :clean_dir "%BASE%.vscode"                      ".vscode"
 
 echo.
 echo ======================================
-echo  クリーン完了
+echo  Clean done
 echo ======================================
 pause
 exit /b 0
@@ -59,8 +59,8 @@ set _TARGET=%~1
 set _LABEL=%~2
 if exist "%_TARGET%" (
     rmdir /s /q "%_TARGET%"
-    echo 削除: %_LABEL%
+    echo deleted: %_LABEL%
 ) else (
-    echo [スキップ] %_LABEL% は存在しません
+    echo [skip] %_LABEL% not found
 )
 exit /b

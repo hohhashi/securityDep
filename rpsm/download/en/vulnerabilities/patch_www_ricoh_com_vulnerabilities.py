@@ -1,104 +1,53 @@
-"""
-patch_www_ricoh_com_vulnerabilities.py
-
-Applies patches to downloaded www.ricoh.com files for local preview:
-  1. Copies the patched en/vulinfo_search.js (supports File System Access API
-     and local folder selection) into the downloaded location.
-  2. Creates .vscode/settings.json so Live Server uses www.ricoh.com as root.
-
-Usage:
-  Run this script from the same folder that contains www.ricoh.com/
-  (i.e. the same folder as setup_www_ricoh_com_vulnerabilities.bat).
-
-  py patch_www_ricoh_com_vulnerabilities.py
-"""
-
 import os
-import sys
 import shutil
-import json
 
-# ---------------------------------------------------------------------------
-# Paths
-# ---------------------------------------------------------------------------
+BASE = os.path.dirname(os.path.abspath(__file__))
+os.chdir(BASE)
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+FILES = [
+    (
+        'vulinfo_search.patch.js',
+        'www.ricoh.com/-/Media/Ricoh/Sites/com'
+        '/products/security/vulnerabilities/js/vulinfo_search.js'
+    ),
+    (
+        'template.patch.js',
+        'www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/template.js'
+    ),
+]
 
-# Source: patched vulinfo_search.js bundled next to this script
-PATCHED_JS_SRC = os.path.join(HERE, "vulinfo_search.js")
+for src_name, dst_path in FILES:
+    src = os.path.join(BASE, src_name)
+    dst = os.path.join(BASE, dst_path)
 
-# Destination: where download bat puts the original file
-JS_DST = os.path.join(
-    HERE,
-    "www.ricoh.com",
-    "-",
-    "Media",
-    "Ricoh",
-    "Sites",
-    "com",
-    "products",
-    "security",
-    "vulnerabilities",
-    "js",
-    "vulinfo_search.js",
-)
+    if not os.path.exists(src):
+        print(f'ERROR: source not found: {src_name}')
+        continue
 
-# .vscode/settings.json
-VSCODE_DIR = os.path.join(HERE, ".vscode")
-VSCODE_SETTINGS = os.path.join(VSCODE_DIR, "settings.json")
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    shutil.copy2(src, dst)
+    print(f'OK: {src_name}  ->  {dst_path}')
 
-LIVE_SERVER_ROOT = "/www.ricoh.com"
+# templateBase -> templateBase.js
+src_tb = os.path.join(BASE, 'www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase')
+dst_tb = os.path.join(BASE, 'www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase.js')
+if os.path.exists(src_tb):
+    shutil.copy2(src_tb, dst_tb)
+    print('OK: templateBase  ->  templateBase.js')
+else:
+    print('ERROR: templateBase not found (run download bat first)')
 
-# ---------------------------------------------------------------------------
-# Step 1: copy patched vulinfo_search.js
-# ---------------------------------------------------------------------------
+vscode_dir = os.path.join(BASE, '.vscode')
+os.makedirs(vscode_dir, exist_ok=True)
+settings_path = os.path.join(vscode_dir, 'settings.json')
+settings = """{
+    "liveServer.settings.root": "/www.ricoh.com",
+    "files.autoGuessEncoding": true
+}
+"""
+with open(settings_path, 'w', encoding='utf-8') as f:
+    f.write(settings)
+print('OK: .vscode/settings.json')
 
-def patch_vulinfo_search_js():
-    if not os.path.isfile(PATCHED_JS_SRC):
-        print("ERROR: vulinfo_search.js not found next to this script.")
-        print("       Expected: " + PATCHED_JS_SRC)
-        sys.exit(1)
-
-    dst_dir = os.path.dirname(JS_DST)
-    if not os.path.isdir(dst_dir):
-        print("ERROR: destination directory not found.")
-        print("       Expected: " + dst_dir)
-        print("       Please run download_www_ricoh_com_vulnerabilities.bat first.")
-        sys.exit(1)
-
-    shutil.copy2(PATCHED_JS_SRC, JS_DST)
-    print("OK  Copied vulinfo_search.js -> " + JS_DST)
-
-# ---------------------------------------------------------------------------
-# Step 2: create / update .vscode/settings.json
-# ---------------------------------------------------------------------------
-
-def setup_vscode_settings():
-    settings = {}
-    if os.path.isfile(VSCODE_SETTINGS):
-        try:
-            with open(VSCODE_SETTINGS, "r", encoding="utf-8") as f:
-                settings = json.load(f)
-        except Exception:
-            settings = {}
-
-    settings["liveServer.settings.root"] = LIVE_SERVER_ROOT
-
-    os.makedirs(VSCODE_DIR, exist_ok=True)
-    with open(VSCODE_SETTINGS, "w", encoding="utf-8") as f:
-        json.dump(settings, f, indent=2, ensure_ascii=False)
-        f.write("\n")
-
-    print("OK  " + VSCODE_SETTINGS)
-    print("    liveServer.settings.root = " + LIVE_SERVER_ROOT)
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
-if __name__ == "__main__":
-    print("=== patch_www_ricoh_com_vulnerabilities ===")
-    patch_vulinfo_search_js()
-    setup_vscode_settings()
-    print("")
-    print("Done. Open www.ricoh.com with Live Server to preview.")
+print()
+print('done')

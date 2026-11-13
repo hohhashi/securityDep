@@ -1,25 +1,24 @@
 import os
 import shutil
 
-# このスクリプトのあるフォルダを基点にする
 BASE = os.path.dirname(os.path.abspath(__file__))
 os.chdir(BASE)
 
-# -----------------------------------------------
-# コピー先の定義
-# -----------------------------------------------
-
 FILES = [
     (
-        'product_vul.js',
+        'product.patch.html',
+        'jp.ricoh.com/security/products/vulnerabilities/product.html'
+    ),
+    (
+        'product_vul.patch.js',
         'jp.ricoh.com/-/Media/Ricoh/Sites/jp_ricoh'
         '/security/products/vulnerabilities/js/product_vul.js'
     ),
+    (
+        'template.patch.js',
+        'jp.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/template.js'
+    ),
 ]
-
-# -----------------------------------------------
-# コピー実行
-# -----------------------------------------------
 
 for src_name, dst_path in FILES:
     src = os.path.join(BASE, src_name)
@@ -33,9 +32,14 @@ for src_name, dst_path in FILES:
     shutil.copy2(src, dst)
     print(f'OK: {src_name}  ->  {dst_path}')
 
-# -----------------------------------------------
-# .vscode/settings.json
-# -----------------------------------------------
+# templateBase -> templateBase.js
+src_tb = os.path.join(BASE, 'jp.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase')
+dst_tb = os.path.join(BASE, 'jp.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase.js')
+if os.path.exists(src_tb):
+    shutil.copy2(src_tb, dst_tb)
+    print('OK: templateBase  ->  templateBase.js')
+else:
+    print('ERROR: templateBase not found (run download bat first)')
 
 vscode_dir = os.path.join(BASE, '.vscode')
 os.makedirs(vscode_dir, exist_ok=True)

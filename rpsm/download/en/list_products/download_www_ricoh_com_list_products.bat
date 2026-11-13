@@ -119,6 +119,7 @@ curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cookie-management\css\common.css"
 
 mkdir "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js"
 curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase" "https://www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
+curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase.js" "https://www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
 
 mkdir "www.ricoh.com\layouts\system"
 curl -L -o "www.ricoh.com\layouts\system\VisitorIdentificationCSS.aspx" "https://www.ricoh.com/layouts/system/VisitorIdentificationCSS.aspx"

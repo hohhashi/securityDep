@@ -1,10 +1,10 @@
 @echo off
 if exist ".vscode" rmdir /s /q ".vscode"
 if exist "jp.ricoh.com" rmdir /s /q "jp.ricoh.com"
-rem HAR‚©‚ç¶¬‚µ‚½curlƒRƒ}ƒ“ƒhˆê——
+rem HARï¿½ï¿½ï¿½ç¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½curlï¿½Rï¿½}ï¿½ï¿½ï¿½hï¿½ê——
 rem jp.ricoh.com - 2026/06/09
-rem URL‚ÌƒpƒX\‘¢‚ğ‚»‚Ì‚Ü‚ÜƒtƒHƒ‹ƒ_‚Æ‚µ‚ÄÄŒ»‚µ‚Ü‚·
-rem Às: download_vuln_list.bat
+rem URLï¿½Ìƒpï¿½Xï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚Ü‚Üƒtï¿½Hï¿½ï¿½ï¿½_ï¿½Æ‚ï¿½ï¿½ÄÄŒï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
+rem ï¿½ï¿½ï¿½s: download_vuln_list.bat
 
 set UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36
 set REF=https://jp.ricoh.com/
@@ -271,4 +271,4 @@ rem [SKIP-TRACKING] https://s1406731827.t.eloqua.com/visitor/v200/svrGP.aspx?pps
 if not exist "jp.ricoh.com\-\Media\Ricoh\Common\cmn_v3\img" mkdir "jp.ricoh.com\-\Media\Ricoh\Common\cmn_v3\img"
 curl -L -o "jp.ricoh.com\-\Media\Ricoh\Common\cmn_v3\img\icon_anchor_top.svg" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://jp.ricoh.com/-/Media/Ricoh/Common/cmn_v3/img/icon_anchor_top.svg"
 
-echo Š®—¹
+echo done

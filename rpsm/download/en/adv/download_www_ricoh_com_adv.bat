@@ -96,6 +96,7 @@ curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\initBase.j
 
 mkdir "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js"
 curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase" "https://www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
+curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase.js" "https://www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
 
 mkdir "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\css"
 curl -L -o "www.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\css\template.css" "https://www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/css/template.css"

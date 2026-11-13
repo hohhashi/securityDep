@@ -1,45 +1,43 @@
 import os
 import shutil
 
-# Base directory is the folder containing this script
 BASE = os.path.dirname(os.path.abspath(__file__))
 os.chdir(BASE)
 
-# -----------------------------------------------
-# Files to copy
-# -----------------------------------------------
-
 FILES = [
     (
-        'vul.js',
+        'vul.patch.html',
+        'www.ricoh.com/products/security/vulnerabilities/vul.html'
+    ),
+    (
+        'vul.patch.js',
         'www.ricoh.com/-/Media/Ricoh/Sites/com'
         '/products/security/vulnerabilities/js/vul.js'
     ),
     (
-        'vul.html',
-        'www.ricoh.com/products/security/vulnerabilities/vul.html'
+        'template.patch.js',
+        'www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/template.js'
     ),
 ]
-
-# -----------------------------------------------
-# Copy files
-# -----------------------------------------------
 
 for src_name, dst_path in FILES:
     src = os.path.join(BASE, src_name)
     dst = os.path.join(BASE, dst_path)
-
     if not os.path.exists(src):
         print(f'ERROR: source not found: {src_name}')
         continue
-
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     shutil.copy2(src, dst)
     print(f'OK: {src_name}  ->  {dst_path}')
 
-# -----------------------------------------------
-# .vscode/settings.json
-# -----------------------------------------------
+# templateBase -> templateBase.js
+src_tb = os.path.join(BASE, 'www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase')
+dst_tb = os.path.join(BASE, 'www.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase.js')
+if os.path.exists(src_tb):
+    shutil.copy2(src_tb, dst_tb)
+    print('OK: templateBase  ->  templateBase.js')
+else:
+    print('ERROR: templateBase not found (run download bat first)')
 
 vscode_dir = os.path.join(BASE, '.vscode')
 os.makedirs(vscode_dir, exist_ok=True)
