@@ -11,9 +11,13 @@ os.chdir(BASE)
 
 FILES = [
     (
-        'adv.js',
+        'adv.patch.js',
         'jp.ricoh.com/-/Media/Ricoh/Sites/jp_ricoh'
         '/security/products/vulnerabilities/js/adv.js'
+    ),
+    (
+        'template.patch.js',
+        'jp.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/template.js'
     ),
 ]
 
@@ -32,6 +36,19 @@ for src_name, dst_path in FILES:
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     shutil.copy2(src, dst)
     print(f'OK: {src_name}  ->  {dst_path}')
+
+# -----------------------------------------------
+# templateBase -> templateBase.js
+# -----------------------------------------------
+
+src_tb = os.path.join(BASE, 'jp.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase')
+dst_tb = os.path.join(BASE, 'jp.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase.js')
+
+if not os.path.exists(src_tb):
+    print(f'ERROR: source not found: jp.ricoh.com/...js/templateBase')
+else:
+    shutil.copy2(src_tb, dst_tb)
+    print('OK: templateBase  ->  templateBase.js')
 
 # -----------------------------------------------
 # .vscode/settings.json
