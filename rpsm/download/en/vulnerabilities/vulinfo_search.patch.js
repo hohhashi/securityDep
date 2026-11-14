@@ -449,7 +449,7 @@ var app = new Vue({
       });
     }
     function pickAndSaveFolder() {
-      return waitForUserClickToSelectFolder("Select local vuls.ricoh.com folder")
+      return waitForUserClickToSelectFolder("Select local vuls folder")
         .then(function () {
           return window.showDirectoryPicker({ id: "vulsRicohRoot", mode: "read" });
         })
@@ -477,7 +477,7 @@ var app = new Vue({
                 window.__vulsRicohRootHandle = savedHandle;
                 return savedHandle;
               }
-              return waitForUserClickToSelectFolder("Allow access to vuls.ricoh.com folder")
+              return waitForUserClickToSelectFolder("Allow access to vuls folder")
                 .then(function () {
                   return savedHandle.requestPermission({ mode: "read" });
                 })

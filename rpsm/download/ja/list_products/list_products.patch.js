@@ -485,7 +485,7 @@ var app = new Vue({
       });
     }
     function pickAndSaveFolderListProducts() {
-      return waitForUserClickToSelectFolderListProducts("ローカルのvuls.ricoh.comフォルダを選択")
+      return waitForUserClickToSelectFolderListProducts("ローカルのvulsフォルダを選択")
         .then(function () {
           return window.showDirectoryPicker({ id: "vulsRicohRoot", mode: "read" });
         })
@@ -513,7 +513,7 @@ var app = new Vue({
                 window.__vulsRicohRootHandle = savedHandle;
                 return savedHandle;
               }
-              return waitForUserClickToSelectFolderListProducts("vuls.ricoh.comフォルダへのアクセスを許可")
+              return waitForUserClickToSelectFolderListProducts("vulsフォルダへのアクセスを許可")
                 .then(function () {
                   return savedHandle.requestPermission({ mode: "read" });
                 })
