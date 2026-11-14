@@ -241,6 +241,13 @@ var app = new Vue({
           d["list2Title"]     = (d.productStatus && d.productStatus.list2Title) ? d.productStatus.list2Title : "";
           d["products"]       = (d.productStatus && d.productStatus.products) ? d.productStatus.products : [];
 
+          // v2 リードセクション用フィールド（JSON に存在すればそのまま渡す）
+          d["impact"]            = d["impact"]            || null;
+          d["caution"]           = d["caution"]           || null;
+          d["interimMeasure"]    = d["interimMeasure"]    || null;
+          d["permanentMeasure"]  = d["permanentMeasure"]  || null;
+          d["investigatingNote"] = d["investigatingNote"] || null;
+
           // businessFields のカウント
           for (var i = 0; i < d["businessFields"].length; i++) {
             d["businessFields"][i]["count"] = 0;
@@ -255,7 +262,7 @@ var app = new Vue({
             }
           }
 
-          // v2 では contact は {text, links: [{text, url}], imageUrl} オブジェクト
+          // v2 では contact は {text, links: [{text, url, imageUrl}], imageUrl} オブジェクト
           // テンプレート側で item.contact.text / item.contact.link を参照するため
           // links[] → link（単数）に変換する
           if (d.contact) {
