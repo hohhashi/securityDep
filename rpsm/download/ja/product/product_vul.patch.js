@@ -542,6 +542,7 @@ var app = new Vue({
 
         // version 2.0: advisories は {id, title, severity, ...} のみ（component/model なし）
         self.isV2 = (self.item.version === "2.0");
+        self.isLocal = isLocal;
         var isV2 = self.isV2;
 
         for(i=0; i<self.allItems.length; i++){

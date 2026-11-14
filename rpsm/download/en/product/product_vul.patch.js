@@ -47,6 +47,7 @@ var app = new Vue({
     hashNotIncludePage: "",
     isModel:false,
     isV2:false,
+    isLocal:false,
     loadingText:"Loading",
 
     flgPrev: true,
@@ -305,7 +306,7 @@ var app = new Vue({
       for (var i = self.pageStart; i <= self.pageEnd; i++) {
         var tempObj = {};
         tempObj["page"] = i;
-        tempObj["url"] = "/security/products/vulnerabilities/product.html?p=" + i + self.hashNotIncludePage;
+        tempObj["url"] = "/products/security/vulnerabilities/product.html?p=" + i + self.hashNotIncludePage;
         if (i == self.pageCurrent) {
           tempObj["active"] = "act";
         } else {
@@ -318,8 +319,8 @@ var app = new Vue({
       //BACKボタン
       if (self.pageCurrent != 1) {
         self.urlPrev =
-          //"/security/products/vulnerabilities/product?p=" +
-          "/security/products/vulnerabilities/product.html?p=" +
+          //"/products/security/vulnerabilities/product?p=" +
+          "/products/security/vulnerabilities/product.html?p=" +
           (self.pageCurrent - 1) +
           self.hashNotIncludePage;
         self.flgPrev = true;
@@ -329,17 +330,17 @@ var app = new Vue({
 
       //NEXTボタン
       if (self.pageCurrent != self.totalPage) {
-        //self.urlNext = "/security/products/vulnerabilities/product?p=" + (self.pageCurrent + 1) + self.hashNotIncludePage;
-        self.urlNext = "/security/products/vulnerabilities/product.html?p=" + (self.pageCurrent + 1) + self.hashNotIncludePage;
+        //self.urlNext = "/products/security/vulnerabilities/product?p=" + (self.pageCurrent + 1) + self.hashNotIncludePage;
+        self.urlNext = "/products/security/vulnerabilities/product.html?p=" + (self.pageCurrent + 1) + self.hashNotIncludePage;
         self.flgNext = true;
       } else {
         self.flgNext = false;
       }
       //最初と最後のボタン
-      //self.urlFirst = "/security/products/vulnerabilities/product?p=1" + self.hashNotIncludePage;
-      //self.urlLast = "/security/products/vulnerabilities/product?p=" + self.totalPage + self.hashNotIncludePage;
-      self.urlFirst = "/security/products/vulnerabilities/product.html?p=1" + self.hashNotIncludePage;
-      self.urlLast = "/security/products/vulnerabilities/product.html?p=" + self.totalPage + self.hashNotIncludePage;
+      //self.urlFirst = "/products/security/vulnerabilities/product?p=1" + self.hashNotIncludePage;
+      //self.urlLast = "/products/security/vulnerabilities/product?p=" + self.totalPage + self.hashNotIncludePage;
+      self.urlFirst = "/products/security/vulnerabilities/product.html?p=1" + self.hashNotIncludePage;
+      self.urlLast = "/products/security/vulnerabilities/product.html?p=" + self.totalPage + self.hashNotIncludePage;
     },
     hideCover: function() {
       $("#vulWrap_cover").animate({ opacity: 0 }, 400, function() {
@@ -373,7 +374,7 @@ var app = new Vue({
     let dateParam = year+mon+date+random;
 
     let fileName = "https://vuls.ricoh.com/en/prodinfo/"+self.jsonid+".json?"+dateParam;
-    //let fileName = "/-/Media/Ricoh/Sites/jp_ricoh/security/products/vulnerabilities/data/prodinfo/"+self.jsonid+".json?"+dateParam;
+    //let fileName = "/-/Media/Ricoh/Sites/jp_ricoh/products/security/vulnerabilities/data/prodinfo/"+self.jsonid+".json?"+dateParam;
     let offsetVar = $("#vulinfoApp").offset();
     let scrollPost = offsetVar.top;
 
@@ -542,12 +543,13 @@ var app = new Vue({
 
         // version 2.0: advisories は {id, title, severity, ...} のみ（component/model なし）
         self.isV2 = (self.item.version === "2.0");
+        self.isLocal = isLocal;
         var isV2 = self.isV2;
 
         for(i=0; i<self.allItems.length; i++){
           //リンク先（vul.html?id=... で脆弱性詳細ページへ）
           self.allItems[i]["linkUrl"] = localizeProductUrl(
-            "/security/products/vulnerabilities/vul.html?id=" + self.allItems[i].id
+            "/products/security/vulnerabilities/vul.html?id=" + self.allItems[i].id
           );
 
           // v2 / v1 共通: updatedAt・publishedAt が存在すれば lastUpdate / firstEdition を生成
@@ -643,7 +645,7 @@ var app = new Vue({
           self.loadingText = "Failed to load data.";
         } else {
           self.isError = true;
-          location.href = '/security/products/vulnerabilities/';
+          location.href = '/products/security/vulnerabilities/';
         }
     });
   }
@@ -722,7 +724,7 @@ function getParam() {
     //ハッシュなし
     isError = true;
     if(isError){
-      location.href = '/security/products/vulnerabilities/';
+      location.href = '/products/security/vulnerabilities/';
       return false;
     }
   }
