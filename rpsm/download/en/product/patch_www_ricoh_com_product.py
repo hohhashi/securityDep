@@ -6,6 +6,10 @@ os.chdir(BASE)
 
 FILES = [
     (
+        'product.patch.html',
+        'www.ricoh.com/products/security/vulnerabilities/product.html'
+    ),
+    (
         'product_vul.patch.js',
         'www.ricoh.com/-/Media/Ricoh/Sites/com'
         '/products/security/vulnerabilities/js/product_vul.js'

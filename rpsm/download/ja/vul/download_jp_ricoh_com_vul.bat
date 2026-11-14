@@ -1,8 +1,8 @@
 @echo off
-rem HARï¿½ï¿½ï¿½ç¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½curlï¿½Rï¿½}ï¿½ï¿½ï¿½hï¿½ê——
+rem HAR‚©‚ç¶¬‚µ‚½curlƒRƒ}ƒ“ƒhˆê——
 rem jp.ricoh.com - 2026/06/03
-rem URLï¿½Ìƒpï¿½Xï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚Ü‚Üƒtï¿½Hï¿½ï¿½ï¿½_ï¿½Æ‚ï¿½ï¿½ÄÄŒï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
-rem ï¿½ï¿½ï¿½s: download_ricoh.bat
+rem URL‚ÌƒpƒX\‘¢‚ğ‚»‚Ì‚Ü‚ÜƒtƒHƒ‹ƒ_‚Æ‚µ‚ÄÄŒ»‚µ‚Ü‚·
+rem Às: download_ricoh.bat
 
 set UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/148.0.0.0 Safari/537.36
 set REF=https://jp.ricoh.com/
@@ -171,7 +171,6 @@ curl -L -o "jp.ricoh.com\vuls.ricoh.com\ja\vulinfo\2026\ricoh-2026-000004.json" 
 
 if not exist "jp.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js" mkdir "jp.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js"
 curl -L -o "jp.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase.js" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://jp.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
-curl -L -o "jp.ricoh.com\-\Media\Ricoh\Common\cmn_g_header_footer\js\templateBase" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://jp.ricoh.com/-/Media/Ricoh/Common/cmn_g_header_footer/js/templateBase"
 
 if not exist "jp.ricoh.com\cookie-cdn.cookiepro.com\scripttemplates\202506.1.0" mkdir "jp.ricoh.com\cookie-cdn.cookiepro.com\scripttemplates\202506.1.0"
 curl -L -o "jp.ricoh.com\cookie-cdn.cookiepro.com\scripttemplates\202506.1.0\otBannerSdk.js" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://cookie-cdn.cookiepro.com/scripttemplates/202506.1.0/otBannerSdk.js"
@@ -247,4 +246,4 @@ rem [SKIP-POST] https://www.google-analytics.com/g/collect?v=2&tid=G-1W7QW96RNV&
 if not exist "jp.ricoh.com\layouts\system" mkdir "jp.ricoh.com\layouts\system"
 curl -L -o "jp.ricoh.com\layouts\system\VisitorIdentification.js" -H "User-Agent: %UA%" -H "Referer: %REF%" "https://jp.ricoh.com/layouts/system/VisitorIdentification.js"
 
-echo done
+echo Š®—¹
