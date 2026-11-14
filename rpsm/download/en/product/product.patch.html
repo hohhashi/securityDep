@@ -1,14 +1,8 @@
-
-
 <!doctype html>
 <html lang=EN>
 <head>
 
     
-<meta name="VIcurrentDateTime" content="639302448561095425" />
-<meta name="VirtualFolder" content="/" />
-<script type="text/javascript" src="/layouts/system/VisitorIdentification.js"></script>
-
     
 
 <meta charset="utf-8">
@@ -16,7 +10,7 @@
 <title>Security Information List by Vulnerability | Global | Ricoh</title>
     <meta name="Description" content="[Ricoh Global Official Website] From October 1, 2022 onward, vulnerability information will be posted on this page. If we determine that the information is important for our customers, it will also be posted in the “Important Notices,” as before." />
 <meta property="og:title" content="Security Information List by Vulnerability | Global | Ricoh" />
-    <meta property="og:image" content="https://www.ricoh.com/-/media/Ricoh/Common/cmn_v3/img/og-image.webp?rev=549e30934785489fbd556ee2e4c3b238&amp;sc_lang=ja-JP&amp;hash=4FF6DA9CDEA7D90E4BB039F80C87402F" />
+    <meta property="og:image" content="https://www.ricoh.com/-/media/Ricoh/Common/cmn_v3/img/og-image.webp?rev=549e30934785489fbd556ee2e4c3b238&amp;hash=9DB561AD22E96D26590C1574F15A7B50" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="From October 1, 2022 onward, vulnerability information will be posted on this page. If we determine that the information is important for our customers, it will also be posted in the “Important Notices,” as before." />
 <meta property="og:url" content="https://www.ricoh.com/products/security/vulnerabilities/product" />
@@ -29,8 +23,8 @@
 <link rel="canonical" href="https://www.ricoh.com/products/security/vulnerabilities/product" />
 
 
-<link rel="icon" type="image/vnd.microsoft.icon" href="/-/media/ScAssets/System/Images/favicon.ico?rev=88442a4d923a4ee98543f6eb4b4a7286&amp;sc_lang=ja-JP">
-<link rel="apple-touch-icon" href="/-/media/ScAssets/System/Images/apple_icon.png?rev=5cd532f4ff6f40259f15588ccb0c87bd&amp;sc_lang=ja-JP&amp;hash=22F83749537928257871DCFB884039EF">
+<link rel="icon" type="image/vnd.microsoft.icon" href="/-/media/ScAssets/System/Images/favicon.ico?rev=88442a4d923a4ee98543f6eb4b4a7286">
+<link rel="apple-touch-icon" href="/-/media/ScAssets/System/Images/apple_icon.png?rev=5cd532f4ff6f40259f15588ccb0c87bd&amp;hash=5C6951D7B440B03897CC8472BCB915E2">
 
 
 
@@ -826,9 +820,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																						<caption class="sr-only">Filtered results of vulnerability Information List by Products or Services</caption>
 																						<!-- v2: no Components column -->
 																						<colgroup v-if="isV2">
-																							<col class="c-table__col--w5p">
-																							<col class="c-table__col--w50p">
 																							<col class="c-table__col--w15p">
+																							<col class="c-table__col--w5p">
+																							<col class="c-table__col--w40p">
 																							<col class="c-table__col--w15p">
 																							<col class="c-table__col--w10p">
 																							<col class="c-table__col--w10p">
@@ -844,14 +838,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																							<col class="c-table__col--w10p">
 																						</colgroup>
 																						<thead>
-																							<th class="" v-if="isModel" style="min-width: 130px;">
-																								<strong>Products or
-																									<br>Services</strong>
+																							<th class="" style="min-width: 130px;">
+																								<strong>Vulnerability Information ID</strong>
 																							</th>
-																							<th style="min-width: 90px;" v-if="!isV2">
-																								<strong>Components</strong>
-																							</th>
-																							<th style="max-width: 36px;">
+																																									<th style="min-width: 90px;" v-if="!isV2"><strong>Components</strong></th>
+																																									<th style="max-width: 36px;">
 																							</th>
 																							<th style="min-width: 360px;">
 																								<strong>Title</strong>
@@ -872,9 +863,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																						<tbody>
 																							<template v-for="advisory in items">
 																								<tr>
-																									<td class="al_l" v-if="isModel">{{advisory.model}}</td>
+																									<td class="al_c">{{advisory.id}}</td>
 																									<td class="al_l" v-if="!isV2">{{advisory.component}}</td>
-																									<td class="al_c">
+																																							<td class="al_c">
 																										<span class="ic_important">
 																											<img src="/-/Media/Ricoh/Sites/com/products/security/vulnerabilities/img/ic_important.svg" v-if="advisory.importance==='Important'" alt="Important">
 																										</span>
@@ -953,7 +944,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																			</div>
 																		</template>
 																		<template v-if="totalNum == 0">
-																			<div class="box__notfound">{{loadingText}}</div>
+																			<div class="box__notfound">No matching data found.</div>
 																		</template>
 																	</div>
 																</div>

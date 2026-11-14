@@ -5,7 +5,7 @@
 <head>
 
     
-<meta name="VIcurrentDateTime" content="639277401697781319" />
+<meta name="VIcurrentDateTime" content="639302519910665673" />
 <meta name="VirtualFolder" content="/" />
 <script type="text/javascript" src="/layouts/system/VisitorIdentification.js"></script>
 
@@ -388,9 +388,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="https://jp.ricoh.com/IR/stock/stock-information" class="gl-menu_link"><span>株式基本情報</span></a></li>
         <li><a href="https://jp.ricoh.com/IR/stock/shareholder-returns" class="gl-menu_link"><span>株主還元</span></a></li>
         <li><a href="https://jp.ricoh.com/IR/stock/ratings" class="gl-menu_link"><span>社債・格付情報</span></a></li>
-        <li><a href="https://jp.ricoh.com/IR/stock/koukoku" class="gl-menu_link"><span>電子公告</span></a></li>
         <li><a href="https://jp.ricoh.com/IR/stock/chart" class="gl-menu_link"><span>株価情報</span></a></li>
-        </ul><!-- gl-menu_sub-list -->
+        <li><a href="https://jp.ricoh.com/IR/stock/procedure" class="gl-menu_link"><span>株式事務手続</span></a></li>
+        <li><a href="https://jp.ricoh.com/IR/stock/koukoku" class="gl-menu_link"><span>電子公告</span></a></li>
+      </ul><!-- gl-menu_sub-list -->
     </div><!-- gl-menu_sub -->
 </li><!-- fn-submenu 4 -->
 <li class="fn-submenu">
@@ -566,7 +567,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <p>はたらく歓びは、創造的な仕事から生まれる</p>
 </div>
 <div class='gl-pickup_img'>
-<img src='https://jp.ricoh.com/-/media/Ricoh/Sites/jp_ricoh/products/img/img_01.webp?rev=8fa319fe325047019db019d2d41e6101&sc_lang=ja-JP&hash=7729B57BE17E5585FF5BCCAEEACEAB98' alt='' width='282' height='148'>
+<img src='https://jp.ricoh.com/-/media/Ricoh/Sites/jp_ricoh/products/workplace-services/thumbnail.webp?rev=c2f2122f2cf24342acc09a585b3f3429&sc_lang=ja-JP&hash=EA1DE64AD9C9B6F178EAEBAA0DB7E374' alt='' width='282' height='148'>
 </div>
 </a>
 </li>
@@ -593,6 +594,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li>
         <ul class="gl-menu_sub-list">
           <li><a href="https://jp.ricoh.com/technology/ai" class="gl-menu_link"><span>はたらく人に最高の支援をAIで</span></a></li>
+          <li><a href="https://jp.ricoh.com/technology/ai/HiDEEN" class="gl-menu_link"><span>リコーのAI技術基盤Hi.DEEN</span></a></li>
           <li><a href="https://jp.ricoh.com/technology/ai/LLM" class="gl-menu_link"><span>“はたらく”を支えるリコーの大規模言語モデル（LLM）</span></a></li>
           <li><a href="https://jp.ricoh.com/technology/inkjet/" class="gl-menu_link"><span>リコーのインクジェット技術の広がり</span></a></li>
           <li class="fn-submenu">
@@ -922,16 +924,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																				<div class="c-table c-table--scrollX">
 																					<table data-sp-table-width="640">
 																						<caption class="sr-only">対策された脆弱性のセキュリティ情報リストの絞り込み結果</caption>
-																						<!-- v2: 構成要素列なし -->
+																						<!-- v2: no Components column -->
 																						<colgroup v-if="isV2">
-																							<col class="c-table__col--w5p">
-																							<col class="c-table__col--w50p">
 																							<col class="c-table__col--w15p">
+																							<col class="c-table__col--w5p">
+																							<col class="c-table__col--w40p">
 																							<col class="c-table__col--w15p">
 																							<col class="c-table__col--w10p">
 																							<col class="c-table__col--w10p">
 																						</colgroup>
-																						<!-- v1: 構成要素列あり -->
+																						<!-- v1: with Components column -->
 																						<colgroup v-if="!isV2">
 																							<col class="c-table__col--w15p">
 																							<col class="c-table__col--w10p">
@@ -942,10 +944,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																							<col class="c-table__col--w10p">
 																						</colgroup>
 																						<thead>
-																							<th class="" v-if="isModel" style="min-width: 130px;">
-																								<strong>対象製品・
-																									<br>サービス</strong>
-																							</th>
+																																													<th class="" style="min-width: 130px;">
+																							<strong>脆弱性情報ID</strong>
+																						</th>
 																							<th style="min-width: 90px;" v-if="!isV2">
 																								<strong>構成要素</strong>
 																							</th>
@@ -971,7 +972,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																						<tbody>
 																							<template v-for="advisory in items">
 																								<tr>
-																									<td class="al_l" v-if="isModel">{{advisory.model}}</td>
+																																																		<td class="al_c">{{advisory.id}}</td>
 																									<td class="al_l" v-if="!isV2">{{advisory.component}}</td>
 																									<td class="al_c">
 																										<span class="ic_important">

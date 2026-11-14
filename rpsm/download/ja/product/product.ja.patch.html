@@ -925,10 +925,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																						<!-- v2: 構成要素列なし -->
 																						<colgroup v-if="isV2">
 																							<col class="c-table__col--w5p">
-																							<col class="c-table__col--w50p">
+																							<col class="c-table__col--w15p">
+																							<col class="c-table__col--w25p">
 																							<col class="c-table__col--w15p">
 																							<col class="c-table__col--w15p">
-																							<col class="c-table__col--w10p">
+																							<col class="c-table__col--w15p">
 																							<col class="c-table__col--w10p">
 																						</colgroup>
 																						<!-- v1: 構成要素列あり -->
@@ -936,7 +937,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																							<col class="c-table__col--w15p">
 																							<col class="c-table__col--w10p">
 																							<col class="c-table__col--w5p">
-																							<col class="c-table__col--w40p">
+																							<col class="c-table__col--w10p">
+																							<col class="c-table__col--w35p">
 																							<col class="c-table__col--w15p">
 																							<col class="c-table__col--w10p">
 																							<col class="c-table__col--w10p">
@@ -951,7 +953,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																							</th>
 																							<th style="max-width: 36px;">
 																							</th>
-																							<th style="min-width: 360px;">
+																																														<th style="min-width: 160px;">
+																								<strong>脆弱性情報ID</strong>
+																							</th>
+<th>
 																								<strong>タイトル</strong>
 																							</th>
 																							<th class="">
@@ -978,7 +983,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 																											<img src="/-/Media/Ricoh/Sites/jp_ricoh/security/products/vulnerabilities/img/ic_important.svg" v-if="advisory.importance==='Important'" alt="重要">
 																										</span>
 																									</td>
-																									<td class="al_l">
+																																																		<td class="al_c">{{advisory.id}}</td>
+<td class="al_l">
 																										<div class="td_title">
 																											<a v-bind:href="advisory.linkUrl">
 																												<img src="/-/Media/Ricoh/Common/cmn_v3/img/svg/arrow-right-primary-color.svg" alt="">{{advisory.title}}</a>
