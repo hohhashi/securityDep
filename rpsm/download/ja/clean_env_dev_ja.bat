@@ -2,17 +2,15 @@
 rem ===============================================
 rem clean_env_dev_ja.bat
 rem
-rem 各ページフォルダ (adv, list_products, product,
-rem vul, vulnerabilities) の jp.ricoh.com フォルダと
-rem .vscode フォルダ、および
-rem env_dev フォルダを削除してクリーンな状態に戻します。
+rem Deletes jp.ricoh.com folders, .vscode folders,
+rem and env_dev folder for each page directory.
 rem ===============================================
 
 set BASE=%~dp0
 
 echo ======================================
-echo  クリーン処理を開始します
-echo  削除対象:
+echo  [clean] Starting cleanup...
+echo  Targets:
 echo    adv\jp.ricoh.com
 echo    adv\.vscode
 echo    list_products\jp.ricoh.com
@@ -27,9 +25,9 @@ echo    env_dev
 echo    .vscode
 echo ======================================
 echo.
-set /p CONFIRM=本当に削除しますか？ (y/N): 
+set /p CONFIRM=Delete all? (y/N): 
 if /i not "%CONFIRM%"=="y" (
-    echo キャンセルしました。
+    echo Cancelled.
     pause
     exit /b 0
 )
@@ -49,7 +47,7 @@ call :clean_dir "%BASE%.vscode"                       ".vscode"
 
 echo.
 echo ======================================
-echo  クリーン完了
+echo  [clean] Done.
 echo ======================================
 pause
 exit /b 0
@@ -59,8 +57,8 @@ set _TARGET=%~1
 set _LABEL=%~2
 if exist "%_TARGET%" (
     rmdir /s /q "%_TARGET%"
-    echo 削除: %_LABEL%
+    echo [deleted] %_LABEL%
 ) else (
-    echo [スキップ] %_LABEL% は存在しません
+    echo [skip] %_LABEL% not found
 )
 exit /b
